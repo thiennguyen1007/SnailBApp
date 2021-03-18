@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SnailBApp.Views.MyBagPage"
+             Title="My Bag"
+             BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="Margin" Value="5,-5,0,0"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="Grid.Column" Value="1"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <RelativeLayout>
+        <Label Text="{Binding MoneyOfItem}" x:Name="lbMoneyItem" IsVisible="False"/>
+        <ScrollView 
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.74}">
+            <StackLayout Orientation="Vertical" BindableLayout.ItemsSource="{Binding LstBag}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="#C5CDC9" CornerRadius="10" Margin="10,5,10,0">
+                            <Grid ColumnDefinitions="1.5*,2.5*,0.5*">
+                                <Image Grid.Column="0" Source="{Binding IMG}" 
+                                       WidthRequest="80" HeightRequest="80" 
+                                       HorizontalOptions="Start" VerticalOptions="Start" />
+                                <StackLayout Grid.Column="1" Spacing="5" WidthRequest="115">
+                                    <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Price}" 
+                                           FontSize="16"/>
+                                </StackLayout>
+                                <StackLayout Grid.Column="2">
+                                    <Label Text="{Binding SL}" 
+                                           Margin="0" HorizontalOptions="Center"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+        <Frame Grid.Row="1" CornerRadius="5" Margin="5,0,5,0" Padding="0" IsVisible="{Binding IsAnyItem, Mode=OneWay}"
+               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
+               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.75}"
+               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.25}">
+            <StackLayout Spacing="0" HorizontalOptions="FillAndExpand" 
+                         VerticalOptions="FillAndExpand" BackgroundColor="#FFFFCC" Margin="0">
+                <Grid ColumnDefinitions="*,2*" RowDefinitions="*,*,*" 
+                      RowSpacing="5" Margin="20,10,20,0">
+                    <Label Text="Tong Tien:" HorizontalOptions="Start"                             
+                           Grid.Column="0" Grid.Row="0"/>
+                    <Label Text="{Binding TotalMoney}" HorizontalOptions="End"                             
+                           Grid.Column="1" Grid.Row="0"/>
+                    <Label Grid.Column="0" Text="Nguoi nhan:" 
+                           FontSize="15" 
+                           VerticalOptions="Center" Grid.Row="1"/>
+                    <Entry Placeholder="Name"
+                           Grid.Row="1"
+                           Text="{Binding Name}"/>
+                    <Label Grid.Column="0" Text="So dien thoai:" 
+                           FontSize="15" 
+                           VerticalOptions="Center" Grid.Row="2"/>
+                    <Entry Placeholder="phone number"                             
+                           Grid.Row="2"
+                           Text="{Binding PhoneNumber}"/>
+                </Grid>
+                <Button Text="Thanh Toan" FontSize="20" 
+                        FontAttributes="Bold" CornerRadius="10" 
+                        BackgroundColor="#FFBE00"
+                        Margin="30,5,30,0" TextTransform="Uppercase" 
+                        Command="{Binding ThanhToanCommand}"/>
+            </StackLayout>
+        </Frame>
+    </RelativeLayout>
+</ContentPage>

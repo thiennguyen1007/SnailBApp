@@ -16,5 +16,6 @@ namespace SnailBApp.Models
         public string Desc { get; set; }
         [MaxLength(200)]
         public string IMG { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

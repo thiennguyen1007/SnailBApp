@@ -1,9 +1,11 @@
 ﻿using SQLite;
 namespace SnailBApp.Models
 {
+    //6 thuoc tinh
     [Table("Food")]
     public class Food
     {
+        [PrimaryKey, NotNull]
         public int ID { get; set; }
         public string Name { get; set; }
         public string Desc { get; set; }

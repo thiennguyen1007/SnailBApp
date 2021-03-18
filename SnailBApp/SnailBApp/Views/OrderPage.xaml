@@ -3,6 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SnailBApp.Views.OrderPage"
              NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="HeightRequest" Value="30"/>
+                <Setter Property="WidthRequest" Value="30"/>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <RelativeLayout>
         <Grid RowDefinitions="0.3*,*,0.5*,3*" 
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
@@ -19,29 +31,28 @@
             </Grid.Background>
             <StackLayout Grid.Row="0" Orientation="Vertical">
                 <Grid>
-                    <ImageButton Source="btn_back.png" HorizontalOptions="Start" HeightRequest="25" WidthRequest="25" 
-                         Margin="10,10,0,0"
-                         BackgroundColor="Transparent" Command="{Binding HomeCommand}"/>
+                    <ImageButton Source="btn_back.png" HorizontalOptions="Start" 
+                                 Margin="10,10,0,0"
+                                 Command="{Binding BackCommand}"/>
                     <ImageButton Source="GioHang.png" HorizontalOptions="End"
-                                HeightRequest="40" WidthRequest="40" Margin="0,10,10,0"
-                                BackgroundColor="Transparent" Command="{Binding MyBagCommand}"/>
+                                 Margin="0,10,10,0"
+                                 Command="{Binding MyBagCommand}"/>
                 </Grid>
             </StackLayout>
             <StackLayout Grid.Row="1" Orientation="Vertical" >
-                <Label Text="Search for" TextColor="Black" FontSize="35" HorizontalOptions="Start" Margin="20, 10, 0, 0" FontAttributes="Bold"/>
+                <Label Text="Search for" FontSize="35" HorizontalOptions="Start" Margin="20, 10, 0, 0" FontAttributes="Bold"/>
                 <Label Text="Best Of Meal" FontSize="40" TextColor="#FFBE00" Margin="40, 0, 0, 0" HorizontalOptions="Start"/>
             </StackLayout>
-
             <StackLayout Grid.Row="2" Orientation="Horizontal" Spacing="10">
                 <Entry Placeholder="Search..." TextColor="#81503D"
                        FontAttributes="None" WidthRequest="300" HeightRequest="30" 
                        HorizontalOptions="Center" Margin="40,0,0,0"
                        PlaceholderColor="#81503D"
                    />
-                <Image Source="search.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="End"/>
+                <ImageButton Source="search.png" HorizontalOptions="End"/>
             </StackLayout>
             <!--start of list food-->
-            <CarouselView Grid.Row="3" ItemsSource="{Binding dsMonAn}"  
+            <CarouselView Grid.Row="3" ItemsSource="{Binding LstFoods}"  
                           PeekAreaInsets="80" Margin="0,0,0,10" 
                           x:Name="listFood" >
                 <CarouselView.ItemsLayout>
@@ -55,9 +66,9 @@
                                 <Image Source="logo.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center"
                                        VerticalOptions="Center" Margin="0,55,0,0" Opacity="0.5" Grid.Row="0"/>
                                 <StackLayout Grid.Row="1" Padding="20" VerticalOptions="Center" Margin="0,-30,0,0">
-                                    <Label Text="{Binding Name}" TextColor="Black" FontSize="18" FontAttributes="Bold"
-                                        HorizontalTextAlignment="Center"/>
-                                    <Label Text="{Binding Desc}" TextColor="Black" FontSize="14"
+                                    <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"/>
+                                    <Label Text="{Binding Desc}" FontSize="14"
                                         HorizontalTextAlignment="Center"/>
                                     <Stepper HeightRequest="35" VerticalOptions="End" x:Name="stepperSL" 
                                          Value="{Binding SL, Mode=TwoWay}"
@@ -72,7 +83,7 @@
                                     <Label Text="{Binding Price}" TextColor="Black" FontSize="20" FontAttributes="Bold"
                                          HorizontalOptions="Center"/>
                                     <Button Text="ADD" TextColor="White" BackgroundColor="#FFBE00" WidthRequest="100" 
-                                        Command="{Binding Source={x:Reference listFood},Path=BindingContext.AddFoodCommand}" 
+                                        Command="{Binding Source={x:Reference listFood},Path=BindingContext.AddCommand}" 
                                         CornerRadius="20" HorizontalOptions="Center" CommandParameter="{Binding .}"
                                         HeightRequest="40"/>
                                 </StackLayout>

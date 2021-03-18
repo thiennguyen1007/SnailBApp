@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using SnailBApp.Data;
+using SnailBApp.Data.FoodData;
+using SnailBApp.Services;
+using SnailBApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,7 +12,20 @@ namespace SnailBApp.Views
     {
         public OrderPage()
         {
+            var pageService = new PageService();
+            var dataAccess = new SQLiteFoodStore(DependencyService.Get<ISQLite>());
+            this.BindingContext = new OrderViewModel(dataAccess, pageService);
             InitializeComponent();
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ViewModel.LoadDataCommand.Execute(null);
+        }
+        public OrderViewModel ViewModel
+        {
+            get { return BindingContext as OrderViewModel; }
+            set { BindingContext = value; }
         }
     }
 }

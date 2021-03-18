@@ -9,7 +9,8 @@ namespace SnailBApp
         {
             InitializeComponent();
             //DependencyService.Register<MockDataStore>();
-            MainPage = new NavigationPage(new StartPage());
+            //MainPage = new NavigationPage(new StartPage());
+            MainPage = new AppShell();
         }
         protected override void OnStart()
         {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SnailBApp.Data.FoodData
 {
-    class SQLiteFoodStore : IFoodStore
+    public class SQLiteFoodStore : IFoodStore
     {
         private SQLiteAsyncConnection _connection;
         public SQLiteFoodStore(ISQLite db)
@@ -32,8 +32,6 @@ namespace SnailBApp.Data.FoodData
         public async Task<IEnumerable<Food>> GetFoodsAsync()
         {
             return await _connection.Table<Food>().ToListAsync();
-        }
-
-        
+        }     
     }
 }
