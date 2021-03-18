@@ -1,5 +1,4 @@
-﻿using SnailBApp.Services;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace SnailBApp
 {
@@ -9,9 +8,8 @@ namespace SnailBApp
         public App()
         {
             InitializeComponent();
-
             //DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
+            MainPage = new NavigationPage(new StartPage());
         }
         protected override void OnStart()
         {

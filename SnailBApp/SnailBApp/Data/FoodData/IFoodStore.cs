@@ -6,10 +6,10 @@ namespace SnailBApp.Data.FoodData
 {
     public interface IFoodStore
     {
-        Task<IEnumerable<Food>> GetNhanViensAsync();
-        Task<Food> GetNhanVien(int ID);
-        Task AddNhanVien(Food f);
-        Task UpdateNhanVien(Food f);
-        Task DeleteNhanVien(Food f);
+        Task<IEnumerable<Food>> GetFoodsAsync();
+        Task<Food> GetFood(int ID);
+        Task AddFood(Food f);
+        Task UpdateFood(Food f);
+        Task DeleteFood(Food f);
     }
 }
