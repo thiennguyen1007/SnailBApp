@@ -67,7 +67,11 @@ namespace SnailBApp.ViewModels
         }
         private async void OnBackClicked()
         {
-            await _pageService.PopAsync();
+            if (await _pageService.DisplayAlert("Are you sure!", "All Food in your cart will be clear.", "Ok", "Cancel"))
+            {
+                await Application.Current.MainPage.Navigation.PopToRootAsync();
+                Application.Current.MainPage = new NavigationPage(new StartPage());
+            }          
         }
         private async void OnBagClicked()
         {

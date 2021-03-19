@@ -16,11 +16,11 @@
     </ContentPage.Resources>
     <Grid RowDefinitions="*, 2*, 0.3*">
         <StackLayout Orientation="Vertical" Grid.Row="0" Margin="0" BackgroundColor="#EFEB8E">
-            <Image Source="{Binding IMG}" Margin="0,5,0,0"
-                            HorizontalOptions="Center" HeightRequest="110" WidthRequest="110"/>
-            <Label Text="{Binding Name}" TextColor="Black" 
+            <Image Source="{Binding NhanVien.IMG}" Margin="0,5,0,0"
+                            HorizontalOptions="Center" HeightRequest="150" WidthRequest="200"/>
+            <Label Text="{Binding NhanVien.Name}" TextColor="Black" 
                    HorizontalOptions="Center" FontSize="30" Margin="0,-15,0,0"/>
-            <Label Text="{Binding ID}" TextColor="Black" 
+            <Label Text="{Binding NhanVien.ID}" TextColor="Black" 
                    HorizontalOptions="Center" FontSize="18"/>
         </StackLayout>
         <ScrollView Grid.Row="1">
@@ -28,21 +28,21 @@
                 <Frame CornerRadius="10" Margin="10,10,10,5" BorderColor="#A3A3A3">
                     <StackLayout Spacing="10">
                         <Label Text="Giới Tính"/>
-                        <Entry Text="{Binding GioiTinh}"/>
+                        <Entry Text="{Binding NhanVien.GioiTinh}"/>
                         <Label Text="Ngày Sinh"/>
-                        <Entry Text="{Binding Date}"/>
+                        <Entry Text="{Binding NhanVien.Date}"/>
                         <Label Text="Địa Chỉ"/>
-                        <Entry Text="{Binding Adrress}"/>
+                        <Entry Text="{Binding NhanVien.Address}"/>
                         <Label Text="Ghi chú"/>
-                        <Entry Text="{Binding Desc}"/>
+                        <Entry Text="{Binding NhanVien.Desc}"/>
                         <Label Text="Phone Numbber"/>
-                        <Entry Text="{Binding PhoneNumber}"/>
+                        <Entry Text="{Binding NhanVien.PhoneNumber}"/>
                         <Label Text="Path IMG:"/>
-                        <Entry Text="{Binding IMG}"/>
+                        <Entry Text="{Binding NhanVien.IMG}"/>
                     </StackLayout>
                 </Frame>
             </StackLayout>
         </ScrollView>
-        <Button Text="Update" TextColor="White" Grid.Row="2" Margin="20,5,20,5"/>
+        <Button Text="Update" TextColor="White" Grid.Row="2" Margin="20,5,20,5" Command="{Binding UpdateCommand}"/>
     </Grid>
 </ContentPage>

@@ -25,7 +25,8 @@
                 <StackLayout Orientation="Vertical">
                     <ListView ItemsSource="{Binding LstNhanViens}" 
                               RowHeight="55" x:Name="lstNV"                      
-                              Margin="5,0,5,0" BackgroundColor="#E6E9E8">
+                              Margin="5,0,5,0" BackgroundColor="#E6E9E8"
+                              ItemSelected="lstNV_ItemSelected">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -40,7 +41,7 @@
                                     <ViewCell.ContextActions>
                                         <MenuItem Text="Delete" IsDestructive="true"							           							              
 							                Command="{Binding Source={x:Reference lstNV}, Path=ViewModel.DeleteCommand}"
-							            CommandParameter="{Binding .}"/> <!---->
+							            CommandParameter="{Binding .}"/>
                                     </ViewCell.ContextActions>
                                 </ViewCell>
                             </DataTemplate>

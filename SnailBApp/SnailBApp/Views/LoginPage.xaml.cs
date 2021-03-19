@@ -1,9 +1,5 @@
-﻿using SnailBApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SnailBApp.Services;
+using SnailBApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,8 +10,9 @@ namespace SnailBApp.Views
     {
         public LoginPage()
         {
+            var pageService = new PageService();
             InitializeComponent();
-            this.BindingContext = new LoginViewModel();
+            this.BindingContext = new LoginViewModel(pageService);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace SnailBApp.ViewModels
         {
             _pageService = new PageService();
             LoginCommand = new Command(async () => await _pageService.PushAsync(new LoginPage()));
-            OrderCommand = new Command(async () => await _pageService.PushAsync(new OrderPage()));
+            OrderCommand = new Command( () => Application.Current.MainPage = new NavigationPage(new OrderPage()));
         }
     }
 }

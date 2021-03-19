@@ -24,10 +24,14 @@ namespace SnailBApp.Views.NhanVienPage
             base.OnAppearing();
             ViewModel.LoadDataCommand.Execute(null);
         }
-        private ListNhanVienPageViewModel ViewModel
+        public ListNhanVienPageViewModel ViewModel
         {
             get { return BindingContext as ListNhanVienPageViewModel; }
             set { BindingContext = value; }
+        }
+        private async void lstNV_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+           await ViewModel.ItemSelectedAsync(e.SelectedItem as NhanVienViewModel);
         }
     }
 }

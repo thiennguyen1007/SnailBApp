@@ -83,6 +83,6 @@ namespace SnailBApp.ViewModels.NhanVienVM
                     _pageService.DisplayAlert("Failed!", $"Error when adding!\n {e.Message}", "Ok");
                 }               
             }           
-        }
+        }       
     }
 }
