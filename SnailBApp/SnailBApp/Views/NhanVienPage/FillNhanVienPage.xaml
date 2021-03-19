@@ -1,32 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SnailBApp.Views.NhanVienPage.FillNhanVienPage">
-    <ScrollView>
-        <StackLayout>
-            <Frame CornerRadius="10" BorderColor="Black" Margin="10,20,10,0">
-                <StackLayout Margin="10,20,10,0" Spacing="20">
-                    <Label Text="Dien thong tin nhan vien" TextColor="black" FontSize="25"/>
-                    <Entry Placeholder="Ma nhan vien" BackgroundColor="Transparent" 
-                       TextColor="Black" Keyboard="Text" x:Name="txt_ID"/>
-                    <Entry Placeholder="Name" BackgroundColor="Transparent" 
-                       TextColor="Black" Keyboard="Text" x:Name="txt_name"/>
-                    <Label Text="Gioi Tinh" TextColor="#A3A3A3"/>
-                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10" BackgroundColor="White">
-                        <RadioButton Grid.Column="0" Content="Nam" IsChecked="True"  TextColor="Black"/>
-                        <RadioButton Grid.Column="1" Content="Nu" TextColor="Black" x:Name="radio_Nu"/>
-                    </Grid>
-                    <DatePicker x:Name="datePick_NV"/>
-                    <Entry Placeholder="Dia chi" BackgroundColor="Transparent" TextColor="Black" x:Name="txt_diaChi_NV"/>
-                    <Entry Placeholder="So dien thoai" BackgroundColor="Transparent" 
-                       TextColor="Black" Keyboard="Numeric" x:Name="txt_SDT"/>
-                    <Entry Placeholder="Anh ca nhan" BackgroundColor="Transparent" 
-                       TextColor="Black" x:Name="txt_IMG"/>
-                    <Entry Placeholder="Ghi chu" BackgroundColor="Transparent" 
-                       TextColor="Black" x:Name="txt_ghiChu"/>
-                    <Button Text="OK" FontAttributes="Bold" Font="20"/>
-                </StackLayout>
-            </Frame>
-        </StackLayout>
-    </ScrollView>
+             x:Class="SnailBApp.Views.NhanVienPage.FillNhanVienPage"
+             Title="Fill Infor"
+             BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="PlaceholderColor" Value="#AAAAAA"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="*,4*">
+        <Grid Grid.Row="0">
+            <Image Source="{Binding IMG}"/>
+        </Grid>
+        <ScrollView Grid.Row="1">
+            <StackLayout>
+                <Frame CornerRadius="10" BorderColor="Black" Margin="10,20,10,0">
+                    <StackLayout Margin="10,20,10,0" Spacing="20">
+                        <Entry Placeholder="Name" Keyboard="Text" Text="{Binding Path=NhanVien.Name}"/>
+                        <Label Text="Gioi Tinh" TextColor="#AAAAAA"/>
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10" BackgroundColor="White">
+                            <RadioButton Grid.Column="0" Content="Nam" IsChecked="{Binding Sex}"  TextColor="Black"/>
+                            <RadioButton Grid.Column="1" Content="Nu"  IsChecked="False" TextColor="Black"/>
+                        </Grid>
+                        <DatePicker Date="{Binding Path=NhanVien.Date, Mode=TwoWay}"/>
+                        <Entry Placeholder="Dia chi" Text="{Binding Path=NhanVien.Address}"/>
+                        <Entry Placeholder="So dien thoai" Keyboard="Numeric" Text="{Binding Path=NhanVien.PhoneNumber}"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Entry Placeholder="Anh ca nhan" Text="{Binding Path=NhanVien.IMG, Mode=TwoWay}"/>
+                            <Button Text="Load Image" Command="{Binding LoadCommand}" HorizontalOptions="End"/>
+                        </StackLayout>
+                        <Entry Placeholder="Ghi chu" Text="{Binding Path=NhanVien.Desc}"/>
+                        <Button Text="Add" FontAttributes="Bold" Font="20" Command="{Binding AddCommand}"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

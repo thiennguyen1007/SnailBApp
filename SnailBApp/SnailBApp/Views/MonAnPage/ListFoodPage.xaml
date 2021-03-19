@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SnailBApp.Views.NhanVienPage.ListNhanVienPage"
-             Title="Danh sách Nhân Viên">
+             x:Class="SnailBApp.Views.MonAnPage.ListFoodPage"
+             Title="List Foods">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="ImageButton">
@@ -20,28 +20,28 @@
     <!--start list view-->
     <Grid RowDefinitions="0.3*,5.5*,0.2*,0.1*">
         <SearchBar Grid.Row="0" Placeholder="Search..." BackgroundColor="Transparent"/>
-        <Grid RowDefinitions="11*,0.5*" Grid.Row="1">
+        <Grid RowDefinitions="11*,0.8*" Grid.Row="1">
             <ScrollView Grid.Row="0">
                 <StackLayout Orientation="Vertical">
-                    <ListView ItemsSource="{Binding LstNhanViens}" 
-                              RowHeight="55" x:Name="lstNV"                      
-                              Margin="5,0,5,0" BackgroundColor="#E6E9E8">
+                    <ListView ItemsSource="{Binding LstTemp}" 
+                      RowHeight="55" x:Name="list_NV"                     
+                      Margin="5,0,5,0" BackgroundColor="#CDCFCE">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Grid ColumnDefinitions="*, 2.5*, 1.5*" RowSpacing="5">
-                                        <Image Source="{Binding IMG}" Aspect="AspectFill" Grid.Column="0"/>
+                                    <Grid ColumnDefinitions="*, 2.5*, 1.5*,0.8*" RowSpacing="5">
+                                        <Image Source="{Binding IMG}" Grid.Column="0" x:Name="img" 
+                                       HeightRequest="50" WidthRequest="45"/>
                                         <StackLayout Orientation="Vertical" Grid.Column="1" >
-                                            <Label Text="{Binding Name}" FontSize="20"/>
-                                            <Label Text="{Binding PhoneNumber}"/>
+                                            <Label Text="{Binding Name}" FontSize="15"/>
+                                            <Label Text="{Binding Price}"/>
                                         </StackLayout>
-                                        <Label Text="{Binding Date}" FontSize="15" Grid.Column="2" TextColor="#292A29"/>
+                                        <Label Text="{Binding ID}" FontSize="15" Grid.Column="2" TextColor="#292A29"/>
+                                        <Button Text="-" TextColor="White" Grid.Column="3" HeightRequest="40" WidthRequest="40" 
+                                                BackgroundColor="Black" HorizontalOptions="Center" VerticalOptions="Center"
+                                                Command="{Binding Source={x:Reference list_NV}, Path=BindingContext.DeleteCommand}"
+                                                CommandParameter="{Binding .}"/>
                                     </Grid>
-                                    <ViewCell.ContextActions>
-                                        <MenuItem Text="Delete" IsDestructive="true"							           							              
-							                Command="{Binding Source={x:Reference lstNV}, Path=ViewModel.DeleteCommand}"
-							            CommandParameter="{Binding .}"/> <!---->
-                                    </ViewCell.ContextActions>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -49,7 +49,7 @@
                 </StackLayout>
             </ScrollView>
             <Label Grid.Row="1" Text="{Binding LocationPage}" 
-                   HorizontalOptions="Center" 
+                   HorizontalOptions="Center"
                    VerticalOptions="Center"/>
         </Grid>
         <Grid ColumnDefinitions="*,*,*,*" Grid.Row="2">

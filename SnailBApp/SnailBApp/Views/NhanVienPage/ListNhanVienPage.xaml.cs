@@ -1,4 +1,6 @@
 ﻿
+using SnailBApp.Data;
+using SnailBApp.Data.NhanVienData;
 using SnailBApp.Services;
 using SnailBApp.ViewModels.NhanVienVM;
 using Xamarin.Forms;
@@ -13,8 +15,19 @@ namespace SnailBApp.Views.NhanVienPage
         public ListNhanVienPage()
         {
             var pageService = new PageService();
-            this.BindingContext = new ListNhanVienPageViewModel(pageService);
+            var dataAccess = new SQLiteNhanVienStore(DependencyService.Get<ISQLite>());
+            this.BindingContext = new ListNhanVienPageViewModel(dataAccess,pageService);
             InitializeComponent();
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ViewModel.LoadDataCommand.Execute(null);
+        }
+        private ListNhanVienPageViewModel ViewModel
+        {
+            get { return BindingContext as ListNhanVienPageViewModel; }
+            set { BindingContext = value; }
         }
     }
 }

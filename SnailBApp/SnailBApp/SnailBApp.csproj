@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\MonAnPage\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Views\NhanVienPage\DetailNhanVienPage.xaml.cs">
       <DependentUpon>DetailNhanVienPage.xaml</DependentUpon>
     </Compile>
@@ -24,6 +20,15 @@
 
   <ItemGroup>
     <EmbeddedResource Update="StartPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MonAnPage\DetailFoodPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MonAnPage\FillFoodPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MonAnPage\ListFoodPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MyBagPage.xaml">

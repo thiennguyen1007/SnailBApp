@@ -3,6 +3,7 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:SnailBApp.Views"
        xmlns:NhanVien="clr-namespace:SnailBApp.Views.NhanVienPage"
+       xmlns:MonAn="clr-namespace:SnailBApp.Views.MonAnPage"
        Title="SnailBApp"
        x:Class="SnailBApp.AppShell">
 
@@ -54,7 +55,6 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
-
             <!--
             Custom Style you can apply to any Flyout Item
             -->
@@ -73,23 +73,23 @@
             </Style>
         </ResourceDictionary>
     </Shell.Resources>
-
-    <!-- 
-        When the Flyout is visible this defines the content to display in the flyout.
-        FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
-        https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
-    -->
-    <FlyoutItem Title="About" Icon="icon_about.png">
-        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
-    </FlyoutItem>
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Image Aspect="AspectFill" Source="SnailB.png" Opacity="0.7" 
+                   HeightRequest="150"/>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
     <FlyoutItem Title="Nhân Viên" Icon="nhanVien.png">
         <ShellContent Route="ListNhanVienPage" ContentTemplate="{DataTemplate NhanVien:ListNhanVienPage}" />
     </FlyoutItem>
-
-    <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
+    <FlyoutItem Title="Foods" Icon="monAn.png">
+        <ShellContent Route="ListFoodPage" ContentTemplate="{DataTemplate MonAn:ListFoodPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="About" Icon="icon_about.png">
+        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+    </FlyoutItem>
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>
-
     <!--
         TabBar lets you define content that won't show up in a flyout menu. When this content is active
         the flyout menu won't be available. This is useful for creating areas of the application where 
@@ -100,38 +100,5 @@
     <TabBar>
         <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
     </TabBar>
-
-    <!-- Optional Templates 
-    // These may be provided inline as below or as separate classes.
-
-    // This header appears at the top of the Flyout.
-    // https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyout-header
-    <Shell.FlyoutHeaderTemplate>
-        <DataTemplate>
-            <Grid>ContentHere</Grid>
-        </DataTemplate>
-    </Shell.FlyoutHeaderTemplate>
-
-    // ItemTemplate is for ShellItems as displayed in a Flyout
-    // https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#define-flyoutitem-appearance
-    <Shell.ItemTemplate>
-        <DataTemplate>
-            <ContentView>
-                Bindable Properties: Title, Icon
-            </ContentView>
-        </DataTemplate>
-    </Shell.ItemTemplate>
-
-    // MenuItemTemplate is for MenuItems as displayed in a Flyout
-    // https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#define-menuitem-appearance
-    <Shell.MenuItemTemplate>
-        <DataTemplate>
-            <ContentView>
-                Bindable Properties: Text, Icon
-            </ContentView>
-        </DataTemplate>
-    </Shell.MenuItemTemplate>
-
-    -->
 
 </Shell>

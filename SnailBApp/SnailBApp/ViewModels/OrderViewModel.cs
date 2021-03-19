@@ -18,8 +18,7 @@ namespace SnailBApp.ViewModels
         private ObservableCollection<FoodViewModel> _lstFoods;
         // store food to show in my bag
         private ObservableCollection<FoodViewModel> _lstBag;
-        public ObservableCollection<FoodViewModel> LstBagTemp { get; set; } = new ObservableCollection<FoodViewModel>();
-        
+        public ObservableCollection<FoodViewModel> LstBagTemp { get; set; } = new ObservableCollection<FoodViewModel>();       
         //to Load data, show data OrderPage
         public ICommand LoadDataCommand { get; private set; }
         //go to StartPage
@@ -107,7 +106,7 @@ namespace SnailBApp.ViewModels
                             temp++;
                         }
                     }
-                    if (temp == 0)//not duplicate is true => add & caculate
+                    if (temp == 0)//not duplicate => add & caculate
                     {
                         moneyOfItem = numberOfFood * x.Price;
                         x.Price = moneyOfItem;
@@ -115,10 +114,8 @@ namespace SnailBApp.ViewModels
                     }
                     await _pageService.DisplayAlert("Success", $"{x.SL} {x.Name} added your cart", "OK");
                 }
-                LstBag = new ObservableCollection<FoodViewModel>(LstBagTemp);
-                
+                LstBag = new ObservableCollection<FoodViewModel>(LstBagTemp);              
             }
-
         }            
         private ObservableCollection<FoodViewModel> LstKhoiTao()
         {

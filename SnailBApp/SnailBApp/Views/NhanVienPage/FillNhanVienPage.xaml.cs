@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using SnailBApp.Data;
+using SnailBApp.Data.NhanVienData;
+using SnailBApp.Services;
+using SnailBApp.ViewModels.NhanVienVM;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,7 +12,16 @@ namespace SnailBApp.Views.NhanVienPage
     {
         public FillNhanVienPage()
         {
+            var pageService = new PageService();
+            var dataAccess = new SQLiteNhanVienStore(DependencyService.Get<ISQLite>());
+            ViewModel = new FillNhanVienPageViewModel(dataAccess, pageService);
+            this.BindingContext = ViewModel;
             InitializeComponent();
+        }
+        private FillNhanVienPageViewModel ViewModel
+        {
+            get { return BindingContext as FillNhanVienPageViewModel; }
+            set { BindingContext = value; }
         }
     }
 }

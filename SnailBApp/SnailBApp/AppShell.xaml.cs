@@ -1,7 +1,6 @@
-﻿using SnailBApp.ViewModels;
-using SnailBApp.Views;
+﻿using SnailBApp.Views;
 using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SnailBApp
@@ -15,9 +14,14 @@ namespace SnailBApp
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
         }
 
-        private async void OnMenuItemClicked(object sender, EventArgs e)
+        private void OnMenuItemClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//LoginPage");
+            Task.Delay(1000);
+            Task.Run(async()=> 
+            {
+                await Shell.Current.Navigation.PopToRootAsync();
+                Application.Current.MainPage = new StartPage();
+            });           
         }
     }
 }
