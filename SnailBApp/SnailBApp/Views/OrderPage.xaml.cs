@@ -27,5 +27,10 @@ namespace SnailBApp.Views
             get { return BindingContext as OrderViewModel; }
             set { BindingContext = value; }
         }
+
+        private void Entry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ViewModel.SearchChanged(e.NewTextValue);
+        }
     }
 }

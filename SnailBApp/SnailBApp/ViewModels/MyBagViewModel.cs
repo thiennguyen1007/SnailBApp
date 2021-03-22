@@ -11,12 +11,14 @@ namespace SnailBApp.ViewModels
     {
         private readonly IFoodStore _foodStore;
         private readonly IPageService _pageService;
+        // binding to show in MyBag page
         private ObservableCollection<FoodViewModel> _lstBag;
         private float _totalMoney;
         private string _name;
         private string _phoneNumber;
         private static bool _isAnyItem;
         public ICommand ThanhToanCommand { get; private set; }
+        public ICommand DeleteCommand { get; set; }
         public ObservableCollection<FoodViewModel> LstBag
         {
             get { return _lstBag; }
@@ -47,17 +49,18 @@ namespace SnailBApp.ViewModels
             //open connect SQLite database
             _foodStore = foodStore;
             _pageService = pageService;
-            //
+            //Load
             LoadData(x);
-            TotalMoney = CaculateMoney();
-            IsBusy = BagIsAny();
-            IsAnyItem = IsBusy;
             //Command
             ThanhToanCommand = new Command(OnThanhToanClicked);
+            DeleteCommand = new Command(OnDeleteClicked);
         }
         private ObservableCollection<FoodViewModel> LoadData(ObservableCollection<FoodViewModel> x)
         {
-            LstBag = new ObservableCollection<FoodViewModel>(x);
+            LstBag = x;
+            TotalMoney = CaculateMoney();
+            IsBusy = BagIsAny();
+            IsAnyItem = IsBusy;
             return LstBag;
         }
         private float CaculateMoney()//caculate total money of All item in Bag
@@ -77,6 +80,25 @@ namespace SnailBApp.ViewModels
             if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(PhoneNumber))
             {
                 _pageService.DisplayAlert("Failed", "Thanh Toan thất bại!\nFill all information in box", "OK");
+            }
+        }
+        private async void OnDeleteClicked(object obj)
+        {
+            var x = obj as FoodViewModel;
+            if (await _pageService.DisplayAlert("Are you sure?", "Delete this food from your cart?", "OK", "Cancel"))
+            {
+                LstBag.Remove(x);
+                TotalMoney -= x.Price;
+                //check to show PopUp "Thanh Toan" or not
+                IsBusy = BagIsAny();
+                IsAnyItem = IsBusy;
+                // delete list bag in orderPage.
+                OrderViewModel order = new OrderViewModel(null, null);
+                order.LstBagTemp.Remove(x);
+            }
+            else
+            {
+                return;
             }
         }
         private bool BagIsAny()// check number of item in List Bag

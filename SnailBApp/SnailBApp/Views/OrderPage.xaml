@@ -48,6 +48,8 @@
                        FontAttributes="None" WidthRequest="300" HeightRequest="30" 
                        HorizontalOptions="Center" Margin="40,0,0,0"
                        PlaceholderColor="#81503D"
+                       TextChanged="Entry_TextChanged"
+                       Text="{Binding SearchText, Mode=TwoWay}"
                    />
                 <ImageButton Source="search.png" HorizontalOptions="End"/>
             </StackLayout>

@@ -1,6 +1,7 @@
 ﻿using SnailBApp.Data.FoodData;
 using SnailBApp.Services;
 using SnailBApp.ViewModels.MonAnVM;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,9 +17,10 @@ namespace SnailBApp.ViewModels
         private IPageService _pageService;
         //Binding in OrderPage
         private ObservableCollection<FoodViewModel> _lstFoods;
+        private string _searchText = default;
         // store food to show in my bag
         private ObservableCollection<FoodViewModel> _lstBag;
-        public ObservableCollection<FoodViewModel> LstBagTemp { get; set; } = new ObservableCollection<FoodViewModel>();       
+        private static ObservableCollection<FoodViewModel> _lstBagTemp = new ObservableCollection<FoodViewModel>();
         //to Load data, show data OrderPage
         public ICommand LoadDataCommand { get; private set; }
         //go to StartPage
@@ -37,7 +39,16 @@ namespace SnailBApp.ViewModels
             get { return _lstBag; }
             set { SetProperty(ref _lstBag, value); }
         }
-        
+        public ObservableCollection<FoodViewModel> LstBagTemp
+        {
+            get { return _lstBagTemp; }
+            set { SetProperty(ref _lstBagTemp, value); }
+        }
+        public string SearchText
+        {
+            get { return _searchText; }
+            set { SetProperty(ref _searchText, value); }
+        }
         //==================================================================
         public OrderViewModel(IFoodStore foodStore, IPageService pageService)
         {
@@ -45,7 +56,7 @@ namespace SnailBApp.ViewModels
             _foodStore = foodStore;
             _pageService = pageService;
             //Command
-            LoadDataCommand = new Command(async()=> await LoadData());
+            LoadDataCommand = new Command(async () => await LoadData());
             AddCommand = new Command(OnAddClicked);
             BackCommand = new Command(OnBackClicked);
             MyBagCommand = new Command(OnBagClicked);
@@ -54,7 +65,7 @@ namespace SnailBApp.ViewModels
         {
             LstFoods = new ObservableCollection<FoodViewModel>(LstKhoiTao());
             var lstFoods = await _foodStore.GetFoodsAsync();
-            foreach(var x in lstFoods)
+            foreach (var x in lstFoods)
             {
                 FoodViewModel f = new FoodViewModel();
                 f.ID = x.ID;
@@ -67,7 +78,7 @@ namespace SnailBApp.ViewModels
         }
         private async void OnBackClicked()
         {
-            if (LstBag== null)
+            if (LstBag == null)
             {
                 await Application.Current.MainPage.Navigation.PopToRootAsync();
                 Application.Current.MainPage = new NavigationPage(new StartPage());
@@ -85,17 +96,16 @@ namespace SnailBApp.ViewModels
                 await Application.Current.MainPage.Navigation.PopToRootAsync();
                 Application.Current.MainPage = new NavigationPage(new StartPage());
             }
-                      
         }
         private async void OnBagClicked()
         {
-            LstBag = new ObservableCollection<FoodViewModel>(LstBagTemp);        
+            LstBag = new ObservableCollection<FoodViewModel>(LstBagTemp);
             await _pageService.PushAsync(new Views.MyBagPage(LstBag));
         }
         private async void OnAddClicked(object obj)
         {
-            int numberOfFood=default;
-            float moneyOfItem=default;
+            int numberOfFood = default;
+            float moneyOfItem = default;
             //get food & add to LstBag
             var x = obj as FoodViewModel;
             numberOfFood = x.SL;
@@ -132,9 +142,31 @@ namespace SnailBApp.ViewModels
                     }
                     await _pageService.DisplayAlert("Success", $"{x.SL} {x.Name} added your cart", "OK");
                 }
-                LstBag = new ObservableCollection<FoodViewModel>(LstBagTemp);              
+                LstBag = new ObservableCollection<FoodViewModel>(LstBagTemp);
             }
-        }            
+        }
+        public void SearchChanged(string txt)
+        {
+            Task.Run(() => LoadData());
+            foreach (var item in SearchFood(txt))
+            {
+                LstFoods.Clear();
+                LstFoods.Add(item);
+            }
+        }
+        private IEnumerable<FoodViewModel> SearchFood(string txtFood)
+        {
+            ObservableCollection<FoodViewModel> temp = new ObservableCollection<FoodViewModel>(LstFoods);
+            var x = new List<FoodViewModel>(temp);
+            if (string.IsNullOrWhiteSpace(txtFood)== true || string.IsNullOrEmpty(txtFood)==true)
+            {
+                return x;
+            }
+            else
+            {
+                return x.Where(f => f.Name.StartsWith(txtFood));
+            }
+        }
         private ObservableCollection<FoodViewModel> LstKhoiTao()
         {
             ObservableCollection<FoodViewModel> x = new ObservableCollection<FoodViewModel>();

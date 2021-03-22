@@ -26,7 +26,7 @@
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0}"
             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.74}">
-            <StackLayout Orientation="Vertical" BindableLayout.ItemsSource="{Binding LstBag}">
+            <StackLayout Orientation="Vertical" BindableLayout.ItemsSource="{Binding LstBag}" x:Name="lstFood">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <Frame BackgroundColor="#C5CDC9" CornerRadius="10" Margin="10,5,10,0">
@@ -39,9 +39,12 @@
                                     <Label Text="{Binding Price}" 
                                            FontSize="16"/>
                                 </StackLayout>
-                                <StackLayout Grid.Column="2">
+                                <StackLayout Grid.Column="2" Orientation="Vertical">
                                     <Label Text="{Binding SL}" 
                                            Margin="0" HorizontalOptions="Center"/>
+                                    <ImageButton Source="delete.png" BackgroundColor="#C5CDC9"
+                                                 Command="{Binding Source={x:Reference lstFood}, Path=BindingContext.DeleteCommand}"
+							                     CommandParameter="{Binding .}"/>
                                 </StackLayout>
                             </Grid>
                         </Frame>
