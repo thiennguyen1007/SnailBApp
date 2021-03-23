@@ -14,5 +14,10 @@ namespace SnailBApp.Views
             InitializeComponent();
             this.BindingContext = new LoginViewModel(pageService);
         }
+        protected override bool OnBackButtonPressed()
+        {
+            Application.Current.MainPage = new NavigationPage(new StartPage());
+            return true;
+        }
     }
 }

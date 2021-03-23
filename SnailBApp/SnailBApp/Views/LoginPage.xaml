@@ -10,7 +10,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Entry">
-                <Setter Property="TextColor" Value="#194D33"/>
+                <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
                 <Setter Property="Margin" Value="5,0,20,0"/>
             </Style>

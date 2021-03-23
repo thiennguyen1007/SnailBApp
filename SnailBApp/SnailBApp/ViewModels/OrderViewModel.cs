@@ -115,7 +115,7 @@ namespace SnailBApp.ViewModels
             }
             else // 1: list.count=0; 2: list.count>0 
             {
-                if (LstBagTemp.Any() == false || LstBagTemp.Count == 0) //list bag =0, caculate MoneyOfItem & add Item Food to the listbag
+                if (LstBagTemp.Any() == false) //list bag =0, caculate MoneyOfItem & add Item Food to the listbag
                 {
                     moneyOfItem = numberOfFood * x.Price;
                     x.Price = moneyOfItem;
@@ -147,25 +147,27 @@ namespace SnailBApp.ViewModels
         }
         public void SearchChanged(string txt)
         {
-            Task.Run(() => LoadData());
-            foreach (var item in SearchFood(txt))
+            if (string.IsNullOrWhiteSpace(txt) == true || string.IsNullOrEmpty(txt) == true || txt == "")
             {
-                LstFoods.Clear();
-                LstFoods.Add(item);
+                Task.Run(() => LoadData());
+                return;
+            }
+            else
+            {
+                Task.Run(() => LoadData());
+                ObservableCollection<FoodViewModel> x = new ObservableCollection<FoodViewModel>();
+                foreach (var item in SearchFood(txt))
+                {
+                    x.Add(item);
+                }
+                LstFoods = new ObservableCollection<FoodViewModel>(x);
             }
         }
         private IEnumerable<FoodViewModel> SearchFood(string txtFood)
         {
             ObservableCollection<FoodViewModel> temp = new ObservableCollection<FoodViewModel>(LstFoods);
             var x = new List<FoodViewModel>(temp);
-            if (string.IsNullOrWhiteSpace(txtFood)== true || string.IsNullOrEmpty(txtFood)==true)
-            {
-                return x;
-            }
-            else
-            {
-                return x.Where(f => f.Name.StartsWith(txtFood));
-            }
+            return x.Where(f => f.Name.Contains(txtFood));
         }
         private ObservableCollection<FoodViewModel> LstKhoiTao()
         {

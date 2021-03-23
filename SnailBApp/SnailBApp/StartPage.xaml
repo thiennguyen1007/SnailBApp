@@ -1,13 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ctrl="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              x:Class="SnailBApp.StartPage"
-             NavigationPage.HasNavigationBar="False"
-             xmlns:vm="clr-namespace:SnailBApp.ViewModels"
-             xmlns:ctrl="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin">
-    <ContentPage.BindingContext>
+             NavigationPage.HasNavigationBar="False">
+    <!--<ContentPage.BindingContext>
         <vm:StartViewModel x:Name="vm"/>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#FFBE00"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Grid RowDefinitions="2*,2*,*,*">
         <!--<ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>-->
@@ -38,24 +48,24 @@
         <StackLayout Grid.Row="1" Spacing="20" Margin="0,-130,0,0">
             <ctrl:CircleImage x:Name="img_banner" Source="Start.jpg" HeightRequest="195" WidthRequest="195"/>
             <StackLayout HorizontalOptions="Center" Spacing="8">
-                <Label Text="Are you hungry?" TextColor="White" FontSize="18" HorizontalOptions="Center"/>
-                <Label Text="Don't Wait!" TextColor="White" FontSize="45" 
+                <Label Text="Are you hungry?" FontSize="18" HorizontalOptions="Center"/>
+                <Label Text="Don't Wait!" FontSize="45" 
                        FontAttributes="Bold" HorizontalOptions="Center"/>
-                <Button Text="Order Now" TextColor="White" BackgroundColor="#FFBE00" 
+                <Button Text="Order Now" 
                         WidthRequest="150" HeightRequest="46" 
                         CornerRadius="25" HorizontalOptions="Center" 
                         Command="{Binding OrderCommand}"/>
             </StackLayout>
         </StackLayout>
         <StackLayout Grid.Row="2" Margin="10, 30, 10, 10" Orientation="Vertical">
-            <Label Text="Khách hàng thân thiết?" FontSize="15" TextColor="White" Margin="10, 0, 0, 5" Opacity="0.7"/>
+            <Label Text="Khách hàng thân thiết?" FontSize="15" Margin="10, 0, 0, 5" Opacity="0.7"/>
             <Button Text="Login or Sign Up" CornerRadius="10" HeightRequest="40" 
-                    Opacity="0.7" BackgroundColor="#FFBE00" 
+                    Opacity="0.7" 
                     WidthRequest="300" FontAttributes="Bold" 
                     Command="{Binding LoginCommand}"/>
         </StackLayout>
         <StackLayout Grid.Row="3" Margin="25,10,0,25" Spacing="10">
-            <Label Text="QUICK PICK" TextColor="White" Opacity="0.5" FontSize="14"/>
+            <Label Text="QUICK PICK" Opacity="0.5" FontSize="14"/>
         </StackLayout>
     </Grid>
 </ContentPage>

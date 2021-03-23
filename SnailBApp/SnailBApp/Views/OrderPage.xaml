@@ -51,7 +51,6 @@
                        TextChanged="Entry_TextChanged"
                        Text="{Binding SearchText, Mode=TwoWay}"
                    />
-                <ImageButton Source="search.png" HorizontalOptions="End"/>
             </StackLayout>
             <!--start of list food-->
             <CarouselView Grid.Row="3" ItemsSource="{Binding LstFoods}"  

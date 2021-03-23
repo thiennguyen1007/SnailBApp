@@ -3,6 +3,10 @@ using SnailBApp.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Linq;
+using System.Collections;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace SnailBApp.ViewModels.NhanVienVM
 {
@@ -24,7 +28,6 @@ namespace SnailBApp.ViewModels.NhanVienVM
             set { SetProperty(ref _lstNhanViens, value); }
         }
         #endregion
-
         public ListNhanVienPageViewModel(INhanVienStore nhanVienStore, IPageService pageService)
         {
             //Open connect SQLite, Page
@@ -43,6 +46,20 @@ namespace SnailBApp.ViewModels.NhanVienVM
                 LstNhanViens.Add(new NhanVienViewModel(item));
             }
         }
+        //private IEnumerable<NhanVienViewModel> ReadData()
+        //{
+        //    IEnumerable<Models.NhanVien> nhanViens = default;
+        //    Task.Run(async () =>
+        //    {
+        //        nhanViens = await _nhanVienStore.GetNhanViensAsync();
+
+        //    });
+        //    foreach (var item in nhanViens)
+        //    {
+        //        NhanVienViewModel x = new NhanVienViewModel(item);
+        //        yield return x;
+        //    }
+        //}
         private void OnAddClicked()// navigation to FillNhanVienPage.xaml
         {
             _pageService.PushAsync(new Views.NhanVienPage.FillNhanVienPage());

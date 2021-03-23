@@ -2,6 +2,7 @@
 using SnailBApp.Data.FoodData;
 using SnailBApp.Services;
 using SnailBApp.ViewModels;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,6 +22,11 @@ namespace SnailBApp.Views
         {
             base.OnAppearing();
             ViewModel.LoadDataCommand.Execute(null);
+        }
+        protected override bool OnBackButtonPressed()
+        {
+            Application.Current.MainPage = new NavigationPage(new StartPage());                      
+            return true;
         }
         public OrderViewModel ViewModel
         {
