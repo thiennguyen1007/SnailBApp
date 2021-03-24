@@ -1,10 +1,15 @@
-﻿using System;
+﻿using SnailBApp.Models;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SnailBApp.Data.HoaDonData
 {
-    class IHoaDonStore
+    public interface IHoaDonStore
     {
+        Task<IEnumerable<HoaDon>> GetHoaDonAsync();
+        Task<HoaDon> GetHoaDon(int ID);
+        Task AddHoaDon(HoaDon HD);
+        Task UpdateHoaDon(HoaDon HD);
+        Task DeleteHoaDon(HoaDon HD);
     }
 }

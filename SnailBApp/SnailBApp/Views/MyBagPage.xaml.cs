@@ -1,5 +1,6 @@
 ﻿using SnailBApp.Data;
 using SnailBApp.Data.FoodData;
+using SnailBApp.Data.HoaDonData;
 using SnailBApp.ViewModels;
 using SnailBApp.ViewModels.MonAnVM;
 using System.Collections.ObjectModel;
@@ -18,9 +19,10 @@ namespace SnailBApp.Views
         }
         public MyBagPage(ObservableCollection<FoodViewModel> x)
         {
-            var dataAccess = new SQLiteFoodStore(DependencyService.Get<ISQLite>());
+            //var dataAccessFood = new SQLiteFoodStore(DependencyService.Get<ISQLite>());
+            var dataAccessHoaDon = new SQLiteHoaDonStore(DependencyService.Get<ISQLite>());
             var pageService = new Services.PageService();
-            ViewModel = new MyBagViewModel(x, dataAccess, pageService);
+            ViewModel = new MyBagViewModel(x, dataAccessHoaDon, pageService);
             this.BindingContext = ViewModel;
             InitializeComponent();
         }

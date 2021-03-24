@@ -70,13 +70,13 @@
                            VerticalOptions="Center" Grid.Row="1"/>
                     <Entry Placeholder="Name"
                            Grid.Row="1"
-                           Text="{Binding Name}"/>
+                           Text="{Binding Path=HoaDon.Email}"/>
                     <Label Grid.Column="0" Text="So dien thoai:" 
                            FontSize="15" 
                            VerticalOptions="Center" Grid.Row="2"/>
                     <Entry Placeholder="phone number"                             
                            Grid.Row="2"
-                           Text="{Binding PhoneNumber}"/>
+                           Text="{Binding Path=HoaDon.PhonNumber}"/>
                 </Grid>
                 <Button Text="Thanh Toan" FontSize="20" 
                         FontAttributes="Bold" CornerRadius="10" 

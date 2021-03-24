@@ -1,6 +1,8 @@
-﻿using SnailBApp.Data.FoodData;
+﻿using SnailBApp.Data.HoaDonData;
 using SnailBApp.Services;
 using SnailBApp.ViewModels.MonAnVM;
+using SQLite;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -9,14 +11,15 @@ namespace SnailBApp.ViewModels
 {
     public class MyBagViewModel : BaseViewModel
     {
-        private readonly IFoodStore _foodStore;
         private readonly IPageService _pageService;
+        private readonly IHoaDonStore _hoaDonStore;
         // binding to show in MyBag page
         private ObservableCollection<FoodViewModel> _lstBag;
         private float _totalMoney;
         private string _name;
         private string _phoneNumber;
         private static bool _isAnyItem;
+        private HoaDonVM.HoaDonViewModel _hoaDon;
         public ICommand ThanhToanCommand { get; private set; }
         public ICommand DeleteCommand { get; set; }
         public ObservableCollection<FoodViewModel> LstBag
@@ -44,11 +47,17 @@ namespace SnailBApp.ViewModels
             get { return _isAnyItem; }
             set { SetProperty(ref _isAnyItem, value); }
         }
-        public MyBagViewModel(ObservableCollection<FoodViewModel> x, IFoodStore foodStore, IPageService pageService)
+        public HoaDonVM.HoaDonViewModel HoaDon
+        {
+            get => _hoaDon;
+            set { SetProperty(ref _hoaDon, value); }
+        }
+        //================================================
+        public MyBagViewModel(ObservableCollection<FoodViewModel> x,IHoaDonStore hoaDonStore, IPageService pageService)
         {
             //open connect SQLite database
-            _foodStore = foodStore;
             _pageService = pageService;
+            _hoaDonStore = hoaDonStore;
             //Load
             LoadData(x);
             //Command
@@ -80,6 +89,32 @@ namespace SnailBApp.ViewModels
             if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(PhoneNumber))
             {
                 _pageService.DisplayAlert("Failed", "Thanh Toan thất bại!\nFill all information in box", "OK");
+            }
+            else
+            {
+                string lstFoodString = "";
+                foreach (var item in LstBag)
+                {
+                    lstFoodString += item.SL.ToString() + item.Name.ToString();
+                }
+                HoaDon.Date =DateTime.Now.ToString("dd-MM-YYYY");
+                HoaDon.Price = TotalMoney;
+                HoaDon.Foods = lstFoodString;
+                Models.HoaDon hoaDonAdd = new Models.HoaDon();
+                hoaDonAdd.Email = HoaDon.Email;
+                hoaDonAdd.Foods = HoaDon.Foods;
+                hoaDonAdd.Date = HoaDon.Date;
+                hoaDonAdd.PhoneNumber = HoaDon.PhoneNumber;
+                hoaDonAdd.Price = HoaDon.Price;
+                try
+                {
+                    _hoaDonStore.AddHoaDon(hoaDonAdd);
+                }
+                catch (SQLiteException e)
+                {
+                    _pageService.DisplayAlert("Failed!",$"Failed! \n {e.Message}", "Ok") ;
+                }
+                
             }
         }
         private async void OnDeleteClicked(object obj)
