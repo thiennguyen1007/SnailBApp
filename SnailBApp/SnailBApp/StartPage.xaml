@@ -51,7 +51,7 @@
                 <Label Text="Are you hungry?" FontSize="18" HorizontalOptions="Center"/>
                 <Label Text="Don't Wait!" FontSize="45" 
                        FontAttributes="Bold" HorizontalOptions="Center"/>
-                <Button Text="Order Now" 
+                <Button Text="Order Now" BackgroundColor="#FFBE00"
                         WidthRequest="150" HeightRequest="46" 
                         CornerRadius="25" HorizontalOptions="Center" 
                         Command="{Binding OrderCommand}"/>
@@ -60,7 +60,7 @@
         <StackLayout Grid.Row="2" Margin="10, 30, 10, 10" Orientation="Vertical">
             <Label Text="Khách hàng thân thiết?" FontSize="15" Margin="10, 0, 0, 5" Opacity="0.7"/>
             <Button Text="Login or Sign Up" CornerRadius="10" HeightRequest="40" 
-                    Opacity="0.7" 
+                    Opacity="0.7" BackgroundColor="#FFBE00"
                     WidthRequest="300" FontAttributes="Bold" 
                     Command="{Binding LoginCommand}"/>
         </StackLayout>

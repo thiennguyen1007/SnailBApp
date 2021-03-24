@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SnailBApp.Views.HoaDonPage.ListHoaDonPage"
+             Title="Hóa Đơn"
+             x:Name="page">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="add.png" Command="{Binding AddCommand}"/>
+    </ContentPage.ToolbarItems>
+    <!--start list view-->
+    <Grid RowDefinitions="0.3*,5.5*,0.2*,0.1*">
+        <SearchBar Grid.Row="0" Placeholder="Search..." BackgroundColor="Transparent"/>
+        <Grid RowDefinitions="11*,0.5*" Grid.Row="1">
+            <ScrollView Grid.Row="0">
+                <StackLayout Orientation="Vertical">
+                    <ListView ItemsSource="{Binding LstHoaDon}" 
+                              RowHeight="55" x:Name="lstNV"                      
+                              Margin="5,0,5,0" BackgroundColor="#E6E9E8"
+                              ItemSelected="lstNV_ItemSelected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid ColumnDefinitions="*, 2.5*, 1.5*" RowSpacing="5">
+                                        <StackLayout Orientation="Vertical" Grid.Column="1" >
+                                            <Label Text="{Binding Email}" FontSize="20"/>
+                                            <Label Text="{Binding PhoneNumber}"/>
+                                        </StackLayout>
+                                        <Label Text="{Binding Date}" FontSize="15" Grid.Column="2" TextColor="#292A29"/>
+                                    </Grid>
+                                    <ViewCell.ContextActions>
+                                        <MenuItem Text="Delete" IsDestructive="true"							           							              
+							                Command="{Binding Source={x:Reference page}, Path=ViewModel.DeleteCommand}"
+							                CommandParameter="{Binding .}"/>
+                                    </ViewCell.ContextActions>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="Số lượng hóa đơn"/>
+                        <Label Text="{Binding NumberHD}"/>
+                    </StackLayout>
+
+                </StackLayout>
+            </ScrollView>
+            <Label Grid.Row="1" Text="{Binding LocationPage}" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center"/>
+        </Grid>
+        <Grid ColumnDefinitions="*,*,*,*" Grid.Row="2">
+            <ImageButton Source="fistList.png" Grid.Column="0" Command="{Binding FirstLstCommand}"/>
+            <ImageButton Source="backList.png" Grid.Column="1" Command="{Binding BackLstCommand}"/>
+            <ImageButton Source="nextList.png" Grid.Column="2" Command="{Binding NextLstCommand}"/>
+            <ImageButton Source="lastList.png" Grid.Column="3" Command="{Binding LastLstCommand}"/>
+        </Grid>
+    </Grid>
+</ContentPage>
