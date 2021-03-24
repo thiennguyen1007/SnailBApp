@@ -15,8 +15,7 @@
                 <StackLayout Orientation="Vertical">
                     <ListView ItemsSource="{Binding LstHoaDon}" 
                               RowHeight="55" x:Name="lstNV"                      
-                              Margin="5,0,5,0" BackgroundColor="#E6E9E8"
-                              ItemSelected="lstNV_ItemSelected">
+                              Margin="5,0,5,0" BackgroundColor="#E6E9E8">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
