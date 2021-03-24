@@ -76,7 +76,7 @@
                            VerticalOptions="Center" Grid.Row="2"/>
                     <Entry Placeholder="phone number"                             
                            Grid.Row="2"
-                           Text="{Binding Path=HoaDon.PhonNumber}"/>
+                           Text="{Binding Path=HoaDon.PhoneNumber}"/>
                 </Grid>
                 <Button Text="Thanh Toan" FontSize="20" 
                         FontAttributes="Bold" CornerRadius="10" 

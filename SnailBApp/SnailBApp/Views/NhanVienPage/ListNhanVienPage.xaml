@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SnailBApp.Views.NhanVienPage.ListNhanVienPage"
-             Title="Danh sách Nhân Viên">
+             Title="Danh sách Nhân Viên"
+             x:Name="page">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="ImageButton">
@@ -40,13 +41,18 @@
                                     </Grid>
                                     <ViewCell.ContextActions>
                                         <MenuItem Text="Delete" IsDestructive="true"							           							              
-							                Command="{Binding Source={x:Reference lstNV}, Path=ViewModel.DeleteCommand}"
-							            CommandParameter="{Binding .}"/>
+							                Command="{Binding Source={x:Reference page}, Path=ViewModel.DeleteCommand}"
+							                CommandParameter="{Binding .}"/>
                                     </ViewCell.ContextActions>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="Số lượng nhân viên trong nhà hàng"/>
+                        <Label Text="{Binding NumberNV}"/>
+                    </StackLayout>
+                    
                 </StackLayout>
             </ScrollView>
             <Label Grid.Row="1" Text="{Binding LocationPage}" 

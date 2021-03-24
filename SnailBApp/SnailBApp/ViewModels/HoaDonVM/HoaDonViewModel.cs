@@ -33,5 +33,15 @@
             get => _price;
             set { SetProperty(ref _price, value); }
         }
+        public HoaDonViewModel(Models.HoaDon hd)
+        {
+            ID = hd.ID;
+            Email = hd.Email;
+            PhoneNumber = hd.PhoneNumber;
+            Date = hd.Date;
+            Foods = hd.Foods;
+            Price = hd.Price;
+        }
+        public HoaDonViewModel() { }
     }
 }

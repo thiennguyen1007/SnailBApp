@@ -1,12 +1,10 @@
 ﻿using SnailBApp.Data.NhanVienData;
+using SnailBApp.Models;
 using SnailBApp.Services;
+using SQLite;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
-using System.Linq;
-using System.Collections;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace SnailBApp.ViewModels.NhanVienVM
 {
@@ -15,17 +13,24 @@ namespace SnailBApp.ViewModels.NhanVienVM
         #region KhaiBao
         private readonly IPageService _pageService;
         private readonly INhanVienStore _nhanVienStore;
+        private int _numberNV;
         public ICommand AddCommand { get; private set; }
         public ICommand LoadDataCommand { get; private set; }
         public ICommand FirstLstCommand { get; private set; }
         public ICommand BackLstCommand { get; private set; }
         public ICommand NextLstCommand { get; private set; }
         public ICommand LastLstCommand { get; private set; }
+        public ICommand DeleteCommand { get; private set; }
         private ObservableCollection<NhanVienViewModel> _lstNhanViens;
         public ObservableCollection<NhanVienViewModel> LstNhanViens
         {
             get => _lstNhanViens;
             set { SetProperty(ref _lstNhanViens, value); }
+        }
+        public int NumberNV
+        {
+            get => _numberNV;
+            set { SetProperty(ref _numberNV, value); }
         }
         #endregion
         public ListNhanVienPageViewModel(INhanVienStore nhanVienStore, IPageService pageService)
@@ -36,6 +41,7 @@ namespace SnailBApp.ViewModels.NhanVienVM
             //Command
             AddCommand = new Command(OnAddClicked);
             LoadDataCommand = new Command(LoadData);
+            DeleteCommand = new Command(OnDeleteClicked);
         }
         private async void LoadData()
         {
@@ -45,6 +51,7 @@ namespace SnailBApp.ViewModels.NhanVienVM
             {
                 LstNhanViens.Add(new NhanVienViewModel(item));
             }
+            NumberNV = LstNhanViens.Count;
         }
         //private IEnumerable<NhanVienViewModel> ReadData()
         //{
@@ -76,6 +83,37 @@ namespace SnailBApp.ViewModels.NhanVienVM
             {
                 await page.PushAsync(new Views.NhanVienPage.DetailNhanVien(x));
             }           
+        }
+        private async void OnDeleteClicked(object obj)
+        {
+            var x = obj as NhanVienViewModel;
+            NhanVien nv = new NhanVien();
+            nv.ID = x.ID;
+            nv.Name = x.Name;
+            nv.GioiTinh = x.GioiTinh;
+            nv.IMG = x.IMG;
+            nv.PhoneNumber = x.PhoneNumber;
+            nv.Address = x.Address;
+            nv.Date = x.Date;
+            nv.Desc = x.Desc;
+            try
+            {
+                if (await _pageService.DisplayAlert("Alert!", $"{x.Name} will be delete.\nAre you sure?", "Ok", "Cancel"))
+                {
+                    await _nhanVienStore.DeleteNhanVien(nv);
+                    LstNhanViens.Remove(x);
+                    await _pageService.DisplayAlert("","Success!","Ok");
+                }
+                else
+                {
+                    return;
+                }
+            }
+            catch (SQLiteException e)
+            {
+
+               await _pageService.DisplayAlert("Failed!", "Failed when delete...\nError: " + e.Message, "ok");
+            }
         }
         private ObservableCollection<NhanVienViewModel> KhoiTao()
         {

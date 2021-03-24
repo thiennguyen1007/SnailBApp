@@ -85,7 +85,7 @@ namespace SnailBApp.ViewModels
             }
             else if (LstBag.Count > 0)
             {
-                if (await _pageService.DisplayAlert("Are you sure!", "All Food in your cart will be clear.", "Ok", "Cancel"))
+                if (await _pageService.DisplayAlert("Are you sure!", "Bạn đang bỏ quên hàng trong giỏ kìa!\nBack now.", "Ok", "Cancel"))
                 {
                     await Application.Current.MainPage.Navigation.PopToRootAsync();
                     Application.Current.MainPage = new NavigationPage(new StartPage());

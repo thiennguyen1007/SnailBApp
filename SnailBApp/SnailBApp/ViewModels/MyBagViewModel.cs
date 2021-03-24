@@ -59,6 +59,7 @@ namespace SnailBApp.ViewModels
             _pageService = pageService;
             _hoaDonStore = hoaDonStore;
             //Load
+            HoaDon = new HoaDonVM.HoaDonViewModel();
             LoadData(x);
             //Command
             ThanhToanCommand = new Command(OnThanhToanClicked);
@@ -86,7 +87,8 @@ namespace SnailBApp.ViewModels
         }
         private void OnThanhToanClicked()
         {
-            if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(PhoneNumber))
+            
+            if (string.IsNullOrWhiteSpace(HoaDon.Email) || string.IsNullOrWhiteSpace(HoaDon.PhoneNumber))
             {
                 _pageService.DisplayAlert("Failed", "Thanh Toan thất bại!\nFill all information in box", "OK");
             }
@@ -97,7 +99,7 @@ namespace SnailBApp.ViewModels
                 {
                     lstFoodString += item.SL.ToString() + item.Name.ToString();
                 }
-                HoaDon.Date =DateTime.Now.ToString("dd-MM-YYYY");
+                HoaDon.Date =DateTime.Now.ToString("dd-MM-yyyy");
                 HoaDon.Price = TotalMoney;
                 HoaDon.Foods = lstFoodString;
                 Models.HoaDon hoaDonAdd = new Models.HoaDon();
@@ -109,6 +111,13 @@ namespace SnailBApp.ViewModels
                 try
                 {
                     _hoaDonStore.AddHoaDon(hoaDonAdd);
+                    _pageService.DisplayAlert("","Success!","OK");
+                    LstBag.Clear();
+                    //check to show PopUp "Thanh Toan" or not
+                    IsAnyItem = false;
+                    // delete list bag in orderPage.
+                    OrderViewModel order = new OrderViewModel(null, null);
+                    order.LstBagTemp.Clear();
                 }
                 catch (SQLiteException e)
                 {
