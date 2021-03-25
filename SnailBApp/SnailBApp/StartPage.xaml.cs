@@ -30,10 +30,20 @@ namespace SnailBApp
         }
         private async void SpinImg()
         {
-            while (true)
-            {
-                await img_banner.RelRotateTo(360, 10000, Easing.BounceOut);
-            }
+            double displacement = img_banner.Width;
+            while (true) {
+                await img_banner.FadeTo(0, 800, Easing.Linear);
+                await img_banner.TranslateTo(-displacement, img_banner.Y, 800, Easing.CubicInOut);
+                await img_banner.TranslateTo(displacement, 0, 0);
+                await Task.WhenAll(
+                    img_banner.FadeTo(1, 800, Easing.Linear),
+                    img_banner.TranslateTo(0, img_banner.Y, 800, Easing.CubicInOut));
+            }                           
+            //while (true)
+            //{
+            //    await img_banner.RelRotateTo(360, 5000, Easing.BounceIn);
+            //}
+
         }
     }
 }

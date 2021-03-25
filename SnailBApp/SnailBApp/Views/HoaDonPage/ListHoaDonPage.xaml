@@ -4,9 +4,13 @@
              x:Class="SnailBApp.Views.HoaDonPage.ListHoaDonPage"
              Title="Hóa Đơn"
              x:Name="page">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="add.png" Command="{Binding AddCommand}"/>
-    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <!--start list view-->
     <Grid RowDefinitions="0.3*,5.5*,0.2*,0.1*">
         <SearchBar Grid.Row="0" Placeholder="Search..." BackgroundColor="Transparent"/>
@@ -19,12 +23,16 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Grid ColumnDefinitions="*, 2.5*, 1.5*" RowSpacing="5">
-                                        <StackLayout Orientation="Vertical" Grid.Column="1" >
+                                    <Grid ColumnDefinitions="2.5*, 1.5*" RowSpacing="5">
+                                        <StackLayout Orientation="Vertical" Grid.Column="0" Margin="10,0,0,0">
                                             <Label Text="{Binding Email}" FontSize="20"/>
                                             <Label Text="{Binding PhoneNumber}"/>
                                         </StackLayout>
-                                        <Label Text="{Binding Date}" FontSize="15" Grid.Column="2" TextColor="#292A29"/>
+                                        <StackLayout Orientation="Vertical" Grid.Column="1">
+                                            <Label Text="{Binding Date}" FontSize="15" TextColor="#292A29"/>
+                                            <Label Text="{Binding Price}" TextColor="Red"/>
+                                        </StackLayout>
+                                        
                                     </Grid>
                                     <ViewCell.ContextActions>
                                         <MenuItem Text="Delete" IsDestructive="true"							           							              
@@ -39,7 +47,6 @@
                         <Label Text="Số lượng hóa đơn"/>
                         <Label Text="{Binding NumberHD}"/>
                     </StackLayout>
-
                 </StackLayout>
             </ScrollView>
             <Label Grid.Row="1" Text="{Binding LocationPage}" 

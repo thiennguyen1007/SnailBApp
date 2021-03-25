@@ -8,6 +8,7 @@ namespace SnailBApp.ViewModels.HoaDonVM
     public class ListHoaDonViewModel :BaseViewModel
     {
         private readonly IHoaDonStore _hoaDonStore;
+        private int _numberHD = 0;
         private ObservableCollection<HoaDonViewModel> _lstHoaDon= new ObservableCollection<HoaDonViewModel>();
         //Command
         public ICommand LoadDataCommand { get; private set; }
@@ -15,6 +16,11 @@ namespace SnailBApp.ViewModels.HoaDonVM
         {
             get => _lstHoaDon;
             set { SetProperty(ref _lstHoaDon, value); }
+        }
+        public int NumberHD
+        {
+            get => _numberHD;
+            set { SetProperty(ref _numberHD, value); }
         }
         //=================================================================
         public ListHoaDonViewModel(IHoaDonStore hoaDonStore)
@@ -25,12 +31,14 @@ namespace SnailBApp.ViewModels.HoaDonVM
         }
         private async void LoadData()
         {
+            ObservableCollection<HoaDonViewModel> lstTemp = new ObservableCollection<HoaDonViewModel>();
             var nhanViens = await _hoaDonStore.GetHoaDonAsync();
             foreach (var item in nhanViens)
             {
-                LstHoaDon.Add(new HoaDonViewModel(item));
+                lstTemp.Add(new HoaDonViewModel(item));
             }
-            //NumberHD = LstNhanViens.Count;
+            LstHoaDon = new ObservableCollection<HoaDonViewModel>(lstTemp);
+            NumberHD = LstHoaDon.Count;
         }
     }
 }

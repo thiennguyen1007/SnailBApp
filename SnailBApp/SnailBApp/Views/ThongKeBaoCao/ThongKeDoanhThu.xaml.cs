@@ -1,4 +1,5 @@
-﻿using SnailBApp.Data;
+﻿using Microcharts;
+using SnailBApp.Data;
 using SnailBApp.Data.HoaDonData;
 using SnailBApp.ViewModels.ThongKeVM;
 using Xamarin.Forms;
@@ -9,16 +10,24 @@ namespace SnailBApp.Views.ThongKeBaoCao
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ThongKeDoanhThu : ContentPage
     {
+        //public ObservableCollection<ChartEntry> ChartEntries;
         public ThongKeDoanhThu()
         {
             var hoaDonStore = new SQLiteHoaDonStore(DependencyService.Get<ISQLite>());           
             InitializeComponent();
             ViewModel = new ThongKeDoanhThuViewModel(hoaDonStore);
         }
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
             ViewModel.LoadDataCommad.Execute(null);
+            
+            chartView.Chart = new LineChart
+            {
+                ValueLabelOrientation = Orientation.Horizontal,
+                Entries = await ViewModel.LoadChartAsync(),
+                LabelTextSize = 30
+            };
         }
         public ThongKeDoanhThuViewModel ViewModel
         {
