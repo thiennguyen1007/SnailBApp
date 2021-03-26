@@ -413,18 +413,11 @@ namespace SnailBApp.ViewModels.ThongKeVM
                         chartTemp.Add(chartEntry);
                     }
                 }
-                //sap xep lai mang, thang nao truoc thang nao sau. Caculate tang giam cua doanh thu to draw chart
+                //sap xep lai mang, thang nao truoc thang nao sau
                 Chart = new ObservableCollection<ChartEntry>();
                 Chart.Clear();
-                for (int i = (chartTemp.Count-1); i > 0; i--)
+                for (int i = (chartTemp.Count-1); i >= 0; i--)
                 {
-                    for (int j = i - 1; j >= 0; j--)
-                    {
-                        if (chartTemp[i].Value > chartTemp[j].Value)
-                        {
-                            chartTemp[i].Color = SKColor.Parse("#1976D2");
-                        }
-                    }
                     Chart.Add(chartTemp[i]);
                 }               
             }
