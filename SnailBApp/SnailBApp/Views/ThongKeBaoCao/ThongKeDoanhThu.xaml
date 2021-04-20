@@ -14,8 +14,8 @@
     </ContentPage.Resources>
     <ScrollView>
         <StackLayout Spacing="10">
-            <Frame CornerRadius="10" BorderColor="Black" Margin="10,20,10,20">
-                <StackLayout Orientation="Vertical" Spacing="20">
+            <Frame CornerRadius="10" BorderColor="Black" Margin="10,20">
+                <StackLayout Spacing="20">
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Month:"/>
                         <Entry Placeholder="Month..." Text="{Binding Month, Mode=TwoWay}"
@@ -26,7 +26,7 @@
                         <Entry Placeholder="Year..." Text="{Binding Year, Mode=TwoWay}"
                        Keyboard="Numeric" MaxLength="4" WidthRequest="100" Margin="0,-20,0,0"/>
                     </StackLayout>
-                    <Button Text="Filter" Command="{Binding FilterCommand}" FontAttributes="Bold" Margin="20,0,20,0"/>
+                    <Button Text="Filter" Command="{Binding FilterCommand}" FontAttributes="Bold" Margin="20,0"/>
                     <BoxView Color="Black" HeightRequest="1" Opacity="0.2"/>
                     <Label Text="Tổng tiền lãi ròng x1 (giá trị $):" TextColor="#9FA1A0" FontSize="14"/>
                     <Label Text="{Binding DoanhThu}" TextColor="Black" HorizontalOptions="Center" FontSize="30" VerticalOptions="Center"/>

@@ -11,19 +11,17 @@ namespace SnailBApp.Views.ThongKeBaoCao
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ThongKeDoanhThu : ContentPage
     {
-        //public ObservableCollection<ChartEntry> ChartEntries;
         public ThongKeDoanhThu()
-        {
-            var hoaDonStore = new SQLiteHoaDonStore(DependencyService.Get<ISQLite>());
-            var pageService = new PageService();
-            InitializeComponent();
-            ViewModel = new ThongKeDoanhThuViewModel(hoaDonStore, pageService);
+        {            
+            InitializeComponent();           
         }
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            ViewModel.LoadDataCommad.Execute(null);
-            
+            var hoaDonStore = new SQLiteHoaDonStore(DependencyService.Get<ISQLite>());
+            var pageService = new PageService();
+            ViewModel = new ThongKeDoanhThuViewModel(hoaDonStore, pageService);
+            ViewModel.LoadDataCommad.Execute(null);           
             chartView.Chart = new LineChart
             {
                 ValueLabelOrientation = Orientation.Horizontal,
@@ -31,7 +29,7 @@ namespace SnailBApp.Views.ThongKeBaoCao
                 LabelTextSize = 30
             };
         }
-        public ThongKeDoanhThuViewModel ViewModel
+        private ThongKeDoanhThuViewModel ViewModel
         {
             get { return BindingContext as ThongKeDoanhThuViewModel; }
             set { BindingContext = value; }
