@@ -1,4 +1,6 @@
-﻿namespace SnailBApp.ViewModels.MonAnVM
+﻿using SnailBApp.Models;
+
+namespace SnailBApp.ViewModels.MonAnVM
 {
     public class FoodViewModel : BaseViewModel
     {
@@ -8,6 +10,16 @@
         private string _desc;
         private int _sl;
         private float _price;
+        public FoodViewModel() { }
+        public FoodViewModel(Food x)
+        {
+            ID = x.ID;
+            Name = x.Name;
+            IMG = x.IMG;
+            Desc = x.Desc;
+            SL = x.SL;
+            Price = x.Price;
+        }
         public int ID
         {
             get { return _id; }

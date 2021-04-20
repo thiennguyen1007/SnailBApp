@@ -16,7 +16,7 @@ namespace SnailBApp.Views.NhanVienPage
         {
             var pageService = new PageService();
             var dataAccess = new SQLiteNhanVienStore(DependencyService.Get<ISQLite>());
-            this.BindingContext = new ListNhanVienPageViewModel(dataAccess,pageService);
+            ViewModel = new ListNhanVienPageViewModel(dataAccess,pageService);
             InitializeComponent();
         }
         protected override void OnAppearing()

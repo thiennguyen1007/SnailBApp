@@ -115,7 +115,7 @@ namespace SnailBApp.ViewModels
             }
             else // 1: list.count=0; 2: list.count>0 
             {
-                if (LstBagTemp.Any() == false) //list bag =0, caculate MoneyOfItem & add Item Food to the listbag
+                if (!LstBagTemp.Any()) //list bag =0, caculate MoneyOfItem & add Item Food to the listbag
                 {
                     moneyOfItem = numberOfFood * x.Price;
                     x.Price = moneyOfItem;
@@ -147,10 +147,9 @@ namespace SnailBApp.ViewModels
         }
         public void SearchChanged(string txt)
         {
-            if (string.IsNullOrWhiteSpace(txt) == true || string.IsNullOrEmpty(txt) == true || txt == "")
+            if (string.IsNullOrWhiteSpace(txt) || string.IsNullOrEmpty(txt) || txt == "")
             {
                 Task.Run(() => LoadData());
-                return;
             }
             else
             {
@@ -169,7 +168,7 @@ namespace SnailBApp.ViewModels
             var x = new List<FoodViewModel>(temp);
             return x.Where(f => f.Name.Contains(txtFood));
         }
-        private ObservableCollection<FoodViewModel> LstKhoiTao()
+        public ObservableCollection<FoodViewModel> LstKhoiTao()
         {
             ObservableCollection<FoodViewModel> x = new ObservableCollection<FoodViewModel>();
             FoodViewModel f = new FoodViewModel

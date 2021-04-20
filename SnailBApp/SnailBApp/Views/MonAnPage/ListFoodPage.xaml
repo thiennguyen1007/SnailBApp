@@ -21,33 +21,29 @@
     <Grid RowDefinitions="0.3*,5.5*,0.2*,0.1*">
         <SearchBar Grid.Row="0" Placeholder="Search..." BackgroundColor="Transparent"/>
         <Grid RowDefinitions="11*,0.8*" Grid.Row="1">
-            <ScrollView Grid.Row="0">
-                <StackLayout Orientation="Vertical">
-                    <ListView ItemsSource="{Binding LstTemp}" 
+            <ListView ItemsSource="{Binding LstFoods}"
                       RowHeight="55" x:Name="list_NV"                     
                       Margin="5,0,5,0" BackgroundColor="#CDCFCE">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid ColumnDefinitions="*, 2.5*, 1.5*,0.8*" RowSpacing="5">
-                                        <Image Source="{Binding IMG}" Grid.Column="0" x:Name="img" 
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid ColumnDefinitions="*, 2.5*, 1.5*,0.8*" RowSpacing="5">
+                                <Image Source="{Binding IMG}" Grid.Column="0" x:Name="img" 
                                        HeightRequest="50" WidthRequest="45"/>
-                                        <StackLayout Orientation="Vertical" Grid.Column="1" >
-                                            <Label Text="{Binding Name}" FontSize="15"/>
-                                            <Label Text="{Binding Price}"/>
-                                        </StackLayout>
-                                        <Label Text="{Binding ID}" FontSize="15" Grid.Column="2" TextColor="#292A29"/>
-                                        <Button Text="-" TextColor="White" Grid.Column="3" HeightRequest="40" WidthRequest="40" 
+                                <StackLayout Orientation="Vertical" Grid.Column="1" >
+                                    <Label Text="{Binding Name}" FontSize="15"/>
+                                    <Label Text="{Binding Price}"/>
+                                </StackLayout>
+                                <Label Text="{Binding ID}" FontSize="15" Grid.Column="2" TextColor="#292A29"/>
+                                <Button Text="-" TextColor="White" Grid.Column="3" HeightRequest="40" WidthRequest="40" 
                                                 BackgroundColor="Black" HorizontalOptions="Center" VerticalOptions="Center"
                                                 Command="{Binding Source={x:Reference list_NV}, Path=BindingContext.DeleteCommand}"
                                                 CommandParameter="{Binding .}"/>
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackLayout>
-            </ScrollView>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Label Grid.Row="1" Text="{Binding LocationPage}" 
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>

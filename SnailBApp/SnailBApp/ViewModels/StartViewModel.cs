@@ -1,5 +1,4 @@
-﻿using SnailBApp.Services;
-using SnailBApp.Views;
+﻿using SnailBApp.Views;
 using System.Windows.Input;
 using Xamarin.Forms;
 

@@ -2,7 +2,6 @@
 using SnailBApp.Data.FoodData;
 using SnailBApp.Services;
 using SnailBApp.ViewModels;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,15 +11,15 @@ namespace SnailBApp.Views
     public partial class OrderPage : ContentPage
     {
         public OrderPage()
-        {
-            var pageService = new PageService();
-            var dataAccess = new SQLiteFoodStore(DependencyService.Get<ISQLite>());
-            this.BindingContext = new OrderViewModel(dataAccess, pageService);
+        {           
             InitializeComponent();
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            var pageService = new PageService();
+            var dataAccess = new SQLiteFoodStore(DependencyService.Get<ISQLite>());
+            ViewModel = new OrderViewModel(dataAccess, pageService);
             ViewModel.LoadDataCommand.Execute(null);
         }
         protected override bool OnBackButtonPressed()
@@ -33,7 +32,6 @@ namespace SnailBApp.Views
             get { return BindingContext as OrderViewModel; }
             set { BindingContext = value; }
         }
-
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
             ViewModel.SearchChanged(e.NewTextValue);

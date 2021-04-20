@@ -15,12 +15,11 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid RowDefinitions="*,4*">
-        <Grid Grid.Row="0">
+        <Grid>
             <Image Source="{Binding IMG}"/>
         </Grid>
         <ScrollView Grid.Row="1">
-            <StackLayout>
-                <Frame CornerRadius="10" BorderColor="Black" Margin="10,20,10,0">
+            <Frame CornerRadius="10" BorderColor="Black" Margin="10,20,10,0">
                     <StackLayout Margin="10,20,10,0" Spacing="20">
                         <Entry Placeholder="Name" Keyboard="Text" Text="{Binding Path=NhanVien.Name}"/>
                         <Label Text="Gioi Tinh" TextColor="#AAAAAA"/>
@@ -39,7 +38,6 @@
                         <Button Text="Add" FontAttributes="Bold" Font="20" Command="{Binding AddCommand}"/>
                     </StackLayout>
                 </Frame>
-            </StackLayout>
         </ScrollView>
     </Grid>
 </ContentPage>

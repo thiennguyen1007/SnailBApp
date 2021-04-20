@@ -9,6 +9,7 @@
                 <Setter Property="BackgroundColor" Value="Transparent"/>
                 <Setter Property="HeightRequest" Value="30"/>
                 <Setter Property="WidthRequest" Value="30"/>
+                <Setter Property="Margin" Value="10,10,0,0"/>
             </Style>
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="Black"/>
@@ -29,17 +30,15 @@
                     </GradientStopCollection>
                 </LinearGradientBrush>
             </Grid.Background>
-            <StackLayout Grid.Row="0" Orientation="Vertical">
+            <StackLayout>
                 <Grid>
                     <ImageButton Source="btn_back.png" HorizontalOptions="Start" 
-                                 Margin="10,10,0,0"
                                  Command="{Binding BackCommand}"/>
                     <ImageButton Source="GioHang.png" HorizontalOptions="End"
-                                 Margin="0,10,10,0"
                                  Command="{Binding MyBagCommand}"/>
                 </Grid>
             </StackLayout>
-            <StackLayout Grid.Row="1" Orientation="Vertical" >
+            <StackLayout Grid.Row="1">
                 <Label Text="Search for" FontSize="35" HorizontalOptions="Start" Margin="20, 10, 0, 0" FontAttributes="Bold"/>
                 <Label Text="Best Of Meal" FontSize="40" TextColor="#FFBE00" Margin="40, 0, 0, 0" HorizontalOptions="Start"/>
             </StackLayout>
@@ -49,8 +48,7 @@
                        HorizontalOptions="Center" Margin="40,0,0,0"
                        PlaceholderColor="#81503D"
                        TextChanged="Entry_TextChanged"
-                       Text="{Binding SearchText, Mode=TwoWay}"
-                   />
+                       Text="{Binding SearchText, Mode=TwoWay}"/>
             </StackLayout>
             <!--start of list food-->
             <CarouselView Grid.Row="3" ItemsSource="{Binding LstFoods}"  
@@ -65,7 +63,7 @@
                             <Grid RowDefinitions="*,*,*" WidthRequest="250" HorizontalOptions="Center" Margin="0,50">
                                 <BoxView Grid.RowSpan="3" BackgroundColor="#B5B5B5" CornerRadius="30"/>
                                 <Image Source="logo.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center"
-                                       VerticalOptions="Center" Margin="0,55,0,0" Opacity="0.5" Grid.Row="0"/>
+                                       VerticalOptions="Center" Margin="0,55,0,0" Opacity="0.5"/>
                                 <StackLayout Grid.Row="1" Padding="20" VerticalOptions="Center" Margin="0,-30,0,0">
                                     <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold"
                                            HorizontalTextAlignment="Center"/>

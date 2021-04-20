@@ -32,10 +32,8 @@
                     <Label Text="{Binding DoanhThu}" TextColor="Black" HorizontalOptions="Center" FontSize="30" VerticalOptions="Center"/>
                 </StackLayout>
             </Frame>
-            <Label Text="Biểu đồ doanh thu 3 tháng gần nhất" FontSize="20"/>
+            <Label Text="Biểu đồ doanh thu 6 tháng gần nhất" FontSize="20"/>
             <forms:ChartView x:Name="chartView" HeightRequest="300"/>
         </StackLayout>
     </ScrollView>
-    
-    
 </ContentPage>

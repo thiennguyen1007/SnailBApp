@@ -20,7 +20,6 @@
     </ContentPage.Resources>
 
     <Grid RowDefinitions="2*,2*,*,*">
-        <!--<ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>-->
         <BoxView Grid.RowSpan="4">
             <BoxView.Background>
                 <!--chuyen mau-->
@@ -32,20 +31,19 @@
                 </LinearGradientBrush>
             </BoxView.Background>
         </BoxView>
-        <StackLayout Grid.Row="0" BackgroundColor="#FFBE00" Orientation="Vertical">
-            <Grid>
-                <StackLayout Spacing="0">
-                    <Label Text="Tel: (+84)08695209**" TextColor="Black" 
-                           FontSize="16" Margin="20,20,0,0" HorizontalOptions="Start"/>
+        <!--<StackLayout BackgroundColor="#FFBE00">-->
+        <Grid BackgroundColor="#FFBE00" ColumnDefinitions="2*,*" >
+            <StackLayout Spacing="5" Margin="20,20,20,0" VerticalOptions="Start">
+                    <Label Text="Tel:(+84)08695209**" TextColor="Black" 
+                           FontSize="16" HorizontalOptions="Start"/>
                     <Label Text="Restaurant" TextColor="Black" 
-                           FontSize="25" Margin="20,0,0,0" HorizontalOptions="Start" FontAttributes="Bold"/>
-                </StackLayout>
-                <Image x:Name="img_logo" Source="logo.png" 
+                           FontSize="25" HorizontalOptions="Start" FontAttributes="Bold"/>
+            </StackLayout> 
+            <Image x:Name="img_logo" Source="logo.png" Grid.Column="1" VerticalOptions="Start"
                        HeightRequest="50" WidthRequest="50" HorizontalOptions="End" 
-                       Margin="10,20"/>
+                       Margin="0,20,20,0"/>
             </Grid>
-        </StackLayout>
-        <StackLayout Grid.Row="1" Spacing="20" Margin="0,-130,0,0">
+            <StackLayout Grid.Row="1" Spacing="20" Margin="0,-130,0,0">
             <ctrl:CircleImage x:Name="img_banner" Source="Start.jpg" HeightRequest="195" WidthRequest="195"/>
             <StackLayout HorizontalOptions="Center" Spacing="8">
                 <Label Text="Are you hungry?" FontSize="18" HorizontalOptions="Center"/>
@@ -57,10 +55,10 @@
                         Command="{Binding OrderCommand}"/>
             </StackLayout>
         </StackLayout>
-        <StackLayout Grid.Row="2" Margin="10, 30, 10, 10" Orientation="Vertical">
-            <Label Text="Khách hàng thân thiết?" FontSize="15" Margin="10, 0, 0, 5" Opacity="0.7"/>
+        <StackLayout Grid.Row="2" Margin="10, 30, 10, 10" Opacity="0.7">
+            <Label Text="Khách hàng thân thiết?" FontSize="15" Margin="10, 0, 0, 5"/>
             <Button Text="Login or Sign Up" CornerRadius="10" HeightRequest="40" 
-                    Opacity="0.7" BackgroundColor="#FFBE00"
+                    BackgroundColor="#FFBE00"
                     WidthRequest="300" FontAttributes="Bold" 
                     Command="{Binding LoginCommand}"/>
         </StackLayout>
