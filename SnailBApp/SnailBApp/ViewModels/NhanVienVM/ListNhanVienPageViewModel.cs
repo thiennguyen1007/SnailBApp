@@ -16,10 +16,6 @@ namespace SnailBApp.ViewModels.NhanVienVM
         private int _numberNV;
         public ICommand AddCommand { get; private set; }
         public ICommand LoadDataCommand { get; private set; }
-        public ICommand FirstLstCommand { get; private set; }
-        public ICommand BackLstCommand { get; private set; }
-        public ICommand NextLstCommand { get; private set; }
-        public ICommand LastLstCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
         private ObservableCollection<NhanVienViewModel> _lstNhanViens;
         public ObservableCollection<NhanVienViewModel> LstNhanViens
@@ -89,10 +85,6 @@ namespace SnailBApp.ViewModels.NhanVienVM
                     await _nhanVienStore.DeleteNhanVien(nv);
                     LstNhanViens.Remove(x);
                     await _pageService.DisplayAlert("","Success!","Ok");
-                }
-                else
-                {
-                    return;
                 }
             }
             catch (SQLiteException e)

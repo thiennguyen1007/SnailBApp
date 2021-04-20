@@ -9,10 +9,14 @@ namespace SnailBApp
     {
         private StartViewModel ViewModel;
         public StartPage()
+        {            
+            InitializeComponent();           
+        }
+        protected override void OnAppearing()
         {
-            ViewModel = new StartViewModel();
-            InitializeComponent();
+            base.OnAppearing();
             SpinImg();
+            ViewModel = new StartViewModel();
             this.BindingContext = ViewModel;
         }
         protected override bool OnBackButtonPressed()
@@ -29,7 +33,6 @@ namespace SnailBApp
         }
         private async void SpinImg()
         {
-            double displacement = img_banner.Width;
             while (true) {
                 await img_banner.RotateTo(360,2000, Easing.BounceIn);
             }                           

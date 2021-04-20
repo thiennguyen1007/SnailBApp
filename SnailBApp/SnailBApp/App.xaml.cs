@@ -4,13 +4,10 @@ namespace SnailBApp
 {
     public partial class App : Application
     {
-
         public App()
         {
             InitializeComponent();
-            //DependencyService.Register<MockDataStore>();
             MainPage = new NavigationPage(new StartPage());
-            //MainPage = new AppShell();
         }
         protected override void OnStart()
         {

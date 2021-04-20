@@ -18,7 +18,6 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-
     <Grid RowDefinitions="2*,2*,*,*">
         <BoxView Grid.RowSpan="4">
             <BoxView.Background>

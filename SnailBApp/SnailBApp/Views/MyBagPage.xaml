@@ -26,12 +26,12 @@
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0}"
             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.74}">
-            <StackLayout Orientation="Vertical" BindableLayout.ItemsSource="{Binding LstBag}" x:Name="lstFood">
+            <StackLayout BindableLayout.ItemsSource="{Binding LstBag}" x:Name="lstFood">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <Frame BackgroundColor="#C5CDC9" CornerRadius="10" Margin="10,5,10,0">
                             <Grid ColumnDefinitions="1.5*,2.5*,0.5*">
-                                <Image Grid.Column="0" Source="{Binding IMG}" 
+                                <Image Source="{Binding IMG}" 
                                        WidthRequest="80" HeightRequest="80" 
                                        HorizontalOptions="Start" VerticalOptions="Start" />
                                 <StackLayout Grid.Column="1" Spacing="5" WidthRequest="115">
@@ -39,7 +39,7 @@
                                     <Label Text="{Binding Price}" 
                                            FontSize="16"/>
                                 </StackLayout>
-                                <StackLayout Grid.Column="2" Orientation="Vertical">
+                                <StackLayout Grid.Column="2">
                                     <Label Text="{Binding SL}" 
                                            Margin="0" HorizontalOptions="Center"/>
                                     <ImageButton Source="delete.png" BackgroundColor="#C5CDC9"
@@ -52,7 +52,7 @@
                 </BindableLayout.ItemTemplate>
             </StackLayout>
         </ScrollView>
-        <Frame Grid.Row="1" CornerRadius="5" Margin="5,0,5,0" Padding="0" IsVisible="{Binding IsAnyItem, Mode=OneWay}"
+        <Frame Grid.Row="1" CornerRadius="5" Margin="5,0" Padding="0" IsVisible="{Binding IsAnyItem, Mode=OneWay}"
                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.75}"
                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
@@ -61,17 +61,16 @@
                          VerticalOptions="FillAndExpand" BackgroundColor="#FFFFCC" Margin="0">
                 <Grid ColumnDefinitions="*,2*" RowDefinitions="*,*,*" 
                       RowSpacing="5" Margin="20,10,20,0">
-                    <Label Text="Tong Tien:" HorizontalOptions="Start"                             
-                           Grid.Column="0" Grid.Row="0"/>
+                    <Label Text="Tong Tien:" HorizontalOptions="Start"/>
                     <Label Text="{Binding TotalMoney}" HorizontalOptions="End"                             
-                           Grid.Column="1" Grid.Row="0"/>
-                    <Label Grid.Column="0" Text="Nguoi nhan:" 
+                           Grid.Column="1"/>
+                    <Label Text="Nguoi nhan:" 
                            FontSize="15" 
                            VerticalOptions="Center" Grid.Row="1"/>
                     <Entry Placeholder="Name"
                            Grid.Row="1"
                            Text="{Binding Path=HoaDon.Email}"/>
-                    <Label Grid.Column="0" Text="So dien thoai:" 
+                    <Label Text="So dien thoai:" 
                            FontSize="15" 
                            VerticalOptions="Center" Grid.Row="2"/>
                     <Entry Placeholder="phone number"                             

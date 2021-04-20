@@ -61,8 +61,7 @@ namespace SnailBApp.ViewModels.ThongKeVM
             {
                 TotalMoney += item.Price;
             }
-            float x = TotalMoney;
-            DoanhThu = x.ToString();
+            DoanhThu = TotalMoney.ToString();
             //         
         }
         private async void OnFilterClicked()

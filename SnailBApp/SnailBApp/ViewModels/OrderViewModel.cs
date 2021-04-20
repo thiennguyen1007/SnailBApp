@@ -80,22 +80,15 @@ namespace SnailBApp.ViewModels
         {
             if (LstBag == null)
             {
-                await Application.Current.MainPage.Navigation.PopToRootAsync();
                 Application.Current.MainPage = new NavigationPage(new StartPage());
-            }
-            else if (LstBag.Count > 0)
-            {
-                if (await _pageService.DisplayAlert("Are you sure!", "Bạn đang bỏ quên hàng trong giỏ kìa!\nBack now.", "Ok", "Cancel"))
-                {
-                    await Application.Current.MainPage.Navigation.PopToRootAsync();
-                    Application.Current.MainPage = new NavigationPage(new StartPage());
-                }
             }
             else
             {
-                await Application.Current.MainPage.Navigation.PopToRootAsync();
-                Application.Current.MainPage = new NavigationPage(new StartPage());
-            }
+                if (await _pageService.DisplayAlert("Are you sure!", "Bạn đang bỏ quên hàng trong giỏ kìa!\nBack now.", "Ok", "Cancel"))
+                {
+                    Application.Current.MainPage = new NavigationPage(new StartPage());
+                }               
+            }          
         }
         private async void OnBagClicked()
         {
@@ -166,7 +159,7 @@ namespace SnailBApp.ViewModels
         {
             ObservableCollection<FoodViewModel> temp = new ObservableCollection<FoodViewModel>(LstFoods);
             var x = new List<FoodViewModel>(temp);
-            return x.Where(f => f.Name.Contains(txtFood));
+            return x.Where(f => f.Name!=null && f.Name.Contains(txtFood));
         }
         public ObservableCollection<FoodViewModel> LstKhoiTao()
         {
@@ -175,7 +168,7 @@ namespace SnailBApp.ViewModels
             {
                 ID = 1,
                 Name = "Chicken Rice",
-                Desc = "Nhung con ga vung Tay A, mui vi that ngon va tuoi mat",
+                Desc = "Nhung con ga vung Tay A, mui vi ngon va tuoi mat",
                 IMG = "IMG05.png",
                 Price = (float)23.99,
             };
@@ -183,7 +176,7 @@ namespace SnailBApp.ViewModels
             {
                 ID = 2,
                 Name = "Banana Cream",
-                Desc = "Kem chuối là món ngon, món quà vặt tuổi thơ quen thuộc của nhiều người.",
+                Desc = "Kem chuối là món ngon, món quà nhiều người.",
                 IMG = "IMG04.png",
                 Price = (float)10.99,
             };
@@ -191,7 +184,7 @@ namespace SnailBApp.ViewModels
             {
                 ID = 3,
                 Name = "Juicy Chicken",
-                Desc = "Sụn gà rang muối là một món ăn cực kỳ hấp dẫn, được nhiều người like.",
+                Desc = "Sụn gà rang muối là một món ăn cực kỳ hấp dẫn.",
                 IMG = "IMG01.png",
                 Price = (float)23.99,
             };
@@ -199,7 +192,7 @@ namespace SnailBApp.ViewModels
             {
                 ID = 4,
                 Name = "Pizza",
-                Desc = "Nguyên liệu lúa mì thượng hạng của vùng Bắc Nga, công thức nấu độc nhâts.",
+                Desc = "Nguyên liệu lúa mì thượng hạng của vùng Bắc Nga.",
                 IMG = "pizza.png",
                 Price = (float)25.99,
             };

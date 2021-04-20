@@ -17,7 +17,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <RelativeLayout>
-        <Grid RowDefinitions="0.3*,*,0.5*,3*" 
+        <Grid RowDefinitions="0.3*,0.6*,0.5*,3*" 
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0}"
             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
