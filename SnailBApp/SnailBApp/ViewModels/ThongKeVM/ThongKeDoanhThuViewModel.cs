@@ -128,7 +128,7 @@ namespace SnailBApp.ViewModels.ThongKeVM
                     HoaDonViewModel x = new HoaDonViewModel(lstHoaDonToFilter[lstHoaDonToFilter.Count - 1]);
                     int nowMonth = int.Parse(x.Date.Substring(3, 2));
                     int nowYear = int.Parse(x.Date.Substring(6, 4));
-                    string lastTimeOfItem = x.Date.Substring(3, 7);
+                    //string lastTimeOfItem = x.Date.Substring(3, 7);
                     for (int i = 0; i < index; i++)
                     {
                         int month = int.Parse(lstHoaDonToFilter[i].Date.Substring(3, 2));
@@ -168,11 +168,11 @@ namespace SnailBApp.ViewModels.ThongKeVM
                         }
                     }
                     if (nowMonth >= 6)// ko can lui nam
-                    {                        
+                    {
                         //add
                         int tempMonth = nowMonth;
                         for (int i = 0; i < 5; i++)
-                        {                           
+                        {
                             if (tempMonth == 1)
                             {
                                 chartEntry = new ChartEntry((float)janMoney)
@@ -267,7 +267,7 @@ namespace SnailBApp.ViewModels.ThongKeVM
                                 {
                                     ValueLabel = decMoney.ToString(),
                                     Label = "Dec",
-                                };                               
+                                };
                             }
                             chartTemp.Add(chartEntry);
                             //giam thang
@@ -280,33 +280,15 @@ namespace SnailBApp.ViewModels.ThongKeVM
                           last_julMoney, last_augMoney, last_sepMoney, last_octMoney, last_novMoney, last_decMoney;
                         last_janMoney = last_febMoney = last_marMoney = last_aprMoney = last_mayMoney = last_junMoney =
                         last_julMoney = last_augMoney = last_sepMoney = last_octMoney = last_novMoney = last_decMoney = 0;
-                        int lastYear = nowYear--;
+                        int lastYear = nowYear-1;
                         int tempMonth = nowMonth;
-                        for(int i=0; i<index; i++)
+                        for (int i = 0; i < index; i++)
                         {
                             int month = int.Parse(lstHoaDonToFilter[i].Date.Substring(3, 2));
                             int year = int.Parse(lstHoaDonToFilter[i].Date.Substring(6, 4));
                             if (year == lastYear)
                             {
-                                if (month == 1)
-                                {
-                                    last_janMoney += lstHoaDonToFilter[i].Price;
-                                }
-                                else if (month == 2)
-                                {
-                                    last_febMoney += lstHoaDonToFilter[i].Price;
-                                }
-                                else if (month == 3)
-                                {
-                                    last_marMoney += lstHoaDonToFilter[i].Price;
-                                }
-                                else if (month == 4)
-                                { last_aprMoney += lstHoaDonToFilter[i].Price; }
-                                else if (month == 5)
-                                { last_mayMoney += lstHoaDonToFilter[i].Price; }
-                                else if (month == 6)
-                                { last_junMoney += lstHoaDonToFilter[i].Price; }
-                                else if (month == 7)
+                                if (month == 5)
                                 { last_julMoney += lstHoaDonToFilter[i].Price; }
                                 else if (month == 8)
                                 { last_augMoney += lstHoaDonToFilter[i].Price; }
@@ -320,8 +302,12 @@ namespace SnailBApp.ViewModels.ThongKeVM
                                 { last_decMoney += lstHoaDonToFilter[i].Price; }
                             }
                         }
-                        for (int i = 0; i < 5; i++)
+                        for (int i = 0; i < 6; i++)
                         {
+                            if (tempMonth == 0)
+                            {
+                                tempMonth = 12;
+                            }
                             if (tempMonth == 1)
                             {
                                 chartEntry = new ChartEntry((float)janMoney)
@@ -364,7 +350,7 @@ namespace SnailBApp.ViewModels.ThongKeVM
                             }
                             else if (tempMonth == 8)
                             {
-                                chartEntry = new ChartEntry((float)augMoney)
+                                chartEntry = new ChartEntry((float)last_augMoney)
                                 {
                                     ValueLabel = last_augMoney.ToString(),
                                     Label = "Aug",
@@ -372,7 +358,7 @@ namespace SnailBApp.ViewModels.ThongKeVM
                             }
                             else if (tempMonth == 9)
                             {
-                                chartEntry = new ChartEntry((float)sepMoney)
+                                chartEntry = new ChartEntry((float)last_sepMoney)
                                 {
                                     ValueLabel = last_sepMoney.ToString(),
                                     Label = "Sep",
@@ -380,7 +366,7 @@ namespace SnailBApp.ViewModels.ThongKeVM
                             }
                             else if (tempMonth == 10)
                             {
-                                chartEntry = new ChartEntry((float)octMoney)
+                                chartEntry = new ChartEntry((float)last_octMoney)
                                 {
                                     ValueLabel = last_octMoney.ToString(),
                                     Label = "Oct",
@@ -388,7 +374,7 @@ namespace SnailBApp.ViewModels.ThongKeVM
                             }
                             else if (tempMonth == 11)
                             {
-                                chartEntry = new ChartEntry((float)novMoney)
+                                chartEntry = new ChartEntry((float)last_novMoney)
                                 {
                                     ValueLabel = last_novMoney.ToString(),
                                     Label = "Nov",
@@ -396,15 +382,14 @@ namespace SnailBApp.ViewModels.ThongKeVM
                             }
                             else if (tempMonth == 12)
                             {
-                                chartEntry = new ChartEntry((float)decMoney)
+                                chartEntry = new ChartEntry((float)last_decMoney)
                                 {
                                     ValueLabel = last_decMoney.ToString(),
                                     Label = "Dec",
                                 };
                             }
-                            chartTemp.Add(chartEntry);
-                            tempMonth = tempMonth == 0 ? 12: tempMonth--;
-                            //tempMonth--;
+                            chartTemp.Add(chartEntry);                           
+                            tempMonth--;
                         }
                     }
                     //sap xep lai mang, thang nao truoc thang nao sau
