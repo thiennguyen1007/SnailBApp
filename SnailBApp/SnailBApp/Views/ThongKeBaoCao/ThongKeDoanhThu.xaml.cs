@@ -12,8 +12,8 @@ namespace SnailBApp.Views.ThongKeBaoCao
     public partial class ThongKeDoanhThu : ContentPage
     {
         public ThongKeDoanhThu()
-        {            
-            InitializeComponent();           
+        {
+            InitializeComponent();
         }
         protected async override void OnAppearing()
         {
@@ -21,13 +21,18 @@ namespace SnailBApp.Views.ThongKeBaoCao
             var hoaDonStore = new SQLiteHoaDonStore(DependencyService.Get<ISQLite>());
             var pageService = new PageService();
             ViewModel = new ThongKeDoanhThuViewModel(hoaDonStore, pageService);
-            ViewModel.LoadDataCommad.Execute(null);           
+            ViewModel.LoadDataCommad.Execute(null);
             chartView.Chart = new LineChart
             {
                 ValueLabelOrientation = Orientation.Horizontal,
                 Entries = await ViewModel.LoadChartAsync(),
                 LabelTextSize = 30
             };
+            chartRadar.Chart = new RadarChart
+            {
+                Entries = await ViewModel.LoadChartAsync(),
+            };
+
         }
         private ThongKeDoanhThuViewModel ViewModel
         {

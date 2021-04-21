@@ -22,8 +22,6 @@
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Month:"/>
                         <Entry Placeholder="Month..." Text="{Binding Month, Mode=TwoWay}" MaxLength="2"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
                         <Label Text="Year:"/>
                         <Entry Placeholder="Year..." Text="{Binding Year, Mode=TwoWay}" MaxLength="4"/>
                     </StackLayout>
@@ -34,7 +32,32 @@
                 </StackLayout>
             </Frame>
             <Label Text="Biểu đồ doanh thu 6 tháng gần nhất" FontSize="20"/>
-            <forms:ChartView x:Name="chartView" HeightRequest="300"/>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="20" HeightRequest="50">
+                <Button Text="Line Chart" Command="{Binding ChartCommand}" CommandParameter="0" Margin="35,0,35,0" BackgroundColor="#0D374C">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding StatusChart}" Value="true">
+                            <Setter Property="TextColor" Value="#FF9800"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Text="Radar Chart" Grid.Column="1" Command="{Binding ChartCommand}" CommandParameter="1" Margin="35,0,35,0" 
+                        FontSize="12"
+                        BackgroundColor="#0D374C">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding StatusChart}" Value="false">
+                            <Setter Property="TextColor" Value="#FF9800"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+            </Grid>
+            <forms:ChartView x:Name="chartView" HeightRequest="300" IsVisible="{Binding StatusChart}"/>
+            <forms:ChartView x:Name="chartRadar" HeightRequest="300" IsVisible="false">
+                <forms:ChartView.Triggers>
+                    <DataTrigger TargetType="forms:ChartView" Binding="{Binding StatusChart}" Value="false">
+                        <Setter Property="IsVisible" Value="true"/>
+                    </DataTrigger> 
+                </forms:ChartView.Triggers>
+            </forms:ChartView>
         </StackLayout>
     </ScrollView>
 </ContentPage>

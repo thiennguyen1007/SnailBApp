@@ -2,11 +2,46 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SnailBApp.Views.MonAnPage.DetailFoodPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="18"/>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor"  Value="#A3A3A3"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="*, 2*, 0.3*">
+        <StackLayout Margin="0" BackgroundColor="#EFEB8E">
+            <Image Source="{Binding Food.IMG}" Margin="0,5,0,0"
+                            HorizontalOptions="Center" HeightRequest="150" WidthRequest="200"/>
+            <Label Text="{Binding NhanVien.Name}" TextColor="Black" 
+                   HorizontalOptions="Center" FontSize="30" Margin="0,-15,0,0"/>
+            <Label Text="{Binding NhanVien.ID}" TextColor="Black" 
+                   HorizontalOptions="Center" FontSize="18"/>
         </StackLayout>
-    </ContentPage.Content>
+        <ScrollView Grid.Row="1">
+            <StackLayout  Margin="0">
+                <Frame CornerRadius="10" Margin="10,10,10,5" BorderColor="#A3A3A3">
+                    <StackLayout Spacing="10">
+                        <Label Text="Giới Tính"/>
+                        <Entry Text="{Binding NhanVien.GioiTinh}"/>
+                        <Label Text="Ngày Sinh"/>
+                        <Entry Text="{Binding NhanVien.Date}"/>
+                        <Label Text="Địa Chỉ"/>
+                        <Entry Text="{Binding NhanVien.Address}"/>
+                        <Label Text="Ghi chú"/>
+                        <Entry Text="{Binding NhanVien.Desc}"/>
+                        <Label Text="Phone Numbber"/>
+                        <Entry Text="{Binding NhanVien.PhoneNumber}"/>
+                        <Label Text="Path IMG:"/>
+                        <Entry Text="{Binding NhanVien.IMG}"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+        <Button Text="Update" TextColor="White" Grid.Row="2" Margin="20,5,20,5" Command="{Binding UpdateCommand}"/>
+    </Grid>
 </ContentPage>

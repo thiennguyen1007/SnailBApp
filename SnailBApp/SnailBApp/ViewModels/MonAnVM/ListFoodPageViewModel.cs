@@ -11,14 +11,17 @@ namespace SnailBApp.ViewModels.MonAnVM
         private int _numberFood;
         //
         private ObservableCollection<FoodViewModel> _lstFoods;
+        //commmand
         public ICommand LoadDataCommand { get; private set; }
+        //get set
         public ObservableCollection<FoodViewModel> LstFoods { get => _lstFoods; set => SetProperty(ref _lstFoods, value); }
         public int NumberFood { get => _numberFood; set => SetProperty(ref _numberFood, value); }
-
+        //implement
         public ListFoodPageViewModel(IFoodStore foodSore)
         {
             _foodSore = foodSore;
             LoadDataCommand = new Command(LoadData);
+            
         }
         private async void LoadData()
         {

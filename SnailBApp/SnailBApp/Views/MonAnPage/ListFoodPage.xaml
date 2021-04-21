@@ -21,10 +21,9 @@
     <!--start list view-->
     <Grid RowDefinitions="0.4*,5.5*,0.4*">
         <SearchBar Placeholder="Search..." BackgroundColor="Transparent"/>
-        <Grid RowDefinitions="11*,0.8*" Grid.Row="1">
-            <ListView ItemsSource="{Binding LstFoods}"
+        <ListView ItemsSource="{Binding LstFoods}"
                       RowHeight="55" x:Name="list_NV"                     
-                      Margin="5,0" BackgroundColor="#CDCFCE">
+                      Margin="5,0" BackgroundColor="#CDCFCE" Grid.Row="1">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -46,9 +45,9 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Label Grid.Row="1" Text="{Binding LocationPage}" 
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"/>
-        </Grid>
+        <StackLayout Orientation="Horizontal" Grid.Row="2" HorizontalOptions="Center">
+            <Label Text="Tổng số lượng món ăn: "/>
+            <Label Text="{Binding NumberFood}"/>
+        </StackLayout>
     </Grid>
 </ContentPage>

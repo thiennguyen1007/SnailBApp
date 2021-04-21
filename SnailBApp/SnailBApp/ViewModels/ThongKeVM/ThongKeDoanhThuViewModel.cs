@@ -16,6 +16,7 @@ namespace SnailBApp.ViewModels.ThongKeVM
         private readonly IHoaDonStore _hoaDonStore;
         private readonly IPageService _pageService;
         private string _doanhThu;
+        private bool _statusChart;
         private int _month;
         private int _year;
         private ObservableCollection<ChartEntry> _chart;
@@ -28,8 +29,10 @@ namespace SnailBApp.ViewModels.ThongKeVM
                 SetProperty(ref _doanhThu, value);
             }
         }
+        //command
         public ICommand LoadDataCommad { get; private set; }
         public ICommand FilterCommand { get; private set; }
+        public ICommand ChartCommand { get; private set; }
         public int Month
         {
             get => _month;
@@ -45,6 +48,9 @@ namespace SnailBApp.ViewModels.ThongKeVM
             get => _chart;
             set { SetProperty(ref _chart, value); }
         }
+
+        public bool StatusChart { get => _statusChart; set => SetProperty(ref _statusChart, value); }
+
         //=============================================================
         public ThongKeDoanhThuViewModel(IHoaDonStore hoaDonStore, IPageService pageService)
         {
@@ -53,10 +59,12 @@ namespace SnailBApp.ViewModels.ThongKeVM
             //
             LoadDataCommad = new Command(async () => await LoadData());
             FilterCommand = new Command(OnFilterClicked);
+            ChartCommand = new Command<string>(OnStatusChartClicked);
         }
         private async Task LoadData()
         {
             float TotalMoney = default;
+            StatusChart = true;
             var lstHoaDon = await _hoaDonStore.GetHoaDonAsync();
             foreach (var item in lstHoaDon)
             {
@@ -94,6 +102,14 @@ namespace SnailBApp.ViewModels.ThongKeVM
                 }
                 DoanhThu = TotalMoney.ToString();
             }
+        }
+        private void OnStatusChartClicked(string parameter)
+        {
+            if(parameter=="0")
+            {
+                StatusChart = true;
+            }else
+            { StatusChart = false; }
         }
         public async Task<IEnumerable<ChartEntry>> LoadChartAsync()
         {
@@ -395,6 +411,21 @@ namespace SnailBApp.ViewModels.ThongKeVM
                     {
                         Chart.Add(chartTemp[i]);
                     }
+                    //set mau
+                    for(int i =0; i<5; i++)
+                    {
+                        for(int j=i+1; j<6; j++)
+                        {
+                            if(Chart[i].Value<Chart[j].Value)
+                            {
+                                Chart[j].Color= SkiaSharp.SKColor.Parse("#004DCF");
+                            }else
+                            {
+                                Chart[j].Color = SkiaSharp.SKColor.Parse("#FF001D");
+                            }
+                        }
+                    }
+                    Chart[0].Color = SkiaSharp.SKColor.Parse("#FFF176");
                 }
             }
             return Chart;
