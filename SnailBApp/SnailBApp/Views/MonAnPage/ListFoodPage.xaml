@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SnailBApp.Views.MonAnPage.ListFoodPage"
-             Title="List Foods">
+             Title="List Foods"
+             x:Name="page">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="ImageButton">
@@ -18,8 +19,8 @@
         <ToolbarItem IconImageSource="add.png" Command="{Binding AddCommand}"/>
     </ContentPage.ToolbarItems>
     <!--start list view-->
-    <Grid RowDefinitions="0.3*,5.5*,0.2*,0.1*">
-        <SearchBar Grid.Row="0" Placeholder="Search..." BackgroundColor="Transparent"/>
+    <Grid RowDefinitions="0.4*,5.5*,0.4*">
+        <SearchBar Placeholder="Search..." BackgroundColor="Transparent"/>
         <Grid RowDefinitions="11*,0.8*" Grid.Row="1">
             <ListView ItemsSource="{Binding LstFoods}"
                       RowHeight="55" x:Name="list_NV"                     
@@ -35,11 +36,12 @@
                                     <Label Text="{Binding Price}"/>
                                 </StackLayout>
                                 <Label Text="{Binding ID}" FontSize="15" Grid.Column="2" TextColor="#292A29"/>
-                                <Button Text="-" TextColor="White" Grid.Column="3"
-                                                BackgroundColor="Black" HorizontalOptions="Center" VerticalOptions="Center"
-                                                Command="{Binding Source={x:Reference list_NV}, Path=BindingContext.DeleteCommand}"
-                                                CommandParameter="{Binding .}"/>
                             </Grid>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Delete" IsDestructive="true"							           							              
+							                Command="{Binding Source={x:Reference page}, Path=ViewModel.DeleteCommand}"
+							                CommandParameter="{Binding .}"/>
+                            </ViewCell.ContextActions>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -47,12 +49,6 @@
             <Label Grid.Row="1" Text="{Binding LocationPage}" 
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>
-        </Grid>
-        <Grid ColumnDefinitions="*,*,*,*" Grid.Row="2">
-            <ImageButton Source="fistList.png" Grid.Column="0" Command="{Binding FirstLstCommand}"/>
-            <ImageButton Source="backList.png" Grid.Column="1" Command="{Binding BackLstCommand}"/>
-            <ImageButton Source="nextList.png" Grid.Column="2" Command="{Binding NextLstCommand}"/>
-            <ImageButton Source="lastList.png" Grid.Column="3" Command="{Binding LastLstCommand}"/>
         </Grid>
     </Grid>
 </ContentPage>

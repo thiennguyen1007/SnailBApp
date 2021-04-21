@@ -9,6 +9,9 @@
         <ResourceDictionary>
             <Style TargetType="Entry">
                 <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="Margin" Value="0,-20,0,0"/>
+                <Setter Property="Keyboard" Value="Numeric"/>
+                <Setter Property="WidthRequest" Value="100"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -18,13 +21,11 @@
                 <StackLayout Spacing="20">
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Month:"/>
-                        <Entry Placeholder="Month..." Text="{Binding Month, Mode=TwoWay}"
-                       Keyboard="Numeric" MaxLength="2" WidthRequest="100" Margin="0,-20,0,0"/>
+                        <Entry Placeholder="Month..." Text="{Binding Month, Mode=TwoWay}" MaxLength="2"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Year:"/>
-                        <Entry Placeholder="Year..." Text="{Binding Year, Mode=TwoWay}"
-                       Keyboard="Numeric" MaxLength="4" WidthRequest="100" Margin="0,-20,0,0"/>
+                        <Entry Placeholder="Year..." Text="{Binding Year, Mode=TwoWay}" MaxLength="4"/>
                     </StackLayout>
                     <Button Text="Filter" Command="{Binding FilterCommand}" FontAttributes="Bold" Margin="20,0"/>
                     <BoxView Color="Black" HeightRequest="1" Opacity="0.2"/>

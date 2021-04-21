@@ -1,14 +1,13 @@
 ﻿using Microcharts;
-using SkiaSharp;
 using SnailBApp.Data.HoaDonData;
 using SnailBApp.Services;
+using SnailBApp.ViewModels.HoaDonVM;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-using SnailBApp.ViewModels.HoaDonVM;
-using System.Linq;
 
 namespace SnailBApp.ViewModels.ThongKeVM
 {
@@ -128,7 +127,6 @@ namespace SnailBApp.ViewModels.ThongKeVM
                     HoaDonViewModel x = new HoaDonViewModel(lstHoaDonToFilter[lstHoaDonToFilter.Count - 1]);
                     int nowMonth = int.Parse(x.Date.Substring(3, 2));
                     int nowYear = int.Parse(x.Date.Substring(6, 4));
-                    //string lastTimeOfItem = x.Date.Substring(3, 7);
                     for (int i = 0; i < index; i++)
                     {
                         int month = int.Parse(lstHoaDonToFilter[i].Date.Substring(3, 2));
@@ -171,7 +169,7 @@ namespace SnailBApp.ViewModels.ThongKeVM
                     {
                         //add
                         int tempMonth = nowMonth;
-                        for (int i = 0; i < 5; i++)
+                        for (int i = 0; i < 6; i++)
                         {
                             if (tempMonth == 1)
                             {
@@ -276,11 +274,9 @@ namespace SnailBApp.ViewModels.ThongKeVM
                     }
                     else// lui year and caculate
                     {
-                        double last_janMoney, last_febMoney, last_marMoney, last_aprMoney, last_mayMoney, last_junMoney,
-                          last_julMoney, last_augMoney, last_sepMoney, last_octMoney, last_novMoney, last_decMoney;
-                        last_janMoney = last_febMoney = last_marMoney = last_aprMoney = last_mayMoney = last_junMoney =
+                        double last_julMoney, last_augMoney, last_sepMoney, last_octMoney, last_novMoney, last_decMoney;
                         last_julMoney = last_augMoney = last_sepMoney = last_octMoney = last_novMoney = last_decMoney = 0;
-                        int lastYear = nowYear-1;
+                        int lastYear = nowYear - 1;
                         int tempMonth = nowMonth;
                         for (int i = 0; i < index; i++)
                         {
@@ -388,7 +384,7 @@ namespace SnailBApp.ViewModels.ThongKeVM
                                     Label = "Dec",
                                 };
                             }
-                            chartTemp.Add(chartEntry);                           
+                            chartTemp.Add(chartEntry);
                             tempMonth--;
                         }
                     }
