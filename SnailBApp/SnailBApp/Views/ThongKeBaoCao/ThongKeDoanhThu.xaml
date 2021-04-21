@@ -25,7 +25,8 @@
                         <Label Text="Year:"/>
                         <Entry Placeholder="Year..." Text="{Binding Year, Mode=TwoWay}" MaxLength="4"/>
                     </StackLayout>
-                    <Button Text="Filter" Command="{Binding FilterCommand}" FontAttributes="Bold" Margin="20,0"/>
+                    <Button Text="Filter" Command="{Binding FilterCommand}" FontAttributes="Bold" Margin="30,0"
+                            CornerRadius="30" BackgroundColor="#99FFCC"/>
                     <BoxView Color="Black" HeightRequest="1" Opacity="0.2"/>
                     <Label Text="Tổng tiền lãi ròng x1 (giá trị $):" TextColor="#9FA1A0" FontSize="14"/>
                     <Label Text="{Binding DoanhThu}" TextColor="Black" HorizontalOptions="Center" FontSize="30" VerticalOptions="Center"/>
@@ -33,7 +34,7 @@
             </Frame>
             <Label Text="Biểu đồ doanh thu 6 tháng gần nhất" FontSize="20"/>
             <Grid ColumnDefinitions="*,*" ColumnSpacing="20" HeightRequest="50">
-                <Button Text="Line Chart" Command="{Binding ChartCommand}" CommandParameter="0" Margin="35,0,35,0" BackgroundColor="#0D374C">
+                <Button Text="Line Chart" Command="{Binding ChartCommand}" CommandParameter="0" Margin="35,0" BackgroundColor="#0D374C">
                     <Button.Triggers>
                         <DataTrigger TargetType="Button" Binding="{Binding StatusChart}" Value="true">
                             <Setter Property="TextColor" Value="#FF9800"/>
