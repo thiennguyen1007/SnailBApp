@@ -17,6 +17,10 @@
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="Grid.Column" Value="1"/>
             </Style>
+            <Style x:Key="lbMoney" TargetType="Label">
+                <Setter Property="TextColor" Value="Red"/>
+                <Setter Property="FontSize" Value="16"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <RelativeLayout>
@@ -36,8 +40,10 @@
                                        HorizontalOptions="Start" VerticalOptions="Start" />
                                 <StackLayout Grid.Column="1" Spacing="5" WidthRequest="115">
                                     <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold"/>
-                                    <Label Text="{Binding Price}" 
-                                           FontSize="16"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Price}" Style="{StaticResource lbMoney}"/>
+                                        <Label Text="$" Style="{StaticResource lbMoney}"/>
+                                    </StackLayout>
                                 </StackLayout>
                                 <StackLayout Grid.Column="2">
                                     <Label Text="{Binding SL}" 

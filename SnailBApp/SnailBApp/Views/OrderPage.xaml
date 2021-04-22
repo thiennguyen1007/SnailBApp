@@ -2,22 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SnailBApp.Views.OrderPage"
+             xmlns:customLayout="clr-namespace:SnailBApp.Views.CustomLayout"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
             <Style TargetType="ImageButton">
                 <Setter Property="BackgroundColor" Value="Transparent"/>
-                <Setter Property="HeightRequest" Value="30"/>
-                <Setter Property="WidthRequest" Value="30"/>
-                <Setter Property="Margin" Value="10,10,0,0"/>
             </Style>
-            <Style TargetType="Label">
+            <Style TargetType="Label" x:Key="lbCategories">
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="TextColor" Value="Black"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <RelativeLayout>
-        <Grid RowDefinitions="0.3*,0.6*,0.5*,3*" 
+        <Grid></Grid>
+        <Grid RowDefinitions="0.5*,*,*,5*" 
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0}"
             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
@@ -30,30 +35,88 @@
                     </GradientStopCollection>
                 </LinearGradientBrush>
             </Grid.Background>
-            <StackLayout Margin="10">
-                <Grid>
-                    <ImageButton Source="home.png" HorizontalOptions="Start" 
-                                 Command="{Binding BackCommand}"/>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="End" Spacing="0">
-                        <ImageButton Source="GioHang.png" 
-                                 Command="{Binding MyBagCommand}"/>
-                        <Label BackgroundColor="Transparent" FontSize="18" Text="{Binding NumberFoodInBag}" TextColor="Red"/>
-                    </StackLayout>
-                </Grid>
-            </StackLayout>
-            <StackLayout Grid.Row="1">
-                <Label Text="Search for" FontSize="35" HorizontalOptions="Start" Margin="20, 10, 0, 0" FontAttributes="Bold"/>
-                <Label Text="Best Of Meal" FontSize="40" TextColor="#FFBE00" Margin="40, 0, 0, 0" HorizontalOptions="Start"/>
-            </StackLayout>
-            <StackLayout Grid.Row="2" Orientation="Horizontal" Spacing="10">
-                <Entry Placeholder="Search..." TextColor="#81503D"
-                       FontAttributes="None" WidthRequest="300" HeightRequest="30" 
-                       HorizontalOptions="Center" Margin="40,0,0,0"
+            <Grid ColumnDefinitions="0.4*,2.8*,0.4*" ColumnSpacing="5">
+                <ImageButton Source="home.png" HorizontalOptions="Start" 
+                             Command="{Binding BackCommand}" Margin="10,10,0,0"/>
+                <Frame Grid.Column="1" CornerRadius="30" BackgroundColor="White" Padding="0" Margin="0,10,0,0">
+                    <Grid ColumnDefinitions="4*,*" Padding="0">
+                        <customLayout:CustomEntry Placeholder="Search..." TextColor="#81503D"
+                       FontAttributes="None" Margin="10,0,0,0"
                        PlaceholderColor="#81503D"
                        TextChanged="Entry_TextChanged"
                        Text="{Binding SearchText, Mode=TwoWay}"/>
+                        <ImageButton Source="search.png" HorizontalOptions="End" Grid.Column="1" Margin="12"/>
+                    </Grid>
+                </Frame>
+
+                <StackLayout Orientation="Horizontal" Grid.Column="2" Spacing="0">
+                    <ImageButton Source="GioHang.png" HeightRequest="25" WidthRequest="25"
+                                 Command="{Binding MyBagCommand}" Margin="0,10,0,0"/>
+                    <Label BackgroundColor="Transparent" FontSize="15" Text="{Binding NumberFoodInBag}" TextColor="Red"/>
+                </StackLayout>
+            </Grid>
+            <Label Grid.Row="1" Text="{Binding LbLoaiMonAn}" FontSize="50" TextColor="#fb9300" FontAttributes="Bold" HorizontalOptions="Center" Opacity="0.4"/>
+            <StackLayout Grid.Row="2">
+                <Label Text="Categories" FontSize="20" TextColor="Black" Margin="20, 0, 0, 0" HorizontalOptions="Start" FontAttributes="Bold" Opacity="0.5"/>
+                <Frame Padding="0" BackgroundColor="Transparent">
+                    <Grid ColumnDefinitions="*,*,*" RowDefinitions="9*,0.1*" ColumnSpacing="50" Margin="20,0">
+                        <Frame CornerRadius="10" BackgroundColor="White" Padding="0">
+                            <StackLayout>
+                                <ImageButton Source="mainFood.png" HeightRequest="40" WidthRequest="40" Command="{Binding FilterCommand}" 
+                                             CommandParameter="0"/>
+                                <Label Text="main dishes" Style="{StaticResource lbCategories}">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding LbLoaiMonAn}" Value="Main Dishes">
+                                            <Setter Property="TextColor" Value="White"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </StackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding LbLoaiMonAn}" Value="Main Dishes">
+                                    <Setter Property="BackgroundColor" Value="#fb9300"/>
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                        <Frame Grid.Column="1" Padding="0" CornerRadius="10">
+                            <StackLayout>
+                                <ImageButton Source="trangMieng.png"   HeightRequest="40" WidthRequest="40"
+                                             Command="{Binding FilterCommand}" CommandParameter="1"/>
+                                <Label Text="Dessert" Style="{StaticResource lbCategories}">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding LbLoaiMonAn}" Value="Dessert">
+                                            <Setter Property="TextColor" Value="White"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </StackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding LbLoaiMonAn}" Value="Dessert">
+                                    <Setter Property="BackgroundColor" Value="#fb9300"/>
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                        <Frame Grid.Column="2" Padding="0" CornerRadius="10">
+                            <StackLayout>
+                                <ImageButton Source="juice.png"  HeightRequest="40" WidthRequest="40" 
+                                             Command="{Binding FilterCommand}" CommandParameter="2"/>
+                                <Label Text="Drink" Style="{StaticResource lbCategories}">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding LbLoaiMonAn}" Value="Drink">
+                                            <Setter Property="TextColor" Value="White"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </StackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding LbLoaiMonAn}" Value="Drink">
+                                    <Setter Property="BackgroundColor" Value="#fb9300"/>
+                                </DataTrigger>
+                            </Frame.Triggers>
+                        </Frame>
+                    </Grid>
+                </Frame>
             </StackLayout>
-            <!--start of list food-->
             <CarouselView Grid.Row="3" ItemsSource="{Binding LstFoods}"  
                           PeekAreaInsets="80" Margin="0,0,0,10" 
                           x:Name="listFood" >
@@ -69,7 +132,7 @@
                                         <LinearGradientBrush>
                                             <GradientStopCollection>
                                                 <GradientStop Color="#DDDDDD" Offset="0"/>
-                                                <GradientStop Color="#FFFF99" Offset="0.8"/>
+                                                <GradientStop Color="#999999" Offset="0.8"/>
                                             </GradientStopCollection>
                                         </LinearGradientBrush>
                                     </BoxView.Background>

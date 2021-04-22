@@ -64,7 +64,7 @@
         <StackLayout Grid.Row="3" Margin="25,0,10,25" Spacing="5" >
             <Label Text="News" FontSize="14" TextColor="White"/>
             <Grid ColumnDefinitions="8*,*" Opacity="0.7">
-                <Frame CornerRadius="10" BackgroundColor="#DDDDDD">
+                <Frame CornerRadius="10" BackgroundColor="#DDDDDD" x:Name="frameNews">
                     <Grid ColumnDefinitions="*,4*">
                         <Image Source="{Binding News.IMG}"/>
                         <StackLayout Grid.Column="1">
@@ -72,7 +72,6 @@
                             <Label Text="{Binding News.Detail}" TextColor="Black" FontSize="12"/>
                         </StackLayout>
                     </Grid>
-                    
                 </Frame>
                 <ImageButton Grid.Column="1" Source="nextWhite.png" BackgroundColor="Transparent" Margin="2,10" Command="{Binding NextCommand}"/>
             </Grid>

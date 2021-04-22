@@ -20,11 +20,20 @@ namespace SnailBApp
             ViewModel = new StartViewModel();
             this.BindingContext = ViewModel;
             ViewModel.LoadDataCommand.Execute(null);
-            //do
-            //{
-            //    Task.Delay(5000);
-            //    ViewModel.OnNextClicked();
-            //} while (true);
+            NextNew();
+        }
+        private async void NextNew()
+        {
+            do
+            {
+                await frameNews.TranslateTo(0, 0, 10);
+                await frameNews.TranslateTo(-350, 0, 2000);
+                await Task.Run(()=> {
+                    Task.Delay(2000);
+                    ViewModel.OnNextClicked();
+                });
+                
+            } while (true);
         }
         protected override bool OnBackButtonPressed()
         {

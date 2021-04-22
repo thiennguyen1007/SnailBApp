@@ -19,6 +19,7 @@ namespace SnailBApp.ViewModels
         private ObservableCollection<FoodViewModel> _lstFoods;
         private string _searchText = default;
         private static int _numberFoodInBag;
+        private string _lbLoaiMonAn;
         // store food to show in my bag
         private static ObservableCollection<FoodViewModel> _lstBag;
         private static ObservableCollection<FoodViewModel> _lstBagTemp = new ObservableCollection<FoodViewModel>();
@@ -28,6 +29,7 @@ namespace SnailBApp.ViewModels
         public ICommand BackCommand { get; private set; }
         //go to MyBagPage
         public ICommand MyBagCommand { get; private set; }
+        public ICommand FilterCommand { get; private set; }
         //add Food item to cart
         public ICommand AddCommand { get; private set; }
         public ObservableCollection<FoodViewModel> LstFoods
@@ -51,6 +53,7 @@ namespace SnailBApp.ViewModels
             set { SetProperty(ref _searchText, value); }
         }
         public int NumberFoodInBag { get => _numberFoodInBag; set => SetProperty(ref _numberFoodInBag, value); }
+        public string LbLoaiMonAn { get => _lbLoaiMonAn; set => SetProperty(ref _lbLoaiMonAn, value); }
 
         //==================================================================
         public OrderViewModel(IFoodStore foodStore, IPageService pageService)
@@ -63,6 +66,7 @@ namespace SnailBApp.ViewModels
             AddCommand = new Command(OnAddClicked);
             BackCommand = new Command(OnBackClicked);
             MyBagCommand = new Command(OnBagClicked);
+            FilterCommand = new Command<string>(OnFilterClicked);
         }
         private async Task LoadData()
         {
@@ -143,6 +147,19 @@ namespace SnailBApp.ViewModels
                 LstBag = new ObservableCollection<FoodViewModel>(LstBagTemp);
                 NumberFoodInBag = LstBag.Count;
                 x.SL = 0;
+            }
+        }
+        private void OnFilterClicked(string parameter)
+        {
+            if(parameter=="0")
+            {
+                LbLoaiMonAn = "Main Dishes";
+            }else if(parameter=="1")
+            {
+                LbLoaiMonAn = "Dessert";
+            }else
+            {
+                LbLoaiMonAn = "Drink";
             }
         }
         public void SearchChanged(string txt)
