@@ -18,8 +18,9 @@ namespace SnailBApp.ViewModels
         //Binding in OrderPage
         private ObservableCollection<FoodViewModel> _lstFoods;
         private string _searchText = default;
+        private static int _numberFoodInBag;
         // store food to show in my bag
-        private ObservableCollection<FoodViewModel> _lstBag;
+        private static ObservableCollection<FoodViewModel> _lstBag;
         private static ObservableCollection<FoodViewModel> _lstBagTemp = new ObservableCollection<FoodViewModel>();
         //to Load data, show data OrderPage
         public ICommand LoadDataCommand { get; private set; }
@@ -49,6 +50,8 @@ namespace SnailBApp.ViewModels
             get { return _searchText; }
             set { SetProperty(ref _searchText, value); }
         }
+        public int NumberFoodInBag { get => _numberFoodInBag; set => SetProperty(ref _numberFoodInBag, value); }
+
         //==================================================================
         public OrderViewModel(IFoodStore foodStore, IPageService pageService)
         {
@@ -78,13 +81,13 @@ namespace SnailBApp.ViewModels
         }
         private async void OnBackClicked()
         {
-            if (LstBag == null)
+            if (LstBag == null || !LstBag.Any())
             {
                 Application.Current.MainPage = new NavigationPage(new StartPage());
             }
             else
             {
-                if (await _pageService.DisplayAlert("Are you sure!", "Bạn đang bỏ quên hàng trong giỏ kìa!\nBack now.", "Ok", "Cancel"))
+                if (await _pageService.DisplayAlert("Are you sure!", "Bạn đang bỏ quên hàng trong giỏ kìa!\nGo home now.", "Ok", "Cancel"))
                 {
                     Application.Current.MainPage = new NavigationPage(new StartPage());
                 }               
@@ -136,6 +139,7 @@ namespace SnailBApp.ViewModels
                     await _pageService.DisplayAlert("Success", $"{x.SL} {x.Name} added your cart", "OK");
                 }
                 LstBag = new ObservableCollection<FoodViewModel>(LstBagTemp);
+                NumberFoodInBag = LstBag.Count;
             }
         }
         public void SearchChanged(string txt)

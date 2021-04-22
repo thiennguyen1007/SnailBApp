@@ -25,8 +25,8 @@
                         <Label Text="Year:"/>
                         <Entry Placeholder="Year..." Text="{Binding Year, Mode=TwoWay}" MaxLength="4"/>
                     </StackLayout>
-                    <Button Text="Filter" Command="{Binding FilterCommand}" FontAttributes="Bold" Margin="30,0"
-                            CornerRadius="30" BackgroundColor="#99FFCC"/>
+                    <Button Text="Filter" Command="{Binding FilterCommand}" FontAttributes="Bold" Margin="40,0"
+                            CornerRadius="30" BackgroundColor="#FF9800"/>
                     <BoxView Color="Black" HeightRequest="1" Opacity="0.2"/>
                     <Label Text="Tổng tiền lãi ròng x1 (giá trị $):" TextColor="#9FA1A0" FontSize="14"/>
                     <Label Text="{Binding DoanhThu}" TextColor="Black" HorizontalOptions="Center" FontSize="30" VerticalOptions="Center"/>

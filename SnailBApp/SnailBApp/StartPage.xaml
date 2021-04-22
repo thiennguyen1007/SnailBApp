@@ -18,7 +18,7 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid RowDefinitions="2*,2*,*,*">
+    <Grid RowDefinitions="1.7*,2*,0.8*,*">
         <BoxView Grid.RowSpan="4">
             <BoxView.Background>
                 <!--chuyen mau-->
@@ -40,7 +40,7 @@
             </StackLayout> 
             <Image x:Name="img_logo" Source="logo.png" Grid.Column="1" VerticalOptions="Start"
                        HeightRequest="50" WidthRequest="50" HorizontalOptions="End" 
-                       Margin="0,20,20,0"/>
+                       Margin="0,20"/>
             </Grid>
             <StackLayout Grid.Row="1" Spacing="20" Margin="0,-130,0,0">
             <ctrl:CircleImage x:Name="img_banner" Source="Start.jpg" HeightRequest="195" WidthRequest="195"/>
@@ -54,15 +54,15 @@
                         Command="{Binding OrderCommand}"/>
             </StackLayout>
         </StackLayout>
-        <StackLayout Grid.Row="2" Margin="10, 30, 10, 10" Opacity="0.7">
+        <StackLayout Grid.Row="2" Margin="10, 10, 10,0" Opacity="0.7">
             <Label Text="Khách hàng thân thiết?" FontSize="15" Margin="10, 0, 0, 5"/>
             <Button Text="Login or Sign Up" CornerRadius="10" HeightRequest="40" 
                     BackgroundColor="#FFBE00"
                     WidthRequest="300" FontAttributes="Bold" 
                     Command="{Binding LoginCommand}"/>
         </StackLayout>
-        <StackLayout Grid.Row="3" Margin="25,10,0,25" Spacing="10">
-            <Label Text="QUICK PICK" Opacity="0.5" FontSize="14"/>
+        <StackLayout Grid.Row="3" Margin="25,0" Spacing="10">
+            <Label Text="News" Opacity="0.5" FontSize="14"/>
         </StackLayout>
     </Grid>
 </ContentPage>

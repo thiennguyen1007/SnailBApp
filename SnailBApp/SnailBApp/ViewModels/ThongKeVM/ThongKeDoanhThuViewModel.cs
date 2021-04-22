@@ -17,8 +17,8 @@ namespace SnailBApp.ViewModels.ThongKeVM
         private readonly IPageService _pageService;
         private string _doanhThu;
         private bool _statusChart;
-        private int _month;
-        private int _year;
+        private string _month;
+        private string _year;
         private ObservableCollection<ChartEntry> _chart;
         public ObservableCollection<HoaDonViewModel> lstHoaDonToFilter { get; set; } = new ObservableCollection<HoaDonViewModel>();
         public string DoanhThu
@@ -33,12 +33,12 @@ namespace SnailBApp.ViewModels.ThongKeVM
         public ICommand LoadDataCommad { get; private set; }
         public ICommand FilterCommand { get; private set; }
         public ICommand ChartCommand { get; private set; }
-        public int Month
+        public string Month
         {
             get => _month;
             set { SetProperty(ref _month, value); }
         }
-        public int Year
+        public string Year
         {
             get => _year;
             set { SetProperty(ref _year, value); }
@@ -48,7 +48,6 @@ namespace SnailBApp.ViewModels.ThongKeVM
             get => _chart;
             set { SetProperty(ref _chart, value); }
         }
-
         public bool StatusChart { get => _statusChart; set => SetProperty(ref _statusChart, value); }
 
         //=============================================================
@@ -74,31 +73,69 @@ namespace SnailBApp.ViewModels.ThongKeVM
         }
         private async void OnFilterClicked()
         {
-            if (Month > 12 || Month <= 0)
+            float TotalMoney = 0;
+            if (string.IsNullOrEmpty(Month) || string.IsNullOrWhiteSpace(Month) || Month == "")// month is null
             {
-                DoanhThu = "0\nKhông có dữ liệu";
-            }
-            else
-            {
-                float TotalMoney = 0;
-                int dem = 0;
-                ObservableCollection<HoaDonVM.HoaDonViewModel> lstHoaDonToFilter = new ObservableCollection<HoaDonVM.HoaDonViewModel>();
-                var lstHoaDon = await _hoaDonStore.GetHoaDonAsync();
-                foreach (var item in lstHoaDon)
+                Month = null;
+                if (!string.IsNullOrWhiteSpace(Year) && !string.IsNullOrEmpty(Year) && Year != "")
                 {
-                    lstHoaDonToFilter.Add(new HoaDonVM.HoaDonViewModel(item));
-                }
-                for (int i = 0; i < lstHoaDonToFilter.Count; i++)
-                {
-                    if (int.Parse(lstHoaDonToFilter[i].Date.Substring(3, 2)) == Month && int.Parse(lstHoaDonToFilter[i].Date.Substring(6, 4)) == Year)
+                    int numberYear = int.Parse(Year);
+                    int dem = 0;
+                    ObservableCollection<HoaDonVM.HoaDonViewModel> lstHoaDonToFilter = new ObservableCollection<HoaDonVM.HoaDonViewModel>();
+                    var lstHoaDon = await _hoaDonStore.GetHoaDonAsync();
+                    foreach (var item in lstHoaDon)
                     {
-                        TotalMoney += lstHoaDonToFilter[i].Price;
-                        dem++;
+                        lstHoaDonToFilter.Add(new HoaDonVM.HoaDonViewModel(item));
+                    }
+                    for (int i = 0; i < lstHoaDonToFilter.Count; i++)
+                    {
+                        if (int.Parse(lstHoaDonToFilter[i].Date.Substring(6, 4)) == numberYear)
+                        {
+                            TotalMoney += lstHoaDonToFilter[i].Price;
+                            dem++;
+                        }
+                    }
+                    if (dem == 0)
+                    {
+                        DoanhThu = $"0\nNo data found for{Month}/{Year}";
                     }
                 }
-                if (dem == 0)
+            }
+            else// month # null
+            {
+                if (!string.IsNullOrWhiteSpace(Year) && !string.IsNullOrEmpty(Month) && Year != "")
                 {
-                    DoanhThu = $"0\nNo data found for{Month}/{Year}";
+                    int numberMonth = int.Parse(Month);
+                    int numberYear = int.Parse(Year);
+                    if (numberMonth > 12 || numberMonth <= 0)
+                    {
+                        await _pageService.DisplayAlert("", "invalid month -_-", "ok");
+                    }else
+                    {
+                        int dem = 0;
+                        ObservableCollection<HoaDonVM.HoaDonViewModel> lstHoaDonToFilter = new ObservableCollection<HoaDonVM.HoaDonViewModel>();
+                        var lstHoaDon = await _hoaDonStore.GetHoaDonAsync();
+                        foreach (var item in lstHoaDon)
+                        {
+                            lstHoaDonToFilter.Add(new HoaDonVM.HoaDonViewModel(item));
+                        }
+                        for (int i = 0; i < lstHoaDonToFilter.Count; i++)
+                        {
+                            if (int.Parse(lstHoaDonToFilter[i].Date.Substring(6, 4)) == numberYear && int.Parse(lstHoaDonToFilter[i].Date.Substring(3, 2)) == numberMonth)
+                            {
+                                TotalMoney += lstHoaDonToFilter[i].Price;
+                                dem++;
+                            }
+                        }
+                        if (dem == 0)
+                        {
+                            DoanhThu = $"0\nNo data found for{Month}/{Year}";
+                        }
+                    }
+                }
+                else
+                {
+                    await _pageService.DisplayAlert("", "insert year to filter...", "ok");
                 }
                 DoanhThu = TotalMoney.ToString();
             }

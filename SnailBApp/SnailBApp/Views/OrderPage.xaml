@@ -26,16 +26,19 @@
                 <LinearGradientBrush>
                     <GradientStopCollection>
                         <GradientStop Color="White" Offset="0"/>
-                        <GradientStop Color="#6F9682" Offset="1"/>
+                        <GradientStop Color="#111111" Offset="1"/>
                     </GradientStopCollection>
                 </LinearGradientBrush>
             </Grid.Background>
-            <StackLayout>
+            <StackLayout Margin="10">
                 <Grid>
-                    <ImageButton Source="btn_back.png" HorizontalOptions="Start" 
+                    <ImageButton Source="home.png" HorizontalOptions="Start" 
                                  Command="{Binding BackCommand}"/>
-                    <ImageButton Source="GioHang.png" HorizontalOptions="End"
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="End" Spacing="0">
+                        <ImageButton Source="GioHang.png" 
                                  Command="{Binding MyBagCommand}"/>
+                        <Label BackgroundColor="Transparent" FontSize="18" Text="{Binding NumberFoodInBag}" TextColor="Red"/>
+                    </StackLayout>
                 </Grid>
             </StackLayout>
             <StackLayout Grid.Row="1">
@@ -79,8 +82,10 @@
                                     </StackLayout>
                                 </StackLayout>
                                 <StackLayout Grid.Row="2" Spacing="10" Padding="20" VerticalOptions="End">
-                                    <Label Text="{Binding Price}" TextColor="Black" FontSize="20" FontAttributes="Bold"
-                                         HorizontalOptions="Center"/>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                        <Label Text="{Binding Price}" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
+                                        <Label Text="$" TextColor="Black" FontSize="12"/>
+                                    </StackLayout>
                                     <Button Text="ADD" TextColor="White" BackgroundColor="#FFBE00" WidthRequest="100" 
                                         Command="{Binding Source={x:Reference listFood},Path=BindingContext.AddCommand}" 
                                         CornerRadius="20" HorizontalOptions="Center" CommandParameter="{Binding .}"
