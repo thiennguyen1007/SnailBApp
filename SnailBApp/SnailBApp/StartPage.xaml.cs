@@ -1,4 +1,5 @@
 ﻿using SnailBApp.ViewModels;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,6 +19,12 @@ namespace SnailBApp
             SpinImg();
             ViewModel = new StartViewModel();
             this.BindingContext = ViewModel;
+            ViewModel.LoadDataCommand.Execute(null);
+            //do
+            //{
+            //    Task.Delay(5000);
+            //    ViewModel.OnNextClicked();
+            //} while (true);
         }
         protected override bool OnBackButtonPressed()
         {

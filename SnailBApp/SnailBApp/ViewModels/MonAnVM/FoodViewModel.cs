@@ -20,6 +20,15 @@ namespace SnailBApp.ViewModels.MonAnVM
             SL = x.SL;
             Price = x.Price;
         }
+        public FoodViewModel (FoodViewModel x)
+        {
+            ID = x.ID;
+            Name = x.Name;
+            IMG = x.IMG;
+            Desc = x.Desc;
+            SL = x.SL;
+            Price = x.Price;
+        }
         public int ID
         {
             get { return _id; }

@@ -61,8 +61,21 @@
                     WidthRequest="300" FontAttributes="Bold" 
                     Command="{Binding LoginCommand}"/>
         </StackLayout>
-        <StackLayout Grid.Row="3" Margin="25,0" Spacing="10">
-            <Label Text="News" Opacity="0.5" FontSize="14"/>
+        <StackLayout Grid.Row="3" Margin="25,0,10,25" Spacing="5" >
+            <Label Text="News" FontSize="14" TextColor="White"/>
+            <Grid ColumnDefinitions="8*,*" Opacity="0.7">
+                <Frame CornerRadius="10" BackgroundColor="#DDDDDD">
+                    <Grid ColumnDefinitions="*,4*">
+                        <Image Source="{Binding News.IMG}"/>
+                        <StackLayout Grid.Column="1">
+                            <Label Text="{Binding News.Title}" TextColor="Red"/>
+                            <Label Text="{Binding News.Detail}" TextColor="Black" FontSize="12"/>
+                        </StackLayout>
+                    </Grid>
+                    
+                </Frame>
+                <ImageButton Grid.Column="1" Source="nextWhite.png" BackgroundColor="Transparent" Margin="2,10" Command="{Binding NextCommand}"/>
+            </Grid>
         </StackLayout>
     </Grid>
 </ContentPage>

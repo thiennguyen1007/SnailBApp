@@ -115,7 +115,8 @@ namespace SnailBApp.ViewModels
                 {
                     moneyOfItem = numberOfFood * x.Price;
                     x.Price = moneyOfItem;
-                    LstBagTemp.Add(x);
+                    FoodViewModel tempF = new FoodViewModel(x);
+                    LstBagTemp.Add(tempF);                   
                     await _pageService.DisplayAlert("Success", $"{x.SL} {x.Name} added to your cart.", "OK");
                 }
                 else
@@ -134,12 +135,14 @@ namespace SnailBApp.ViewModels
                     {
                         moneyOfItem = numberOfFood * x.Price;
                         x.Price = moneyOfItem;
-                        LstBagTemp.Add(x);
+                        FoodViewModel tempF = new FoodViewModel(x);
+                        LstBagTemp.Add(tempF);
                     }
                     await _pageService.DisplayAlert("Success", $"{x.SL} {x.Name} added your cart", "OK");
                 }
                 LstBag = new ObservableCollection<FoodViewModel>(LstBagTemp);
                 NumberFoodInBag = LstBag.Count;
+                x.SL = 0;
             }
         }
         public void SearchChanged(string txt)
