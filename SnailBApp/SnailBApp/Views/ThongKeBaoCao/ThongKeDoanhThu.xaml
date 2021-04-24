@@ -13,6 +13,11 @@
                 <Setter Property="Keyboard" Value="Numeric"/>
                 <Setter Property="WidthRequest" Value="100"/>
             </Style>
+            <Style TargetType="Button" x:Key="btn_chart">
+                <Setter Property="Margin" Value="35,0"/>
+                <Setter Property="BackgroundColor" Value="#0D374C"/>
+                <Setter Property="FontSize" Value="12"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
@@ -34,16 +39,17 @@
             </Frame>
             <Label Text="Biểu đồ doanh thu 6 tháng gần nhất" FontSize="20"/>
             <Grid ColumnDefinitions="*,*" ColumnSpacing="20" HeightRequest="50">
-                <Button Text="Line Chart" Command="{Binding ChartCommand}" CommandParameter="0" Margin="35,0" BackgroundColor="#0D374C">
+                <Button Text="Line Chart" Command="{Binding ChartCommand}" CommandParameter="0" 
+                        Style="{StaticResource btn_chart}">
                     <Button.Triggers>
                         <DataTrigger TargetType="Button" Binding="{Binding StatusChart}" Value="true">
                             <Setter Property="TextColor" Value="#FF9800"/>
                         </DataTrigger>
                     </Button.Triggers>
                 </Button>
-                <Button Text="Radar Chart" Grid.Column="1" Command="{Binding ChartCommand}" CommandParameter="1" Margin="35,0,35,0" 
-                        FontSize="12"
-                        BackgroundColor="#0D374C">
+                <Button Text="Radar Chart" Grid.Column="1" 
+                        Command="{Binding ChartCommand}" CommandParameter="1" 
+                        Style="{StaticResource btn_chart}">
                     <Button.Triggers>
                         <DataTrigger TargetType="Button" Binding="{Binding StatusChart}" Value="false">
                             <Setter Property="TextColor" Value="#FF9800"/>

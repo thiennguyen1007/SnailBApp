@@ -2,11 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SnailBApp.Views.MonAnPage.FillFoodPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <Grid RowDefinitions="*,4*">
+        <Grid>
+            <Image Source="{Binding IMG}"/>
+        </Grid>
+        <ScrollView Grid.Row="1">
+            <Frame CornerRadius="10" BorderColor="Black" Margin="10,20,10,0">
+                <StackLayout Margin="10,20,10,0" Spacing="20">
+                    <Entry Placeholder="ID" Keyboard="Text" Text="{Binding Path=Food.ID}"/>
+                    <Entry Placeholder="Tên món ăn" Text="{Binding Path=Food.Name}"/>
+                    <Entry Placeholder="Giá $" Text="{Binding Path=Food.Price}" 
+                           Keyboard="Numeric" Unfocused="Entry_Unfocused"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Entry Placeholder="Anh mon ăn" Text="{Binding Path=Food.IMG, Mode=TwoWay}"/>
+                        <Button Text="Load Image" Command="{Binding LoadCommand}" 
+                                HorizontalOptions="End"/>
+                    </StackLayout>
+                    <Entry Placeholder="Ghi chu" Text="{Binding Path=Food.Desc}" MaxLength="250"/>
+                    <Button Text="Add" FontAttributes="Bold" Font="20" 
+                            Command="{Binding AddCommand}"/>
+                </StackLayout>
+            </Frame>
+        </ScrollView>
+    </Grid>
 </ContentPage>

@@ -21,9 +21,9 @@ namespace SnailBApp.Views.MonAnPage
         }
         protected override void OnAppearing()
         {
-            //var pageService = new PageService();
+            var pageService = new PageService();
             var dataAccess = new SQLiteFoodStore(DependencyService.Get<ISQLite>());
-            ViewModel = new ListFoodPageViewModel(dataAccess);
+            ViewModel = new ListFoodPageViewModel(dataAccess,pageService);
             base.OnAppearing();
             ViewModel.LoadDataCommand.Execute(null);
         }

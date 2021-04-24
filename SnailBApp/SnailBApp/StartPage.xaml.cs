@@ -10,8 +10,8 @@ namespace SnailBApp
     {
         private StartViewModel ViewModel;
         public StartPage()
-        {            
-            InitializeComponent();           
+        {
+            InitializeComponent();
         }
         protected override void OnAppearing()
         {
@@ -23,16 +23,11 @@ namespace SnailBApp
             NextNew();
         }
         private async void NextNew()
-        {
+        {         
             do
             {
-                await frameNews.TranslateTo(0, 0, 10);
-                await frameNews.TranslateTo(-350, 0, 2000);
-                await Task.Run(()=> {
-                    Task.Delay(2000);
-                    ViewModel.OnNextClicked();
-                });
-                
+                await Task.Delay(2000);
+                ViewModel.OnNextClicked();
             } while (true);
         }
         protected override bool OnBackButtonPressed()
@@ -49,9 +44,12 @@ namespace SnailBApp
         }
         private async void SpinImg()
         {
-            while (true) {
-                await img_banner.RotateTo(360,2000, Easing.BounceIn);
-            }                           
+            do
+            {
+                await img_banner.RotateTo(360, 5000, Easing.BounceIn);
+                await img_banner.RotateTo(180, 2500, Easing.BounceIn);
+                await img_banner.RotateTo(0, 2500, Easing.BounceIn);
+            } while (true);
         }
     }
 }
