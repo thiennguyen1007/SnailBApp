@@ -10,6 +10,11 @@ namespace SnailBApp.ViewModels.MonAnVM
         private IPageService _pageService;
         private IFoodStore _foodStore;
         private object collisionLock = new object();
+        private string id;
+        private string name;
+        private string price;
+        private string desc;
+
         //Command
         public ICommand AddCommand { get; private set; }
         public ICommand LoadCommand { get; private set; }
@@ -29,37 +34,40 @@ namespace SnailBApp.ViewModels.MonAnVM
         public string IMG { get => _iMG; set => SetProperty(ref _iMG, value); }
         private void OnAddClicked()
         {
-            if (Food.ID.ToString() != "" && Food.Name.ToString() != "" && Food.Price > 0 &&
+            if (Food != null)
+            {
+                if (Food.ID.ToString() != "" && Food.Name.ToString() != "" && Food.Price > 0 &&
                 !string.IsNullOrEmpty(Food.ID.ToString()) && !string.IsNullOrWhiteSpace(Food.ID.ToString())
                 && !string.IsNullOrEmpty(Food.Name) && !string.IsNullOrWhiteSpace(Food.Name)
                 && !string.IsNullOrEmpty(Food.Price.ToString()) && !string.IsNullOrWhiteSpace(Food.Price.ToString()))
-            {
-                Models.Food x = new Models.Food();
-                x.ID = Food.ID;
-                x.Name = Food.Name;
-                x.Price = Food.Price;
-                x.IMG = Food.IMG;
-                x.Desc = Food.Desc;
-                //
-                try
                 {
-                    lock(collisionLock)
+                    Models.Food x = new Models.Food();
+                    x.ID = Food.ID;
+                    x.Name = Food.Name;
+                    x.Price = Food.Price;
+                    x.IMG = Food.IMG;
+                    x.Desc = Food.Desc;
+                    //
+                    try
                     {
-                        _foodStore.AddFood(x);
+                        lock (collisionLock)
+                        {
+                            _foodStore.AddFood(x);
+                        }
+                        _pageService.DisplayAlert("", "Success!", "ok");
+                        _pageService.PopAsync();
                     }
-                    _pageService.DisplayAlert("", "Success!", "ok");
-                    _pageService.PopAsync();
-                }
-                catch (System.Exception e)
-                {
+                    catch (System.Exception e)
+                    {
 
-                    _pageService.DisplayAlert("Failed!", $"Error: {e.Message}","ok");
-                }               
-            }
-            else
-            {
-                _pageService.DisplayAlert("Alert!","Thiếu thông tin", "ok");
-            }
+                        _pageService.DisplayAlert("Failed!", $"Error: {e.Message}", "ok");
+                    }
+                }
+                else
+                {
+                    _pageService.DisplayAlert("Alert!", "Thiếu thông tin", "ok");
+                }
+            }           
         }
         public void NumberUnfocus()
         {
