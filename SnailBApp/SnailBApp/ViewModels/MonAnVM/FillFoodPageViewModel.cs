@@ -1,5 +1,6 @@
 ﻿using SnailBApp.Data.FoodData;
 using SnailBApp.Services;
+using System;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -10,10 +11,10 @@ namespace SnailBApp.ViewModels.MonAnVM
         private IPageService _pageService;
         private IFoodStore _foodStore;
         private object collisionLock = new object();
-        private string id;
-        private string name;
-        private string price;
-        private string desc;
+        private string _id;
+        private string _name;
+        private string _price;
+        private string _desc;
 
         //Command
         public ICommand AddCommand { get; private set; }
@@ -32,21 +33,26 @@ namespace SnailBApp.ViewModels.MonAnVM
 
         public FoodViewModel Food { get => _food; set => SetProperty(ref _food, value); }
         public string IMG { get => _iMG; set => SetProperty(ref _iMG, value); }
+        public string Id { get => _id; set => SetProperty(ref _id, value); }
+        public string Name { get => _name; set => SetProperty(ref _name, value); }
+        public string Price { get => _price; set => SetProperty(ref _price, value); }
+        public string Desc { get => _desc; set => SetProperty(ref _desc, value); }
+
         private void OnAddClicked()
         {
             if (Food != null)
             {
-                if (Food.ID.ToString() != "" && Food.Name.ToString() != "" && Food.Price > 0 &&
-                !string.IsNullOrEmpty(Food.ID.ToString()) && !string.IsNullOrWhiteSpace(Food.ID.ToString())
-                && !string.IsNullOrEmpty(Food.Name) && !string.IsNullOrWhiteSpace(Food.Name)
-                && !string.IsNullOrEmpty(Food.Price.ToString()) && !string.IsNullOrWhiteSpace(Food.Price.ToString()))
+                if (Id != "" && Name != "" && Convert.ToSingle(Price) > 0 &&
+                !string.IsNullOrEmpty(Id) && !string.IsNullOrWhiteSpace(Id)
+                && !string.IsNullOrEmpty(Name) && !string.IsNullOrWhiteSpace(Name)
+                && !string.IsNullOrEmpty(Price) && !string.IsNullOrWhiteSpace(Price))
                 {
                     Models.Food x = new Models.Food();
-                    x.ID = Food.ID;
-                    x.Name = Food.Name;
-                    x.Price = Food.Price;
-                    x.IMG = Food.IMG;
-                    x.Desc = Food.Desc;
+                    x.ID = int.Parse(Id);
+                    x.Name = Name;
+                    x.Price = Convert.ToSingle(Price);
+                    x.IMG = IMG;
+                    x.Desc = Desc;
                     //
                     try
                     {

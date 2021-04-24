@@ -17,6 +17,7 @@ namespace SnailBApp.ViewModels.MonAnVM
         //commmand
         public ICommand LoadDataCommand { get; private set; }
         public ICommand AddCommand { get; private set; }
+        public ICommand DeleteCommand { get; private set; }
         //get set
         public ObservableCollection<FoodViewModel> LstFoods { get => _lstFoods; set => SetProperty(ref _lstFoods, value); }
         public int NumberFood { get => _numberFood; set => SetProperty(ref _numberFood, value); }

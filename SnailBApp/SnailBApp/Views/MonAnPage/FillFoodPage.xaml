@@ -10,16 +10,16 @@
         <ScrollView Grid.Row="1">
             <Frame CornerRadius="10" BorderColor="Black" Margin="10,20,10,0">
                 <StackLayout Margin="10,20,10,0" Spacing="20">
-                    <Entry Placeholder="ID" Keyboard="Text" Text="{Binding Path=Food.ID}"/>
-                    <Entry Placeholder="Tên món ăn" Text="{Binding Path=Food.Name}"/>
-                    <Entry Placeholder="Giá $" Text="{Binding Path=Food.Price}" 
+                    <Entry Placeholder="ID" Text="{Binding Id}" Keyboard="Numeric"/>
+                    <Entry Placeholder="Tên món ăn" Text="{Binding Name}"/>
+                    <Entry Placeholder="Giá $" Text="{Binding Price}" 
                            Keyboard="Numeric" Unfocused="Entry_Unfocused"/>
                     <StackLayout Orientation="Horizontal">
-                        <Entry Placeholder="Anh mon ăn" Text="{Binding Path=Food.IMG, Mode=TwoWay}"/>
+                        <Entry Placeholder="Anh mon ăn" Text="{Binding IMG, Mode=TwoWay}"/>
                         <Button Text="Load Image" Command="{Binding LoadCommand}" 
                                 HorizontalOptions="End"/>
                     </StackLayout>
-                    <Entry Placeholder="Ghi chu" Text="{Binding Path=Food.Desc}" MaxLength="250"/>
+                    <Entry Placeholder="Ghi chu" Text="{Binding Desc}" MaxLength="250"/>
                     <Button Text="Add" FontAttributes="Bold" Font="20" 
                             Command="{Binding AddCommand}"/>
                 </StackLayout>
