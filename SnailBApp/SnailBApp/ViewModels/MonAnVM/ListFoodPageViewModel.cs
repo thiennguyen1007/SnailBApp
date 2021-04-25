@@ -26,8 +26,10 @@ namespace SnailBApp.ViewModels.MonAnVM
         {
             _foodSore = foodSore;
             _pageService = pageService;
+            //command
             LoadDataCommand = new Command(LoadData);
             AddCommand = new Command(OnAddClicked);
+            DeleteCommand = new Command(OnDeleteClicked);
         }
         private async void LoadData()
         {
@@ -43,6 +45,36 @@ namespace SnailBApp.ViewModels.MonAnVM
         private async void OnAddClicked()
         {
             await _pageService.PushAsync(new FillFoodPage());
+        }
+        public void OnLstSelectItem(FoodViewModel f)
+        {
+            _pageService.PushAsync(new DetailFoodPage(f));
+        }
+        private async void OnDeleteClicked(object obj)
+        {
+            var x = obj as FoodViewModel;
+            //
+            Models.Food f = new Models.Food();
+            f.ID = x.ID;
+            f.Name = x.Name;
+            f.Price = x.Price;
+            f.Desc = x.Desc;
+            f.IMG = x.IMG;
+            //
+            try
+            {
+                if (await _pageService.DisplayAlert("Alert!", $"{x.Name} will be delete.\nAre you sure?", "Ok", "Cancel"))
+                {
+                    await _foodSore.DeleteFood(f);
+                    LstFoods.Remove(x);
+                    await _pageService.DisplayAlert("", "Success!", "Ok");
+                }
+            }
+            catch (System.Exception e)
+            {
+
+                await _pageService.DisplayAlert("Error!", $"Error: {e.Message}","ok");
+            }
         }
     }
 }

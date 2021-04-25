@@ -1,5 +1,6 @@
 ﻿using SnailBApp.Data.HoaDonData;
 using SnailBApp.Services;
+using SnailBApp.Views.HoaDonPage;
 using SQLite;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -45,6 +46,10 @@ namespace SnailBApp.ViewModels.HoaDonVM
             }
             LstHoaDon = new ObservableCollection<HoaDonViewModel>(lstTemp);
             NumberHD = LstHoaDon.Count;
+        }
+        public void OnLstSelectItem(HoaDonViewModel hd)
+        {
+            _pageService.PushAsync(new DetailHoaDonPage(hd));
         }
         private async void OnDeleteClicked(object obj)
         {

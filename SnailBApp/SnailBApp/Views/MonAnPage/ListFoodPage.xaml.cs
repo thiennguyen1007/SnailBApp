@@ -2,11 +2,6 @@
 using SnailBApp.Data.FoodData;
 using SnailBApp.Services;
 using SnailBApp.ViewModels.MonAnVM;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -31,6 +26,10 @@ namespace SnailBApp.Views.MonAnPage
         {
             get { return BindingContext as ListFoodPageViewModel; }
             set { BindingContext = value; }
+        }
+        private void list_NV_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            ViewModel.OnLstSelectItem(e.SelectedItem as FoodViewModel);
         }
     }
 }

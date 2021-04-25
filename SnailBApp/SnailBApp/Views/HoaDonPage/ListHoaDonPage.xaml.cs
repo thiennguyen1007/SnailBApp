@@ -23,10 +23,15 @@ namespace SnailBApp.Views.HoaDonPage
             base.OnAppearing();
             ViewModel.LoadDataCommand.Execute(null);
         }
-        public ListHoaDonViewModel ViewModel
+        private ListHoaDonViewModel ViewModel
         {
             get => BindingContext as ListHoaDonViewModel;
             set { BindingContext = value; }
+        }
+
+        private void lstNV_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            ViewModel.OnLstSelectItem(e.SelectedItem as HoaDonViewModel);
         }
     }
 }

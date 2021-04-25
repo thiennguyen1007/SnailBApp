@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SnailBApp.Views.MonAnPage.DetailFoodPage">
+             x:Class="SnailBApp.Views.HoaDonPage.DetailHoaDonPage"
+             Title="Detail Hóa Đơn">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Entry">
@@ -14,26 +15,26 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid RowDefinitions="*, 2*, 0.3*">
-        <StackLayout Margin="0" BackgroundColor="#EFEB8E">
-            <Image Source="{Binding Source={x:Reference txtIMG}, Path=Text}" Margin="0,5,0,0"
-                            HorizontalOptions="Center" HeightRequest="150" WidthRequest="200"/>
-            <Label Text="{Binding Source={x:Reference txtName}, Path=Text}" TextColor="Black" 
-                   HorizontalOptions="Center" FontSize="30" Margin="0,-15,0,0"/>
-            <Label Text="{Binding Food.ID}" TextColor="Black" 
+        <StackLayout BackgroundColor="#EFEB8E" Margin="0">
+            <Label Text="{Binding HoaDon.Email}" TextColor="Black" 
+                   HorizontalOptions="Center" FontSize="30" Margin="0,20,0,0"/>
+            <Label Text="{Binding HoaDon.PhoneNumber}" TextColor="Black" 
                    HorizontalOptions="Center" FontSize="18"/>
         </StackLayout>
         <ScrollView Grid.Row="1">
             <StackLayout  Margin="0">
                 <Frame CornerRadius="10" Margin="10,10,10,5" BorderColor="#A3A3A3">
                     <StackLayout Spacing="10">
-                        <Label Text="Tên món ăn"/>
-                        <Entry Text="{Binding Food.Name}" x:Name="txtName"/>
-                        <Label Text="Giá"/>
-                        <Entry Text="{Binding Food.Price}"/>
-                        <Label Text="Ghi chú"/>
-                        <Entry Text="{Binding Food.Desc}"/>
-                        <Label Text="Path IMG:"/>
-                        <Entry Text="{Binding Food.IMG}" x:Name="txtIMG"/>
+                        <Label Text="Email"/>
+                        <Entry Text="{Binding HoaDon.Email}"/>
+                        <Label Text="Phone Numbber"/>
+                        <Entry Text="{Binding HoaDon.PhoneNumber}"/>
+                        <Label Text="Date"/>
+                        <Entry Text="{Binding HoaDon.Date}"/>
+                        <Label Text="List Food"/>
+                        <Editor Text="{Binding HoaDon.Foods}" AutoSize="TextChanges"/>
+                        <Label Text="Total Price of HoaDon"/>
+                        <Entry Text="{Binding HoaDon.Price}"/>
                     </StackLayout>
                 </Frame>
             </StackLayout>
