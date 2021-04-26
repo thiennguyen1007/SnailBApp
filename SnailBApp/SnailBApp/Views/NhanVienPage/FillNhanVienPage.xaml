@@ -30,10 +30,10 @@
                         <DatePicker Date="{Binding Path=NhanVien.Date, Mode=TwoWay}"/>
                         <Entry Placeholder="Dia chi" Text="{Binding Path=NhanVien.Address}"/>
                         <Entry Placeholder="So dien thoai" Keyboard="Numeric" Text="{Binding Path=NhanVien.PhoneNumber}"/>
-                        <StackLayout Orientation="Horizontal">
+                        <Grid ColumnDefinitions="2*,*">
                             <Entry Placeholder="Anh ca nhan" Text="{Binding Path=NhanVien.IMG, Mode=TwoWay}"/>
-                            <Button Text="Load Image" Command="{Binding LoadCommand}" HorizontalOptions="End"/>
-                        </StackLayout>
+                        <Button Text="Load Image" Command="{Binding LoadCommand}" HorizontalOptions="End" Grid.Column="1"/>
+                        </Grid>
                         <Entry Placeholder="Ghi chu" Text="{Binding Path=NhanVien.Desc}"/>
                         <Button Text="Add" FontAttributes="Bold" Font="20" Command="{Binding AddCommand}"/>
                     </StackLayout>
