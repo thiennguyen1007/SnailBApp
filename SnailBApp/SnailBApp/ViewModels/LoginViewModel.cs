@@ -47,15 +47,6 @@ namespace SnailBApp.ViewModels
                 }
                 else
                     await _pageService.DisplayAlert("Login Failed!", "Please enter correct Email and Password", "OK");
-                if (Email == "adminnew" && Pass == "1234")
-                {
-                    await _pageService.DisplayAlert("Login Success", "", "Ok");
-                    await Task.Delay(1000);
-                    await Application.Current.MainPage.Navigation.PopToRootAsync();
-                    Application.Current.MainPage = new AppShell();
-                }
-                else
-                    await _pageService.DisplayAlert("Login Failed!", "Please enter correct Email and Password", "OK");
             }
         }
         }

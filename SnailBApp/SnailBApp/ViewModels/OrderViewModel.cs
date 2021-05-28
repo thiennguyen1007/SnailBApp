@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-
 namespace SnailBApp.ViewModels
 {
     public class OrderViewModel : BaseViewModel

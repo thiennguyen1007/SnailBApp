@@ -72,7 +72,6 @@ namespace SnailBApp.ViewModels.MonAnVM
             }
             catch (System.Exception e)
             {
-
                 await _pageService.DisplayAlert("Error!", $"Error: {e.Message}","ok");
             }
         }

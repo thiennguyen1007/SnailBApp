@@ -6,41 +6,61 @@
              x:Name="page">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <Style TargetType="ImageButton">
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor"
+                        Value="Black" />
+                <Setter Property="FontSize"
+                        Value="12" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <!--start list view-->
     <Grid RowDefinitions="0.5*,5.5*,0.1*">
-        <SearchBar Placeholder="Search..." BackgroundColor="Transparent"/>
+        <SearchBar Placeholder="Search..."
+                   BackgroundColor="Transparent" />
         <StackLayout Grid.Row="1">
-            <ListView ItemsSource="{Binding LstHoaDon}" 
-                      RowHeight="55" x:Name="lstNV"                      
-                      Margin="5,0" BackgroundColor="#E6E9E8"
+            <ListView ItemsSource="{Binding LstHoaDon}"
+                      RowHeight="55"
+                      x:Name="lstHD"
+                      Margin="5,0"
+                      BackgroundColor="#E6E9E8"
                       ItemSelected="lstNV_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid ColumnDefinitions="2.5*, 1.5*" RowSpacing="5">
+                            <Grid ColumnDefinitions="2.5*, 1.5*"
+                                  RowSpacing="5">
                                 <StackLayout Margin="10,0,0,0">
-                                    <Label Text="{Binding Email}" FontSize="20"/>
-                                    <Label Text="{Binding PhoneNumber}"/>
+                                    <Label Text="{Binding Email}"
+                                           FontSize="20" />
+                                    <Label Text="{Binding PhoneNumber}" />
                                 </StackLayout>
                                 <StackLayout Grid.Column="1">
-                                    <Label Text="{Binding Date}" FontSize="15" TextColor="#292A29"/>
-                                    <Label Text="{Binding Price}" TextColor="Red"/>
+                                    <Label Text="{Binding Date}"
+                                           FontSize="15"
+                                           TextColor="#292A29" />
+                                    <Label Text="{Binding Price}"
+                                           TextColor="Red" />
                                 </StackLayout>
                             </Grid>
                             <ViewCell.ContextActions>
-                                <MenuItem Text="Delete" IsDestructive="true"							           							              
-							                Command="{Binding Source={x:Reference page}, Path=ViewModel.DeleteCommand}"
-							                CommandParameter="{Binding .}"/>
+                                <MenuItem Text="Delete"
+                                          IsDestructive="true"
+                                          Command="{Binding Source={x:Reference page}, Path=ViewModel.DeleteCommand}"
+                                          CommandParameter="{Binding .}" />
                             </ViewCell.ContextActions>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Label Text="Số lượng hóa đơn"/>
-                <Label Text="{Binding NumberHD}"/>
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center">
+                <Label Text="Số lượng hóa đơn" />
+                <Label Text="{Binding NumberHD}" />
             </StackLayout>
         </StackLayout>
     </Grid>

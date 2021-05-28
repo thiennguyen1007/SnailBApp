@@ -13,22 +13,21 @@ namespace SnailBApp.Views.HoaDonPage
     {
         public ListHoaDonPage()
         {
-            var dataAccess = new SQLiteHoaDonStore(DependencyService.Get<ISQLite>());
-            var pageService = new PageService();
-            ViewModel = new ListHoaDonViewModel(dataAccess, pageService);
             InitializeComponent();
         }
         protected override void OnAppearing()
         {
+            var dataAccess = new SQLiteHoaDonStore(DependencyService.Get<ISQLite>());
+            var pageService = new PageService();
+            ViewModel = new ListHoaDonViewModel(dataAccess, pageService);
             base.OnAppearing();
             ViewModel.LoadDataCommand.Execute(null);
         }
-        private ListHoaDonViewModel ViewModel
+        public ListHoaDonViewModel ViewModel
         {
-            get => BindingContext as ListHoaDonViewModel;
+            get { return BindingContext as ListHoaDonViewModel; }
             set { BindingContext = value; }
         }
-
         private void lstNV_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             ViewModel.OnLstSelectItem(e.SelectedItem as HoaDonViewModel);
