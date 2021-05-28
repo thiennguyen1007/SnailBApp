@@ -31,5 +31,9 @@ namespace SnailBApp.Views.MonAnPage
         {
             ViewModel.OnLstSelectItem(e.SelectedItem as FoodViewModel);
         }
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ViewModel.OnSearchTextChange(e.NewTextValue);
+        }
     }
 }

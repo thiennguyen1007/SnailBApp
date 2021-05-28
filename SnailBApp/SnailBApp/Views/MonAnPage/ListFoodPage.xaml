@@ -20,7 +20,7 @@
     </ContentPage.ToolbarItems>
     <!--start list view-->
     <Grid RowDefinitions="0.4*,5.5*,0.4*">
-        <SearchBar Placeholder="Search..." BackgroundColor="Transparent"/>
+        <SearchBar Placeholder="Search..." BackgroundColor="Transparent" TextChanged="SearchBar_TextChanged"/>
         <ListView ItemsSource="{Binding LstFoods}"
                   RowHeight="55" x:Name="list_NV"                     
                   Margin="5,0" BackgroundColor="#CDCFCE" Grid.Row="1"

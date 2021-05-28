@@ -1,7 +1,9 @@
 ﻿using SnailBApp.Data.FoodData;
 using SnailBApp.Services;
 using SnailBApp.Views.MonAnPage;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -49,6 +51,28 @@ namespace SnailBApp.ViewModels.MonAnVM
         public void OnLstSelectItem(FoodViewModel f)
         {
             _pageService.PushAsync(new DetailFoodPage(f));
+        }
+        public void OnSearchTextChange(string newTxt)
+        {
+            if (!string.IsNullOrWhiteSpace(newTxt) && !string.IsNullOrEmpty(newTxt) && newTxt != "")
+            {
+                ObservableCollection<FoodViewModel> x = new ObservableCollection<FoodViewModel>();
+                foreach (var item in SearchFood(newTxt))
+                {
+                    x.Add(item);
+                }
+                LstFoods = new ObservableCollection<FoodViewModel>(x);
+            }
+            else
+            {
+                LoadData();
+            }
+        }
+        private IEnumerable<FoodViewModel> SearchFood(string txtNV)
+        {
+            ObservableCollection<FoodViewModel> temp = new ObservableCollection<FoodViewModel>(LstFoods);
+            var x = new List<FoodViewModel>(temp);
+            return x.Where(f => f.Name.Contains(txtNV));
         }
         private async void OnDeleteClicked(object obj)
         {

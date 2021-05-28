@@ -32,5 +32,10 @@ namespace SnailBApp.Views.HoaDonPage
         {
             ViewModel.OnLstSelectItem(e.SelectedItem as HoaDonViewModel);
         }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ViewModel.OnSearchTextChange(e.NewTextValue);
+        }
     }
 }

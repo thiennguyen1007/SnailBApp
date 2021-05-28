@@ -100,7 +100,6 @@ namespace SnailBApp.ViewModels.NhanVienVM
         {
             if (!string.IsNullOrWhiteSpace(newTxt) && !string.IsNullOrEmpty(newTxt) && newTxt != "")
             {
-                Task.Run(() => LoadData());
                 ObservableCollection<NhanVienViewModel> x = new ObservableCollection<NhanVienViewModel>();
                 foreach (var item in SearchNhanVien(newTxt))
                 {

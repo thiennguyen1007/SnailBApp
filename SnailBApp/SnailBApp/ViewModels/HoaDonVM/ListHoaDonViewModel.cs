@@ -2,7 +2,9 @@
 using SnailBApp.Services;
 using SnailBApp.Views.HoaDonPage;
 using SQLite;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -75,6 +77,26 @@ namespace SnailBApp.ViewModels.HoaDonVM
                     await _pageService.DisplayAlert("Failed!", "Failed when delete...\nError: " + e.Message, "ok");
                 }
             }
+        }
+        public void OnSearchTextChange(string newTxt)
+        {
+            if (!string.IsNullOrWhiteSpace(newTxt) && !string.IsNullOrEmpty(newTxt) && newTxt != "")
+            {
+                ObservableCollection<HoaDonViewModel> x = new ObservableCollection<HoaDonViewModel>();
+                foreach (var item in SearchNhanVien(newTxt))
+                {
+                    x.Add(item);
+                }
+                LstHoaDon = new ObservableCollection<HoaDonViewModel>(x);
+            }
+            else
+                LoadData();
+        }
+        private IEnumerable<HoaDonViewModel> SearchNhanVien(string txtNV)
+        {
+            ObservableCollection<HoaDonViewModel> temp = new ObservableCollection<HoaDonViewModel>(LstHoaDon);
+            var x = new List<HoaDonViewModel>(temp);
+            return x.Where(f => f.PhoneNumber.Contains(txtNV));
         }
     }
 }

@@ -169,12 +169,9 @@ namespace SnailBApp.ViewModels
             }
             else
             {
-                Task.Run(() => LoadData());
                 ObservableCollection<FoodViewModel> x = new ObservableCollection<FoodViewModel>();
                 foreach (var item in SearchFood(txt))
-                {
                     x.Add(item);
-                }
                 LstFoods = new ObservableCollection<FoodViewModel>(x);
             }
         }

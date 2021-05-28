@@ -21,7 +21,7 @@
     <!--start list view-->
     <Grid RowDefinitions="0.5*,5.5*,0.1*">
         <SearchBar Placeholder="Search..."
-                   BackgroundColor="Transparent" />
+                   BackgroundColor="Transparent" TextChanged="SearchBar_TextChanged"/>
         <StackLayout Grid.Row="1">
             <ListView ItemsSource="{Binding LstHoaDon}"
                       RowHeight="55"
