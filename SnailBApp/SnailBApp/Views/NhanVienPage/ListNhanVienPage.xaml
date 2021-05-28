@@ -24,7 +24,7 @@
     </ContentPage.ToolbarItems>
     <!--start list view-->
     <Grid RowDefinitions="0.4*,5.5*,0.4*">
-        <SearchBar Placeholder="Search..." BackgroundColor="Transparent"/>
+        <SearchBar Placeholder="Search..." BackgroundColor="Transparent" TextChanged="SearchBar_TextChanged"/>
         <ListView ItemsSource="{Binding LstNhanViens}" 
                               RowHeight="55" x:Name="lstNV"                      
                               Margin="5,0" BackgroundColor="#E6E9E8"

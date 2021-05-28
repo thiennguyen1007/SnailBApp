@@ -33,5 +33,9 @@ namespace SnailBApp.Views.NhanVienPage
         {
            await ViewModel.ItemSelectedAsync(e.SelectedItem as NhanVienViewModel);
         }
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ViewModel.OnSearchTextChange(e.NewTextValue);
+        }
     }
 }

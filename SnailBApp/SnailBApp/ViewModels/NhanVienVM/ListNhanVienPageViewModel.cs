@@ -2,7 +2,10 @@
 using SnailBApp.Models;
 using SnailBApp.Services;
 using SQLite;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -92,6 +95,29 @@ namespace SnailBApp.ViewModels.NhanVienVM
 
                await _pageService.DisplayAlert("Failed!", "Failed when delete...\nError: " + e.Message, "ok");
             }
+        }
+        public void OnSearchTextChange(string newTxt)
+        {
+            if (!string.IsNullOrWhiteSpace(newTxt) && !string.IsNullOrEmpty(newTxt) && newTxt != "")
+            {
+                Task.Run(() => LoadData());
+                ObservableCollection<NhanVienViewModel> x = new ObservableCollection<NhanVienViewModel>();
+                foreach (var item in SearchNhanVien(newTxt))
+                {
+                    x.Add(item);
+                }
+                LstNhanViens = new ObservableCollection<NhanVienViewModel>(x);
+            }
+            else
+            {
+                LoadData();
+            }
+        }
+        private IEnumerable<NhanVienViewModel> SearchNhanVien(string txtNV)
+        {
+            ObservableCollection<NhanVienViewModel> temp = new ObservableCollection<NhanVienViewModel>(LstNhanViens);
+            var x = new List<NhanVienViewModel>(temp);
+            return x.Where(f => f.Name.Contains(txtNV));
         }
         private ObservableCollection<NhanVienViewModel> KhoiTao()
         {
