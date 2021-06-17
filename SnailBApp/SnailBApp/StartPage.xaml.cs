@@ -12,11 +12,11 @@ namespace SnailBApp
         public StartPage()
         {
             InitializeComponent();
+            //Task.Run(SpinImg);
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            SpinImg();
             ViewModel = new StartViewModel();
             this.BindingContext = ViewModel;
             ViewModel.LoadDataCommand.Execute(null);
@@ -44,12 +44,10 @@ namespace SnailBApp
         }
         private async void SpinImg()
         {
-            do
+            while (true)
             {
-                await img_banner.RotateTo(360, 5000, Easing.BounceIn);
-                await img_banner.RotateTo(180, 2500, Easing.BounceIn);
-                await img_banner.RotateTo(0, 2500, Easing.BounceIn);
-            } while (true);
+                await img_banner.RelRotateTo(360, 10000, Easing.BounceOut);
+            } 
         }
     }
 }

@@ -61,7 +61,7 @@
                     WidthRequest="300" FontAttributes="Bold" 
                     Command="{Binding LoginCommand}"/>
         </StackLayout>
-        <StackLayout Grid.Row="3" Margin="25,0,10,25" Spacing="5" >
+        <StackLayout Grid.Row="3" Margin="25,0,10,10" Spacing="5" >
             <Label Text="News" FontSize="14" TextColor="White"/>
             <Grid ColumnDefinitions="8*,*" Opacity="0.7">
                 <Frame CornerRadius="10" BackgroundColor="#DDDDDD" x:Name="frameNews">

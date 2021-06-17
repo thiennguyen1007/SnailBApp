@@ -60,9 +60,9 @@
         </ScrollView>
         <Frame Grid.Row="1" CornerRadius="5" Margin="5,0" Padding="0" IsVisible="{Binding IsAnyItem, Mode=OneWay}"
                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
-               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.75}"
+               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.68}"
                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
-               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.25}">
+               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.3}">
             <StackLayout Spacing="0" HorizontalOptions="FillAndExpand" 
                          VerticalOptions="FillAndExpand" BackgroundColor="#FFFFCC" Margin="0">
                 <Grid ColumnDefinitions="*,2*" RowDefinitions="*,*,*" 
@@ -77,10 +77,11 @@
                            Grid.Row="1"
                            Text="{Binding Path=HoaDon.Email}"/>
                     <Label Text="So dien thoai:" 
-                           FontSize="15" 
+                           FontSize="15"
                            VerticalOptions="Center" Grid.Row="2"/>
                     <Entry Placeholder="phone number"                             
                            Grid.Row="2"
+                           Keyboard="Numeric"
                            Text="{Binding Path=HoaDon.PhoneNumber}"/>
                 </Grid>
                 <Button Text="Thanh Toan" FontSize="20" 
