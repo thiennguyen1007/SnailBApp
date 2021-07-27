@@ -94,7 +94,7 @@
     <FlyoutItem Title="Thông kê" Icon="hoaDon.png">
         <ShellContent Route="ThongKeDoanhThu" ContentTemplate="{DataTemplate ThongKe:ThongKeDoanhThu}" IsTabStop="True"/>
     </FlyoutItem>
-    <FlyoutItem Title="Hoa Don" Icon="hoaDon.png">
+    <FlyoutItem Title="Hóa đơn cần duyệt" Icon="hoaDon.png">
         <ShellContent Route="ListHoaDonPage" ContentTemplate="{DataTemplate HoaDon:ListHoaDonPage}" IsTabStop="True"/>
     </FlyoutItem>
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">

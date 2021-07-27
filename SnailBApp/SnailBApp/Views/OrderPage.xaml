@@ -28,7 +28,6 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <RelativeLayout>
-        <Grid></Grid>
         <Grid RowDefinitions="0.5*,*,*,5*"
               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0}"
@@ -44,34 +43,9 @@
                     </GradientStopCollection>
                 </LinearGradientBrush>
             </Grid.Background>
-            <Grid ColumnDefinitions="0.4*,2.8*,0.4*"
-                  ColumnSpacing="5">
-                <ImageButton Source="home.png"
-                             HorizontalOptions="Start"
-                             Command="{Binding BackCommand}"
-                             Margin="10,10,0,0" />
-                <Frame Grid.Column="1"
-                       CornerRadius="30"
-                       BackgroundColor="White"
-                       Padding="0"
-                       Margin="0,10,0,0">
-                    <Grid ColumnDefinitions="4*,*"
-                          Padding="0">
-                        <customLayout:CustomEntry Placeholder="Search..."
-                                                  TextColor="#81503D"
-                                                  FontAttributes="None"
-                                                  Margin="10,0,0,0"
-                                                  PlaceholderColor="#81503D"
-                                                  TextChanged="Entry_TextChanged"
-                                                  Text="{Binding SearchText, Mode=TwoWay}" />
-                        <ImageButton Source="search.png"
-                                     HorizontalOptions="End"
-                                     Grid.Column="1"
-                                     Margin="12" />
-                    </Grid>
-                </Frame>
+            <Grid ColumnDefinitions="3.2*,0.4*">
                 <StackLayout Orientation="Horizontal"
-                             Grid.Column="2"
+                             Grid.Column="1"
                              Spacing="0">
                     <ImageButton Source="GioHang.png"
                                  HeightRequest="25"
@@ -84,16 +58,8 @@
                            TextColor="Red" />
                 </StackLayout>
             </Grid>
-            <Label Grid.Row="1"
-                   Text="{Binding LbLoaiMonAn}"
-                   FontSize="50"
-                   TextColor="#fb9300"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   Opacity="0.4" />
             <CarouselView ItemsSource="{Binding LstFoods}"
                           PeekAreaInsets="80"
-                          Margin="0,0,0,10"
                           x:Name="listFood" Grid.Row="3">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal"
@@ -144,10 +110,9 @@
                                              x:Name="stepperSL"
                                              Value="{Binding SL, Mode=OneWayToSource}"
                                              Minimum="0"
-                                             Increment="1"
-                                             Maximum="100" />
+                                             Increment="1"/>
                                     <StackLayout Orientation="Horizontal"
-                                                 HorizontalOptions="Center">
+                                                 HorizontalOptions="CenterAndExpand">
                                         <Label Text="So luong:"
                                                HorizontalOptions="Start" />
                                         <Label Text="{Binding Source={x:Reference stepperSL}, Path=Value, Mode=OneWay}"
@@ -182,8 +147,8 @@
                             <Image Source="{Binding IMG}"
                                    HeightRequest="100"
                                    WidthRequest="100"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Start" />
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalOptions="StartAndExpand"/>
                         </Grid>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>

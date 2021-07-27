@@ -10,15 +10,16 @@ using Xamarin.Forms;
 
 namespace SnailBApp.ViewModels.HoaDonVM
 {
-    public class ListHoaDonViewModel :BaseViewModel
+    public class ListHoaDonViewModel : BaseViewModel
     {
         private readonly IHoaDonStore _hoaDonStore;
         private readonly IPageService _pageService;
         private int _numberHD = 0;
-        private ObservableCollection<HoaDonViewModel> _lstHoaDon= new ObservableCollection<HoaDonViewModel>();
+        private ObservableCollection<HoaDonViewModel> _lstHoaDon = new ObservableCollection<HoaDonViewModel>();
         //Command
         public ICommand LoadDataCommand { get; private set; }
         public ICommand DeleteCommand { get; private set; }
+        public ICommand StatusCommand { get; private set; }
         public ObservableCollection<HoaDonViewModel> LstHoaDon
         {
             get => _lstHoaDon;
@@ -37,6 +38,7 @@ namespace SnailBApp.ViewModels.HoaDonVM
             //Command
             LoadDataCommand = new Command(LoadData);
             DeleteCommand = new Command(OnDeleteClicked);
+            StatusCommand = new Command<string>(OnStatusClicked);
         }
         private async void LoadData()
         {
@@ -67,9 +69,9 @@ namespace SnailBApp.ViewModels.HoaDonVM
                 hd.Price = x.Price;
                 try
                 {
-                      await _hoaDonStore.DeleteHoaDon(hd);
-                      LstHoaDon.Remove(x);
-                      await _pageService.DisplayAlert("", "Success!", "Ok");
+                    await _hoaDonStore.DeleteHoaDon(hd);
+                    LstHoaDon.Remove(x);
+                    await _pageService.DisplayAlert("", "Success!", "Ok");
                 }
                 catch (SQLiteException e)
                 {
@@ -77,6 +79,14 @@ namespace SnailBApp.ViewModels.HoaDonVM
                     await _pageService.DisplayAlert("Failed!", "Failed when delete...\nError: " + e.Message, "ok");
                 }
             }
+        }
+        private void OnStatusClicked(string parameter)
+        {
+            //if(parameter=="+")
+            //{
+
+            //}
+            //else
         }
         public void OnSearchTextChange(string newTxt)
         {

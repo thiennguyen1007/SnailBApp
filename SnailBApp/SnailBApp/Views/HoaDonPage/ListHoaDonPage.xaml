@@ -21,7 +21,8 @@
     <!--start list view-->
     <Grid RowDefinitions="0.5*,5.5*,0.1*">
         <SearchBar Placeholder="Search..."
-                   BackgroundColor="Transparent" TextChanged="SearchBar_TextChanged"/>
+                   BackgroundColor="Transparent"
+                   TextChanged="SearchBar_TextChanged" />
         <StackLayout Grid.Row="1">
             <ListView ItemsSource="{Binding LstHoaDon}"
                       RowHeight="55"
@@ -32,7 +33,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid ColumnDefinitions="2.5*, 1.5*"
+                            <Grid ColumnDefinitions="1.5*, 1.5*,*"
                                   RowSpacing="5">
                                 <StackLayout Margin="10,0,0,0">
                                     <Label Text="{Binding Email}"
@@ -46,6 +47,27 @@
                                     <Label Text="{Binding Price}"
                                            TextColor="Red" />
                                 </StackLayout>
+                                <Grid ColumnDefinitions="*,*"
+                                      Grid.Column="2"
+                                      Margin="0,10">
+                                    <Grid.Resources>
+                                        <ResourceDictionary>
+                                            <Style TargetType="ImageButton">
+                                                <Setter Property="VerticalOptions"
+                                                        Value="CenterAndExpand" />
+                                                <Setter Property="HorizontalOptions"
+                                                        Value="CenterAndExpand" />
+                                            </Style>
+                                        </ResourceDictionary>
+                                    </Grid.Resources>
+                                    <ImageButton Source="check.png"
+                                                 Command="{Binding StatusCommand}"
+                                                 CommandParameter="+" />
+                                    <ImageButton Grid.Column="1"
+                                                 Source="delete.png"
+                                                 Command="{Binding StatusCommand}"
+                                                 CommandParameter="-" />
+                                </Grid>
                             </Grid>
                             <ViewCell.ContextActions>
                                 <MenuItem Text="Delete"
