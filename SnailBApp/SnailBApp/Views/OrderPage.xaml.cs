@@ -13,13 +13,13 @@ namespace SnailBApp.Views
         public OrderPage()
         {           
             InitializeComponent();
+            var pageService = new PageService();
+            var dataAccess = new SQLiteFoodStore(DependencyService.Get<ISQLite>());
+            ViewModel = new OrderViewModel(dataAccess, pageService);
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            var pageService = new PageService();
-            var dataAccess = new SQLiteFoodStore(DependencyService.Get<ISQLite>());
-            ViewModel = new OrderViewModel(dataAccess, pageService);
             ViewModel.LoadDataCommand.Execute(null);
         }
         protected override bool OnBackButtonPressed()

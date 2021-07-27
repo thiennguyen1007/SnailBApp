@@ -4,9 +4,6 @@
              xmlns:ctrl="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              x:Class="SnailBApp.StartPage"
              NavigationPage.HasNavigationBar="False">
-    <!--<ContentPage.BindingContext>
-        <vm:StartViewModel x:Name="vm"/>
-    </ContentPage.BindingContext>-->
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">

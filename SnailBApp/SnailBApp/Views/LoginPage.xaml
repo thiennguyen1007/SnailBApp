@@ -4,102 +4,76 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             BackgroundColor="#254248"
+             NavigationPage.HasNavigationBar="False"
              x:Class="SnailBApp.Views.LoginPage"
-             Shell.NavBarIsVisible="False"
-             Title="Login Page">
+             Shell.NavBarIsVisible="False">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor"
+                        Value="White" />
+            </Style>
             <Style TargetType="Entry">
-                <Setter Property="TextColor" Value="Black"/>
-                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-                <Setter Property="Margin" Value="5,0,20,0"/>
-            </Style>
-            <Style TargetType="Frame" x:Key="frameSmall">
-                <Setter Property="BackgroundColor" Value="Transparent"/>
-                <Setter Property="BorderColor" Value="DarkGray"/>
-                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-                <Setter Property="CornerRadius" Value="30"/>
-            </Style>
-            <Style TargetType="Label" x:Key="lbSmall">
-                <Setter Property="FontSize" Value="Small"/>
-                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="PlaceholderColor"
+                        Value="#c7c4cd" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout>
-        <StackLayout.Background>
-            <LinearGradientBrush>
-                <GradientStopCollection>
-                    <GradientStop Color="#161616" Offset="0"/>
-                    <GradientStop Color="#4E5054" Offset="1"/>
-                </GradientStopCollection>
-            </LinearGradientBrush>
-        </StackLayout.Background>
-        <Frame HeightRequest="150" Padding="0">
-            <Image Source="img_login_banner.jpg" 
-                           Aspect="AspectFill"
-                           Opacity="0.8"/>
-        </Frame>
-        <Frame BackgroundColor="#FFFFFF" HeightRequest="550" 
-                       HasShadow="True" Padding="10,5,10,5" Margin="10,-60,10,0"
-                       HorizontalOptions="FillAndExpand"
-                       CornerRadius="30" BorderColor="#FFBE00">
-            <StackLayout Spacing="10">
-                <Label Text="SnailB Restaurant" TextColor="Black" 
-                       HorizontalOptions="CenterAndExpand" 
-                       FontAttributes="Bold" FontSize="25"
-                       Margin="0,10,0,0"/>
-                <!--email-->
-                <StackLayout Margin="10,0">
-                    <Frame Style="{StaticResource frameSmall}">
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="user.png"/>
-                            <Entry Placeholder="Email"  
-                                       Keyboard="Email" Text="{Binding Email, Mode=TwoWay}"/>
-                        </StackLayout>
-                    </Frame>
-                    <!--#end email-->
-
-                    <!--password-->
-                    <Frame Margin="0,15,0,0" Style="{StaticResource frameSmall}">
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="padlock.jpg"/>
-                            <Entry Placeholder="Password" IsPassword="True" 
-                                       Text="{Binding Pass, Mode=TwoWay}"/>
-                        </StackLayout>
-                    </Frame>
-                    <!--#end password-->
-                    <StackLayout  Orientation="Horizontal">
-                        <CheckBox IsChecked="False" Color="#B71C1C" />
-                        <Label Text="Remember me" TextColor="DarkGray" 
-                                   Style="{StaticResource lbSmall}"/>
-                        <Label Text="Forgot Password" 
-                                   TextColor="#B71C1C" 
-                                   FontAttributes="Bold" 
-                                   HorizontalOptions="EndAndExpand"
-                                   Style="{StaticResource lbSmall}"/>
-                    </StackLayout>
-                    <!--button-->
-                    <Button Text="SIGN IN" BackgroundColor="#FFBE00" 
-                                TextColor="White" CornerRadius="30" 
-                                FontAttributes = "Bold" x:Name="btn_login" 
-                                Command="{Binding LoginCommand}" Margin="20,50,20,0"/>
-                    <Label Text="Sign up" TextColor="#B71C1C" 
-                                   FontAttributes="Bold" FontSize="Small"
-                                   Margin="0,5,0,0" HorizontalOptions="Center"/>
-                    <BoxView BackgroundColor="DarkGray" HeightRequest="1" 
-                                 WidthRequest="150"  
-                                 HorizontalOptions="Center" 
-                                 VerticalOptions="Center"
-                                 Margin="0,10,0,0"/>
-                    <StackLayout Orientation="Horizontal" 
-                                 HorizontalOptions="CenterAndExpand"
-                                 Spacing="10">
-                        <Image Source="facebook.png"/>
-                        <Image Source="google.png"/>
-                    </StackLayout>
+    <ContentPage.Content>
+        <Grid RowDefinitions="2*, 3*, 0.5*"
+              Padding="0"
+              Margin="0">
+            <Image Source="img_login_banner"
+                   Aspect="AspectFill" 
+                   Opacity="0.8"/>
+            <StackLayout Grid.Row="1"
+                         Spacing="10"
+                         Margin="20,0,20,0">
+                <Label Text="Login"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       FontSize="30" />
+                <Label Text="Please fill all blanks"
+                       Opacity="0.7" />
+                <Entry Placeholder="email"
+                       Margin="0,10,0,0"
+                       Text="{Binding Email, Mode=TwoWay}" />
+                <Entry Placeholder="password"
+                       IsPassword="True"
+                       Text="{Binding Pass, Mode=TwoWay}"/>
+                <Button Text="Login"
+                        CornerRadius="20"
+                        TextColor="#254248"
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        BackgroundColor="#0df5e3"
+                        Margin="30,0,30,0"
+                        Command="{Binding LoginCommand}"/>
+                <Label Text="Forgot Password?"
+                       TextColor="#0df5e3"
+                       HorizontalOptions="Center" />
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="CenterAndExpand"
+                             Spacing="10">
+                    <Image Source="facebook.png" />
+                    <Image Source="google.png" />
                 </StackLayout>
             </StackLayout>
-        </Frame>
-    </StackLayout>
+            <StackLayout Orientation="Horizontal"
+                         Grid.Row="2"
+                         Spacing="5"
+                         HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="Center">
+                <Label Text="Don't have account?"
+                       Opacity="0.7" />
+                <Label Text="Sign up"
+                       TextColor="#0df5e3"
+                       FontSize="16"
+                       FontAttributes="Bold" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

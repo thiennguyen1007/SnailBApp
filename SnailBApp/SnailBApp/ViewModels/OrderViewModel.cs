@@ -33,8 +33,8 @@ namespace SnailBApp.ViewModels
         public ICommand AddCommand { get; private set; }
         public ObservableCollection<FoodViewModel> LstFoods
         {
-            get { return _lstFoods; }
-            set { SetProperty(ref _lstFoods, value); }
+            get => _lstFoods;
+            set => SetProperty(ref _lstFoods, value);
         }
         public ObservableCollection<FoodViewModel> LstBag
         {
@@ -89,12 +89,10 @@ namespace SnailBApp.ViewModels
                 Application.Current.MainPage = new NavigationPage(new StartPage());
             }
             else
-            {
                 if (await _pageService.DisplayAlert("Are you sure!", "Bạn đang bỏ quên hàng trong giỏ kìa!\nGo home now.", "Ok", "Cancel"))
                 {
                     Application.Current.MainPage = new NavigationPage(new StartPage());
-                }               
-            }          
+                }                        
         }
         private async void OnBagClicked()
         {

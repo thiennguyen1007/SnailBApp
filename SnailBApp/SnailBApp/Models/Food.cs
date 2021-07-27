@@ -1,7 +1,7 @@
 ﻿using SQLite;
 namespace SnailBApp.Models
 {
-    //6 thuoc tinh
+    //6 
     [Table("Food")]
     public class Food
     {

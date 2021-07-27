@@ -110,7 +110,8 @@ namespace SnailBApp.ViewModels.ThongKeVM
                     if (numberMonth > 12 || numberMonth <= 0)
                     {
                         await _pageService.DisplayAlert("", "invalid month -_-", "ok");
-                    }else
+                    }
+                    else
                     {
                         int dem = 0;
                         ObservableCollection<HoaDonVM.HoaDonViewModel> lstHoaDonToFilter = new ObservableCollection<HoaDonVM.HoaDonViewModel>();
@@ -142,10 +143,11 @@ namespace SnailBApp.ViewModels.ThongKeVM
         }
         private void OnStatusChartClicked(string parameter)
         {
-            if(parameter=="0")
+            if (parameter == "0")
             {
                 StatusChart = true;
-            }else
+            }
+            else
             { StatusChart = false; }
         }
         public async Task<IEnumerable<ChartEntry>> LoadChartAsync()
@@ -174,7 +176,7 @@ namespace SnailBApp.ViewModels.ThongKeVM
                 else
                 {
                     double janMoney, febMoney, marMoney, aprMoney, mayMoney, junMoney,
-                          julMoney, augMoney, sepMoney, octMoney, novMoney, decMoney;
+                    julMoney, augMoney, sepMoney, octMoney, novMoney, decMoney;
                     janMoney = febMoney = marMoney = aprMoney = mayMoney = junMoney =
                     julMoney = augMoney = sepMoney = octMoney = novMoney = decMoney = 0;
                     HoaDonViewModel x = new HoaDonViewModel(lstHoaDonToFilter[lstHoaDonToFilter.Count - 1]);
@@ -218,114 +220,106 @@ namespace SnailBApp.ViewModels.ThongKeVM
                             { decMoney += lstHoaDonToFilter[i].Price; }
                         }
                     }
-                    if (nowMonth >= 6)// ko can lui nam
+                    if (nowMonth >= 6)// don't need go back last year
                     {
                         //add
                         int tempMonth = nowMonth;
                         for (int i = 0; i < 6; i++)
                         {
-                            if (tempMonth == 1)
+                            switch (tempMonth)
                             {
-                                chartEntry = new ChartEntry((float)janMoney)
-                                {
-                                    ValueLabel = janMoney.ToString(),
-                                    Label = "Jan",
-                                };
-                            }
-                            else if (tempMonth == 2)
-                            {
-                                chartEntry = new ChartEntry((float)febMoney)
-                                {
-                                    ValueLabel = febMoney.ToString(),
-                                    Label = "Feb",
-                                };
-                            }
-                            else if (tempMonth == 3)
-                            {
-                                chartEntry = new ChartEntry((float)marMoney)
-                                {
-                                    ValueLabel = marMoney.ToString(),
-                                    Label = "Mar",
-                                };
-                            }
-                            else if (tempMonth == 4)
-                            {
-                                chartEntry = new ChartEntry((float)aprMoney)
-                                {
-                                    ValueLabel = aprMoney.ToString(),
-                                    Label = "Apr",
-                                };
-                            }
-                            else if (tempMonth == 5)
-                            {
-                                chartEntry = new ChartEntry((float)mayMoney)
-                                {
-                                    ValueLabel = mayMoney.ToString(),
-                                    Label = "May",
-                                };
-                            }
-                            else if (tempMonth == 6)
-                            {
-                                chartEntry = new ChartEntry((float)junMoney)
-                                {
-                                    ValueLabel = junMoney.ToString(),
-                                    Label = "Jun",
-                                };
-                            }
-                            else if (tempMonth == 7)
-                            {
-                                chartEntry = new ChartEntry((float)julMoney)
-                                {
-                                    ValueLabel = julMoney.ToString(),
-                                    Label = "Jul",
-                                };
-                            }
-                            else if (tempMonth == 8)
-                            {
-                                chartEntry = new ChartEntry((float)augMoney)
-                                {
-                                    ValueLabel = augMoney.ToString(),
-                                    Label = "Aug",
-                                };
-                            }
-                            else if (tempMonth == 9)
-                            {
-                                chartEntry = new ChartEntry((float)sepMoney)
-                                {
-                                    ValueLabel = sepMoney.ToString(),
-                                    Label = "Sep",
-                                };
-                            }
-                            else if (tempMonth == 10)
-                            {
-                                chartEntry = new ChartEntry((float)octMoney)
-                                {
-                                    ValueLabel = octMoney.ToString(),
-                                    Label = "Oct",
-                                };
-                            }
-                            else if (tempMonth == 11)
-                            {
-                                chartEntry = new ChartEntry((float)novMoney)
-                                {
-                                    ValueLabel = novMoney.ToString(),
-                                    Label = "Nov",
-                                };
-                            }
-                            else if (tempMonth == 12)
-                            {
-                                chartEntry = new ChartEntry((float)decMoney)
-                                {
-                                    ValueLabel = decMoney.ToString(),
-                                    Label = "Dec",
-                                };
+                                case 1:
+                                    chartEntry = new ChartEntry((float)janMoney)
+                                    {
+                                        ValueLabel = janMoney.ToString(),
+                                        Label = "Jan",
+                                    };
+                                    break;
+                                case 2:
+                                    chartEntry = new ChartEntry((float)febMoney)
+                                    {
+                                        ValueLabel = febMoney.ToString(),
+                                        Label = "Feb",
+                                    };
+                                    break;
+                                case 3:
+                                    chartEntry = new ChartEntry((float)marMoney)
+                                    {
+                                        ValueLabel = marMoney.ToString(),
+                                        Label = "Mar",
+                                    };
+                                    break;
+                                case 4:
+                                    chartEntry = new ChartEntry((float)aprMoney)
+                                    {
+                                        ValueLabel = aprMoney.ToString(),
+                                        Label = "Apr",
+                                    };
+                                    break;
+                                case 5:
+                                    chartEntry = new ChartEntry((float)mayMoney)
+                                    {
+                                        ValueLabel = mayMoney.ToString(),
+                                        Label = "May",
+                                    };
+                                    break;
+                                case 6:
+                                    chartEntry = new ChartEntry((float)junMoney)
+                                    {
+                                        ValueLabel = junMoney.ToString(),
+                                        Label = "Jun",
+                                    };
+                                    break;
+                                case 7:
+                                    chartEntry = new ChartEntry((float)julMoney)
+                                    {
+                                        ValueLabel = julMoney.ToString(),
+                                        Label = "Jul",
+                                    };
+                                    break;
+                                case 8:
+                                    chartEntry = new ChartEntry((float)augMoney)
+                                    {
+                                        ValueLabel = augMoney.ToString(),
+                                        Label = "Aug",
+                                    };
+                                    break;
+                                case 9:
+                                    chartEntry = new ChartEntry((float)sepMoney)
+                                    {
+                                        ValueLabel = sepMoney.ToString(),
+                                        Label = "Sep",
+                                    };
+                                    break;
+                                case 10:
+                                    chartEntry = new ChartEntry((float)octMoney)
+                                    {
+                                        ValueLabel = octMoney.ToString(),
+                                        Label = "Oct",
+                                    };
+                                    break;
+                                case 11:
+                                    chartEntry = new ChartEntry((float)novMoney)
+                                    {
+                                        ValueLabel = novMoney.ToString(),
+                                        Label = "Nov",
+                                    };
+                                    break;
+                                case 12:
+                                    chartEntry = new ChartEntry((float)decMoney)
+                                    {
+                                        ValueLabel = decMoney.ToString(),
+                                        Label = "Dec",
+                                    };
+                                    break;
+
                             }
                             chartTemp.Add(chartEntry);
-                            //giam thang
+                            //increase month
                             tempMonth--;
                         }
                     }
-                    else// lui year and caculate
+                    else// back year and caculation
                     {
                         double last_julMoney, last_augMoney, last_sepMoney, last_octMoney, last_novMoney, last_decMoney;
                         last_julMoney = last_augMoney = last_sepMoney = last_octMoney = last_novMoney = last_decMoney = 0;
@@ -337,18 +331,27 @@ namespace SnailBApp.ViewModels.ThongKeVM
                             int year = int.Parse(lstHoaDonToFilter[i].Date.Substring(6, 4));
                             if (year == lastYear)
                             {
-                                if (month == 5)
-                                { last_julMoney += lstHoaDonToFilter[i].Price; }
-                                else if (month == 8)
-                                { last_augMoney += lstHoaDonToFilter[i].Price; }
-                                else if (month == 9)
-                                { last_sepMoney += lstHoaDonToFilter[i].Price; }
-                                else if (month == 10)
-                                { last_octMoney += lstHoaDonToFilter[i].Price; }
-                                else if (month == 11)
-                                { last_novMoney += lstHoaDonToFilter[i].Price; }
-                                else if (month == 12)
-                                { last_decMoney += lstHoaDonToFilter[i].Price; }
+                                switch (month)
+                                {
+                                    case 5:
+                                        last_julMoney += lstHoaDonToFilter[i].Price;
+                                        break;
+                                    case 8:
+                                        last_augMoney += lstHoaDonToFilter[i].Price;
+                                        break;
+                                    case 9:
+                                        last_sepMoney += lstHoaDonToFilter[i].Price;
+                                        break;
+                                    case 10:
+                                        last_octMoney += lstHoaDonToFilter[i].Price;
+                                        break;
+                                    case 11:
+                                        last_novMoney += lstHoaDonToFilter[i].Price;
+                                        break;
+                                    case 12:
+                                        last_decMoney += lstHoaDonToFilter[i].Price;
+                                        break;
+                                }
                             }
                         }
                         for (int i = 0; i < 6; i++)
@@ -441,22 +444,23 @@ namespace SnailBApp.ViewModels.ThongKeVM
                             tempMonth--;
                         }
                     }
-                    //sap xep lai mang, thang nao truoc thang nao sau
+                    //sort array, thang nao truoc thang nao sau
                     Chart = new ObservableCollection<ChartEntry>();
                     Chart.Clear();
                     for (int i = (chartTemp.Count - 1); i >= 0; i--)
                     {
                         Chart.Add(chartTemp[i]);
                     }
-                    //set mau
-                    for(int i =0; i<5; i++)
+                    //set color
+                    for (int i = 0; i < 5; i++)
                     {
-                        for(int j=i+1; j<6; j++)
+                        for (int j = i + 1; j < 6; j++)
                         {
-                            if(Chart[i].Value<Chart[j].Value)
+                            if (Chart[i].Value < Chart[j].Value)
                             {
-                                Chart[j].Color= SkiaSharp.SKColor.Parse("#004DCF");
-                            }else
+                                Chart[j].Color = SkiaSharp.SKColor.Parse("#004DCF");
+                            }
+                            else
                             {
                                 Chart[j].Color = SkiaSharp.SKColor.Parse("#FF001D");
                             }

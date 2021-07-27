@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SnailBApp.Views.OrderPage"
@@ -7,165 +7,183 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
-                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="TextColor"
+                        Value="Black" />
             </Style>
             <Style TargetType="ImageButton">
-                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
             </Style>
-            <Style TargetType="Label" x:Key="lbCategories">
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="TextColor" Value="Black"/>
+            <Style TargetType="Label"
+                   x:Key="lbCategories">
+                <Setter Property="FontSize"
+                        Value="12" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="TextColor"
+                        Value="Black" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <RelativeLayout>
         <Grid></Grid>
-        <Grid RowDefinitions="0.5*,*,*,5*" 
-            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
-            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0}"
-            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
-            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
+        <Grid RowDefinitions="0.5*,*,*,5*"
+              RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
+              RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0}"
+              RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+              RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
             <Grid.Background>
                 <LinearGradientBrush>
                     <GradientStopCollection>
-                        <GradientStop Color="White" Offset="0"/>
-                        <GradientStop Color="#111111" Offset="1"/>
+                        <GradientStop Color="White"
+                                      Offset="0" />
+                        <GradientStop Color="#111111"
+                                      Offset="1" />
                     </GradientStopCollection>
                 </LinearGradientBrush>
             </Grid.Background>
-            <Grid ColumnDefinitions="0.4*,2.8*,0.4*" ColumnSpacing="5">
-                <ImageButton Source="home.png" HorizontalOptions="Start" 
-                             Command="{Binding BackCommand}" Margin="10,10,0,0"/>
-                <Frame Grid.Column="1" CornerRadius="30" BackgroundColor="White" Padding="0" Margin="0,10,0,0">
-                    <Grid ColumnDefinitions="4*,*" Padding="0">
-                        <customLayout:CustomEntry Placeholder="Search..." TextColor="#81503D"
-                       FontAttributes="None" Margin="10,0,0,0"
-                       PlaceholderColor="#81503D"
-                       TextChanged="Entry_TextChanged"
-                       Text="{Binding SearchText, Mode=TwoWay}"/>
-                        <ImageButton Source="search.png" HorizontalOptions="End" Grid.Column="1" Margin="12"/>
+            <Grid ColumnDefinitions="0.4*,2.8*,0.4*"
+                  ColumnSpacing="5">
+                <ImageButton Source="home.png"
+                             HorizontalOptions="Start"
+                             Command="{Binding BackCommand}"
+                             Margin="10,10,0,0" />
+                <Frame Grid.Column="1"
+                       CornerRadius="30"
+                       BackgroundColor="White"
+                       Padding="0"
+                       Margin="0,10,0,0">
+                    <Grid ColumnDefinitions="4*,*"
+                          Padding="0">
+                        <customLayout:CustomEntry Placeholder="Search..."
+                                                  TextColor="#81503D"
+                                                  FontAttributes="None"
+                                                  Margin="10,0,0,0"
+                                                  PlaceholderColor="#81503D"
+                                                  TextChanged="Entry_TextChanged"
+                                                  Text="{Binding SearchText, Mode=TwoWay}" />
+                        <ImageButton Source="search.png"
+                                     HorizontalOptions="End"
+                                     Grid.Column="1"
+                                     Margin="12" />
                     </Grid>
                 </Frame>
-
-                <StackLayout Orientation="Horizontal" Grid.Column="2" Spacing="0">
-                    <ImageButton Source="GioHang.png" HeightRequest="25" WidthRequest="25"
-                                 Command="{Binding MyBagCommand}" Margin="0,10,0,0"/>
-                    <Label BackgroundColor="Transparent" FontSize="15" Text="{Binding NumberFoodInBag}" TextColor="Red"/>
+                <StackLayout Orientation="Horizontal"
+                             Grid.Column="2"
+                             Spacing="0">
+                    <ImageButton Source="GioHang.png"
+                                 HeightRequest="25"
+                                 WidthRequest="25"
+                                 Command="{Binding MyBagCommand}"
+                                 Margin="0,10,0,0" />
+                    <Label BackgroundColor="Transparent"
+                           FontSize="15"
+                           Text="{Binding NumberFoodInBag}"
+                           TextColor="Red" />
                 </StackLayout>
             </Grid>
-            <Label Grid.Row="1" Text="{Binding LbLoaiMonAn}" FontSize="50" TextColor="#fb9300" FontAttributes="Bold" HorizontalOptions="Center" Opacity="0.4"/>
-            <StackLayout Grid.Row="2">
-                <Label Text="Categories" FontSize="20" TextColor="Black" Margin="20, 0, 0, 0" HorizontalOptions="Start" FontAttributes="Bold" Opacity="0.5"/>
-                <Frame Padding="0" BackgroundColor="Transparent">
-                    <Grid ColumnDefinitions="*,*,*" RowDefinitions="9*,0.1*" ColumnSpacing="50" Margin="20,0">
-                        <Frame CornerRadius="10" BackgroundColor="White" Padding="0">
-                            <StackLayout>
-                                <ImageButton Source="mainFood.png" HeightRequest="40" WidthRequest="40" Command="{Binding FilterCommand}" 
-                                             CommandParameter="0"/>
-                                <Label Text="main dishes" Style="{StaticResource lbCategories}">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label" Binding="{Binding LbLoaiMonAn}" Value="Main Dishes">
-                                            <Setter Property="TextColor" Value="White"/>
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
-                            </StackLayout>
-                            <Frame.Triggers>
-                                <DataTrigger TargetType="Frame" Binding="{Binding LbLoaiMonAn}" Value="Main Dishes">
-                                    <Setter Property="BackgroundColor" Value="#fb9300"/>
-                                </DataTrigger>
-                            </Frame.Triggers>
-                        </Frame>
-                        <Frame Grid.Column="1" Padding="0" CornerRadius="10">
-                            <StackLayout>
-                                <ImageButton Source="trangMieng.png"   HeightRequest="40" WidthRequest="40"
-                                             Command="{Binding FilterCommand}" CommandParameter="1"/>
-                                <Label Text="Dessert" Style="{StaticResource lbCategories}">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label" Binding="{Binding LbLoaiMonAn}" Value="Dessert">
-                                            <Setter Property="TextColor" Value="White"/>
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
-                            </StackLayout>
-                            <Frame.Triggers>
-                                <DataTrigger TargetType="Frame" Binding="{Binding LbLoaiMonAn}" Value="Dessert">
-                                    <Setter Property="BackgroundColor" Value="#fb9300"/>
-                                </DataTrigger>
-                            </Frame.Triggers>
-                        </Frame>
-                        <Frame Grid.Column="2" Padding="0" CornerRadius="10">
-                            <StackLayout>
-                                <ImageButton Source="juice.png"  HeightRequest="40" WidthRequest="40" 
-                                             Command="{Binding FilterCommand}" CommandParameter="2"/>
-                                <Label Text="Drink" Style="{StaticResource lbCategories}">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label" Binding="{Binding LbLoaiMonAn}" Value="Drink">
-                                            <Setter Property="TextColor" Value="White"/>
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
-                            </StackLayout>
-                            <Frame.Triggers>
-                                <DataTrigger TargetType="Frame" Binding="{Binding LbLoaiMonAn}" Value="Drink">
-                                    <Setter Property="BackgroundColor" Value="#fb9300"/>
-                                </DataTrigger>
-                            </Frame.Triggers>
-                        </Frame>
-                    </Grid>
-                </Frame>
-            </StackLayout>
-            <CarouselView Grid.Row="3" ItemsSource="{Binding LstFoods}"  
-                          PeekAreaInsets="80" Margin="0,0,0,10" 
-                          x:Name="listFood" >
+            <Label Grid.Row="1"
+                   Text="{Binding LbLoaiMonAn}"
+                   FontSize="50"
+                   TextColor="#fb9300"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Opacity="0.4" />
+            <CarouselView ItemsSource="{Binding LstFoods}"
+                          PeekAreaInsets="80"
+                          Margin="0,0,0,10"
+                          x:Name="listFood" Grid.Row="3">
                 <CarouselView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="15"/>
+                    <LinearItemsLayout Orientation="Horizontal"
+                                       ItemSpacing="15" />
                 </CarouselView.ItemsLayout>
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
-                        <Grid HeightRequest="600" WidthRequest="250" HorizontalOptions="Center">
-                            <Grid RowDefinitions="*,*,*" WidthRequest="250" HorizontalOptions="Center" Margin="0,50">
-                                <BoxView Grid.RowSpan="3" CornerRadius="30">
+                        <Grid HeightRequest="600"
+                              WidthRequest="250"
+                              HorizontalOptions="Center">
+                            <Grid RowDefinitions="*,*,*"
+                                  WidthRequest="250"
+                                  HorizontalOptions="Center"
+                                  Margin="0,50">
+                                <BoxView Grid.RowSpan="3"
+                                         CornerRadius="30">
                                     <BoxView.Background>
                                         <LinearGradientBrush>
                                             <GradientStopCollection>
-                                                <GradientStop Color="#DDDDDD" Offset="0"/>
-                                                <GradientStop Color="#999999" Offset="0.8"/>
+                                                <GradientStop Color="#DDDDDD"
+                                                              Offset="0" />
+                                                <GradientStop Color="#999999"
+                                                              Offset="0.8" />
                                             </GradientStopCollection>
                                         </LinearGradientBrush>
                                     </BoxView.Background>
                                 </BoxView>
-                                <Image Source="logo.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center"
-                                       VerticalOptions="Center" Margin="0,55,0,0" Opacity="0.5"/>
-                                <StackLayout Grid.Row="1" Padding="20" VerticalOptions="Center" Margin="0,-30,0,0">
-                                    <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold"
-                                           HorizontalTextAlignment="Center"/>
-                                    <Label Text="{Binding Desc}" FontSize="14"
-                                        HorizontalTextAlignment="Center"/>
-                                    <Stepper HeightRequest="35" VerticalOptions="End" x:Name="stepperSL" 
-                                         Value="{Binding SL, Mode=OneWayToSource}"
-                                         Minimum="0" Increment="1" Maximum="100"/>
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                        <Label Text="So luong:" HorizontalOptions="Start"/>
-                                        <Label Text="{Binding Source={x:Reference stepperSL}, Path=Value, Mode=OneWay}" 
-                                               HorizontalOptions="Center"/>
+                                <Image Source="logo.png"
+                                       HeightRequest="40"
+                                       WidthRequest="40"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       Margin="0,55,0,0"
+                                       Opacity="0.5" />
+                                <StackLayout Grid.Row="1"
+                                             Padding="20"
+                                             VerticalOptions="Center"
+                                             Margin="0,-30,0,0">
+                                    <Label Text="{Binding Name}"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center" />
+                                    <Label Text="{Binding Desc}"
+                                           FontSize="14"
+                                           HorizontalTextAlignment="Center" />
+                                    <Stepper HeightRequest="35"
+                                             VerticalOptions="End"
+                                             x:Name="stepperSL"
+                                             Value="{Binding SL, Mode=OneWayToSource}"
+                                             Minimum="0"
+                                             Increment="1"
+                                             Maximum="100" />
+                                    <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="Center">
+                                        <Label Text="So luong:"
+                                               HorizontalOptions="Start" />
+                                        <Label Text="{Binding Source={x:Reference stepperSL}, Path=Value, Mode=OneWay}"
+                                               HorizontalOptions="Center" />
                                     </StackLayout>
                                 </StackLayout>
-                                <StackLayout Grid.Row="2" Spacing="10" Padding="20" VerticalOptions="End">
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                        <Label Text="{Binding Price}" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
-                                        <Label Text="$" TextColor="Black" FontSize="12"/>
+                                <StackLayout Grid.Row="2"
+                                             Spacing="10"
+                                             Padding="20"
+                                             VerticalOptions="End">
+                                    <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="Center">
+                                        <Label Text="{Binding Price}"
+                                               TextColor="Black"
+                                               FontSize="20"
+                                               FontAttributes="Bold" />
+                                        <Label Text="$"
+                                               TextColor="Black"
+                                               FontSize="12" />
                                     </StackLayout>
-                                    <Button Text="ADD" TextColor="White" BackgroundColor="#FFBE00" WidthRequest="100" 
-                                        Command="{Binding Source={x:Reference listFood},Path=BindingContext.AddCommand}" 
-                                        CornerRadius="20" HorizontalOptions="Center" CommandParameter="{Binding .}"
-                                        HeightRequest="40"/>
+                                    <Button Text="ADD"
+                                            TextColor="White"
+                                            BackgroundColor="#FFBE00"
+                                            WidthRequest="100"
+                                            Command="{Binding Source={x:Reference listFood},Path=BindingContext.AddCommand}"
+                                            CornerRadius="20"
+                                            HorizontalOptions="Center"
+                                            CommandParameter="{Binding .}"
+                                            HeightRequest="40" />
                                 </StackLayout>
                             </Grid>
-                            <Image Source="{Binding IMG}" HeightRequest="100" WidthRequest="100" 
-                                   HorizontalOptions="Center" VerticalOptions="Start"  />
+                            <Image Source="{Binding IMG}"
+                                   HeightRequest="100"
+                                   WidthRequest="100"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Start" />
                         </Grid>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>

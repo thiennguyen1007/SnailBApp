@@ -12,7 +12,6 @@ namespace SnailBApp
         public StartPage()
         {
             InitializeComponent();
-            //Task.Run(SpinImg);
         }
         protected override void OnAppearing()
         {
@@ -23,12 +22,12 @@ namespace SnailBApp
             NextNew();
         }
         private async void NextNew()
-        {         
-            do
+        {
+            while (true)
             {
                 await Task.Delay(2000);
                 ViewModel.OnNextClicked();
-            } while (true);
+            }
         }
         protected override bool OnBackButtonPressed()
         {

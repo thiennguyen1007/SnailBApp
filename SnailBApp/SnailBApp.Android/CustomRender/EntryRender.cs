@@ -1,23 +1,16 @@
-﻿using Android.App;
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics.Drawables;
-using Android.OS;
-using Android.Runtime;
 using Android.Text;
-using Android.Views;
-using Android.Widget;
 using SnailBApp.Droid.CustomRender;
 using SnailBApp.Views.CustomLayout;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using static Android.OS.DropBoxManager;
 using Entry = Xamarin.Forms.Entry;
 
+#pragma warning disable CS0612 // Type or member is obsolete
 [assembly: ExportRenderer(typeof(CustomEntry), typeof(CustomEntryRendererAndroid))]
+#pragma warning restore CS0612 // Type or member is obsolete
 
 namespace SnailBApp.Droid.CustomRender
 {
